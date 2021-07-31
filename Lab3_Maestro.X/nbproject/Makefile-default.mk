@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=
+SOURCEFILES_QUOTED_IF_SPACED=Main_maestro.c "C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_Maestro.X/Osc_config.c" "C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab2.1_ED2/lab2.1_ED2.X/UART_CONFIG.c" "C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab2.1_ED2/lab2.1_ED2.X/ADC_CONFIG.c" "C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_Maestro.X/SPI_config.c"
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=
-POSSIBLE_DEPFILES=
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/Main_maestro.p1 ${OBJECTDIR}/_ext/836581083/Osc_config.p1 ${OBJECTDIR}/_ext/128017943/UART_CONFIG.p1 ${OBJECTDIR}/_ext/128017943/ADC_CONFIG.p1 ${OBJECTDIR}/_ext/836581083/SPI_config.p1
+POSSIBLE_DEPFILES=${OBJECTDIR}/Main_maestro.p1.d ${OBJECTDIR}/_ext/836581083/Osc_config.p1.d ${OBJECTDIR}/_ext/128017943/UART_CONFIG.p1.d ${OBJECTDIR}/_ext/128017943/ADC_CONFIG.p1.d ${OBJECTDIR}/_ext/836581083/SPI_config.p1.d
 
 # Object Files
-OBJECTFILES=
+OBJECTFILES=${OBJECTDIR}/Main_maestro.p1 ${OBJECTDIR}/_ext/836581083/Osc_config.p1 ${OBJECTDIR}/_ext/128017943/UART_CONFIG.p1 ${OBJECTDIR}/_ext/128017943/ADC_CONFIG.p1 ${OBJECTDIR}/_ext/836581083/SPI_config.p1
 
 # Source Files
-SOURCEFILES=
+SOURCEFILES=Main_maestro.c C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_Maestro.X/Osc_config.c C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab2.1_ED2/lab2.1_ED2.X/UART_CONFIG.c C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab2.1_ED2/lab2.1_ED2.X/ADC_CONFIG.c C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_Maestro.X/SPI_config.c
 
 
 
@@ -94,7 +94,87 @@ MP_PROCESSOR_OPTION=16F887
 # ------------------------------------------------------------------------------------
 # Rules for buildStep: compile
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
+${OBJECTDIR}/Main_maestro.p1: Main_maestro.c  nbproject/Makefile-${CND_CONF}.mk 
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/Main_maestro.p1.d 
+	@${RM} ${OBJECTDIR}/Main_maestro.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto     -o ${OBJECTDIR}/Main_maestro.p1 Main_maestro.c 
+	@-${MV} ${OBJECTDIR}/Main_maestro.d ${OBJECTDIR}/Main_maestro.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/Main_maestro.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/_ext/836581083/Osc_config.p1: C\:/Users/Andy\ Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_Maestro.X/Osc_config.c  nbproject/Makefile-${CND_CONF}.mk 
+	@${MKDIR} "${OBJECTDIR}/_ext/836581083" 
+	@${RM} ${OBJECTDIR}/_ext/836581083/Osc_config.p1.d 
+	@${RM} ${OBJECTDIR}/_ext/836581083/Osc_config.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto     -o ${OBJECTDIR}/_ext/836581083/Osc_config.p1 "C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_Maestro.X/Osc_config.c" 
+	@-${MV} ${OBJECTDIR}/_ext/836581083/Osc_config.d ${OBJECTDIR}/_ext/836581083/Osc_config.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/_ext/836581083/Osc_config.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/_ext/128017943/UART_CONFIG.p1: C\:/Users/Andy\ Bonilla/Documents/GitHub/ED2/Lab2.1_ED2/lab2.1_ED2.X/UART_CONFIG.c  nbproject/Makefile-${CND_CONF}.mk 
+	@${MKDIR} "${OBJECTDIR}/_ext/128017943" 
+	@${RM} ${OBJECTDIR}/_ext/128017943/UART_CONFIG.p1.d 
+	@${RM} ${OBJECTDIR}/_ext/128017943/UART_CONFIG.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto     -o ${OBJECTDIR}/_ext/128017943/UART_CONFIG.p1 "C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab2.1_ED2/lab2.1_ED2.X/UART_CONFIG.c" 
+	@-${MV} ${OBJECTDIR}/_ext/128017943/UART_CONFIG.d ${OBJECTDIR}/_ext/128017943/UART_CONFIG.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/_ext/128017943/UART_CONFIG.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/_ext/128017943/ADC_CONFIG.p1: C\:/Users/Andy\ Bonilla/Documents/GitHub/ED2/Lab2.1_ED2/lab2.1_ED2.X/ADC_CONFIG.c  nbproject/Makefile-${CND_CONF}.mk 
+	@${MKDIR} "${OBJECTDIR}/_ext/128017943" 
+	@${RM} ${OBJECTDIR}/_ext/128017943/ADC_CONFIG.p1.d 
+	@${RM} ${OBJECTDIR}/_ext/128017943/ADC_CONFIG.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto     -o ${OBJECTDIR}/_ext/128017943/ADC_CONFIG.p1 "C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab2.1_ED2/lab2.1_ED2.X/ADC_CONFIG.c" 
+	@-${MV} ${OBJECTDIR}/_ext/128017943/ADC_CONFIG.d ${OBJECTDIR}/_ext/128017943/ADC_CONFIG.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/_ext/128017943/ADC_CONFIG.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/_ext/836581083/SPI_config.p1: C\:/Users/Andy\ Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_Maestro.X/SPI_config.c  nbproject/Makefile-${CND_CONF}.mk 
+	@${MKDIR} "${OBJECTDIR}/_ext/836581083" 
+	@${RM} ${OBJECTDIR}/_ext/836581083/SPI_config.p1.d 
+	@${RM} ${OBJECTDIR}/_ext/836581083/SPI_config.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto     -o ${OBJECTDIR}/_ext/836581083/SPI_config.p1 "C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_Maestro.X/SPI_config.c" 
+	@-${MV} ${OBJECTDIR}/_ext/836581083/SPI_config.d ${OBJECTDIR}/_ext/836581083/SPI_config.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/_ext/836581083/SPI_config.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
 else
+${OBJECTDIR}/Main_maestro.p1: Main_maestro.c  nbproject/Makefile-${CND_CONF}.mk 
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/Main_maestro.p1.d 
+	@${RM} ${OBJECTDIR}/Main_maestro.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto     -o ${OBJECTDIR}/Main_maestro.p1 Main_maestro.c 
+	@-${MV} ${OBJECTDIR}/Main_maestro.d ${OBJECTDIR}/Main_maestro.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/Main_maestro.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/_ext/836581083/Osc_config.p1: C\:/Users/Andy\ Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_Maestro.X/Osc_config.c  nbproject/Makefile-${CND_CONF}.mk 
+	@${MKDIR} "${OBJECTDIR}/_ext/836581083" 
+	@${RM} ${OBJECTDIR}/_ext/836581083/Osc_config.p1.d 
+	@${RM} ${OBJECTDIR}/_ext/836581083/Osc_config.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto     -o ${OBJECTDIR}/_ext/836581083/Osc_config.p1 "C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_Maestro.X/Osc_config.c" 
+	@-${MV} ${OBJECTDIR}/_ext/836581083/Osc_config.d ${OBJECTDIR}/_ext/836581083/Osc_config.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/_ext/836581083/Osc_config.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/_ext/128017943/UART_CONFIG.p1: C\:/Users/Andy\ Bonilla/Documents/GitHub/ED2/Lab2.1_ED2/lab2.1_ED2.X/UART_CONFIG.c  nbproject/Makefile-${CND_CONF}.mk 
+	@${MKDIR} "${OBJECTDIR}/_ext/128017943" 
+	@${RM} ${OBJECTDIR}/_ext/128017943/UART_CONFIG.p1.d 
+	@${RM} ${OBJECTDIR}/_ext/128017943/UART_CONFIG.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto     -o ${OBJECTDIR}/_ext/128017943/UART_CONFIG.p1 "C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab2.1_ED2/lab2.1_ED2.X/UART_CONFIG.c" 
+	@-${MV} ${OBJECTDIR}/_ext/128017943/UART_CONFIG.d ${OBJECTDIR}/_ext/128017943/UART_CONFIG.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/_ext/128017943/UART_CONFIG.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/_ext/128017943/ADC_CONFIG.p1: C\:/Users/Andy\ Bonilla/Documents/GitHub/ED2/Lab2.1_ED2/lab2.1_ED2.X/ADC_CONFIG.c  nbproject/Makefile-${CND_CONF}.mk 
+	@${MKDIR} "${OBJECTDIR}/_ext/128017943" 
+	@${RM} ${OBJECTDIR}/_ext/128017943/ADC_CONFIG.p1.d 
+	@${RM} ${OBJECTDIR}/_ext/128017943/ADC_CONFIG.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto     -o ${OBJECTDIR}/_ext/128017943/ADC_CONFIG.p1 "C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab2.1_ED2/lab2.1_ED2.X/ADC_CONFIG.c" 
+	@-${MV} ${OBJECTDIR}/_ext/128017943/ADC_CONFIG.d ${OBJECTDIR}/_ext/128017943/ADC_CONFIG.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/_ext/128017943/ADC_CONFIG.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/_ext/836581083/SPI_config.p1: C\:/Users/Andy\ Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_Maestro.X/SPI_config.c  nbproject/Makefile-${CND_CONF}.mk 
+	@${MKDIR} "${OBJECTDIR}/_ext/836581083" 
+	@${RM} ${OBJECTDIR}/_ext/836581083/SPI_config.p1.d 
+	@${RM} ${OBJECTDIR}/_ext/836581083/SPI_config.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto     -o ${OBJECTDIR}/_ext/836581083/SPI_config.p1 "C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_Maestro.X/SPI_config.c" 
+	@-${MV} ${OBJECTDIR}/_ext/836581083/SPI_config.d ${OBJECTDIR}/_ext/836581083/SPI_config.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/_ext/836581083/SPI_config.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
 endif
 
 # ------------------------------------------------------------------------------------
