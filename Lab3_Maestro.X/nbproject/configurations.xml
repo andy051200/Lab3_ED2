@@ -29,6 +29,7 @@
   </logicalFolder>
   <sourceRootList>
     <Elem>../../Lab2.1_ED2/lab2.1_ED2.X</Elem>
+    <Elem>C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_Maestro.X</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>

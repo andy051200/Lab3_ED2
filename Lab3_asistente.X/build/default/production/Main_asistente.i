@@ -2656,17 +2656,71 @@ void ADC_config(void);
 # 37 "Main_asistente.c" 2
 
 # 1 "./SPI_config.h" 1
-# 13 "./SPI_config.h"
-void spi_config(void);
+# 14 "./SPI_config.h"
+typedef enum
+{
+    SPI_MASTER_OSC_DIV4 = 0b00100000,
+    SPI_MASTER_OSC_DIV16 = 0b00100001,
+    SPI_MASTER_OSC_DIV64 = 0b00100010,
+    SPI_MASTER_TMR2 = 0b00100011,
+    SPI_SLAVE_SS_EN = 0b00100100,
+    SPI_SLAVE_SS_DIS = 0b00100101
+}Spi_Type;
+
+typedef enum
+{
+    SPI_DATA_SAMPLE_MIDDLE = 0b00000000,
+    SPI_DATA_SAMPLE_END = 0b10000000
+}Spi_Data_Sample;
+
+typedef enum
+{
+    SPI_CLOCK_IDLE_HIGH = 0b00010000,
+    SPI_CLOCK_IDLE_LOW = 0b00000000
+}Spi_Clock_Idle;
+
+typedef enum
+{
+    SPI_IDLE_2_ACTIVE = 0b00000000,
+    SPI_ACTIVE_2_IDLE = 0b01000000
+}Spi_Transmit_Edge;
+
+
+
+
+void spiInit(Spi_Type, Spi_Data_Sample, Spi_Clock_Idle, Spi_Transmit_Edge);
+void spiWrite(char);
+unsigned spiDataReady();
+char spiRead();
+char spiRead();
 # 38 "Main_asistente.c" 2
 # 48 "Main_asistente.c"
 void setup(void);
-# 57 "Main_asistente.c"
+
+
+
+
+unsigned char cuenta1_timer1;
+
+
+
+
 void __attribute__((picinterrupt(("")))) isr(void)
 {
 
+    if (PIR1bits.TMR1IF)
+    {
+        cuenta1_timer1++;
+        PIR1bits.TMR1IF=0;
+    }
 
 
+    if (PIR1bits.SSPIF)
+    {
+        PORTD=spiRead();
+        spiWrite(PORTB);
+        PIR1bits.SSPIF=0;
+    }
 }
 
 
@@ -2679,7 +2733,16 @@ void main(void)
 
     while(1)
     {
+        switch(cuenta1_timer1)
+        {
+            case(1):
+                PORTB++;
+                break;
 
+            case(2):
+                cuenta1_timer1=0;
+                break;
+        }
     }
 
 }
@@ -2695,25 +2758,35 @@ void setup(void)
     ANSELbits.ANS1=1;
 
 
+    TRISAbits.TRISA5=1;
     TRISB=0;
-    TRISCbits.TRISC6=0;
-    TRISCbits.TRISC7=1;
-
-    TRISDbits.TRISD5=0;
-    TRISDbits.TRISD6=0;
-    TRISDbits.TRISD7=0;
+    TRISD=0;
 
 
     PORTB=0;
     PORTD=0;
 
 
+    T1CONbits.T1CKPS1 = 1;
+    T1CONbits.T1CKPS0 = 1;
+    T1CONbits.T1OSCEN = 1;
+    T1CONbits.T1SYNC = 1;
+    T1CONbits.TMR1CS = 0;
+    T1CONbits.TMR1ON = 1;
+    TMR1H = 0;
+    TMR1L = 0;
+
+
+
     osc_config(4);
     ADC_config();
-    spi_config();
+    spiInit(SPI_SLAVE_SS_EN, SPI_DATA_SAMPLE_MIDDLE, SPI_CLOCK_IDLE_LOW, SPI_IDLE_2_ACTIVE);
 
 
     INTCONbits.GIE=1;
-    PIE1bits.RCIE=1;
-    PIR1bits.RCIF=0;
+    PIE1bits.TMR1IE=1;
+    PIR1bits.TMR1IF=0;
+    PIE1bits.SSPIE = 1;
+    PIR1bits.SSPIF = 0;
+
 }

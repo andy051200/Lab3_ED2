@@ -50,15 +50,27 @@ void setup(void);           //prototipo de funcion de inicializacion pic
 /*-----------------------------------------------------------------------------
  ----------------------- VARIABLES A IMPLEMTENTAR------------------------------
  -----------------------------------------------------------------------------*/
+unsigned char cuenta1_timer1;
 
 /*-----------------------------------------------------------------------------
  ---------------------------- INTERRUPCIONES ----------------------------------
  -----------------------------------------------------------------------------*/
 void __interrupt() isr(void) //funcion de interrupciones
 {
-    //------
+    //------INTERRUPCION DEL TIMER1
+    if (PIR1bits.TMR1IF)
+    {
+        cuenta1_timer1++;
+        PIR1bits.TMR1IF=0;
+    }
     
- 
+    //------INTERRUPCION RECEPCION DE DATOS DESDE PIC MAESTRO
+    if (PIR1bits.SSPIF)
+    {
+        PORTD=spiRead();        //se lee valor proveniente del PIC maestro
+        spiWrite(PORTB);        //se envia el valor hacia el PIC maestro
+        PIR1bits.SSPIF=0;       //se apaga bandera de interrupcion
+    }
 }
 
 /*-----------------------------------------------------------------------------
@@ -66,12 +78,21 @@ void __interrupt() isr(void) //funcion de interrupciones
  -----------------------------------------------------------------------------*/
 void main(void)
 {
-    setup();
+    setup();        //se llama funcion de configuracion
     
     
     while(1)
     {
-        
+        switch(cuenta1_timer1)
+        {
+            case(1):
+                PORTB++;
+                break;
+                
+            case(2):
+                cuenta1_timer1=0;
+                break;
+        }
     }
 
 }
@@ -87,27 +108,37 @@ void setup(void)
     ANSELbits.ANS1=1;       //entrada para el potenciometro 2
     
     //---------CONFIGURACION DE IN/OUT
-    TRISB=0;             //todo el portB como salida
-    TRISCbits.TRISC6=0;     //salida TX
-    TRISCbits.TRISC7=1;
-    //TRISD=0;             //todo el portB como salida
-    TRISDbits.TRISD5=0;     //salida para pines lcd
-    TRISDbits.TRISD6=0;     //salida para pines lcd
-    TRISDbits.TRISD7=0;     //salida para pines lcd
+    TRISAbits.TRISA5=1;     //entrada control para datos desde PIC maestro
+    TRISB=0;                //todo el portB como salida
+    TRISD=0;                //todo el PortD como salida
     
     //---------LIMPIEZA DE PUERTOS
     PORTB=0;
     PORTD=0;
     
+    //---------CONFIGURACION DEL TIMER1
+    T1CONbits.T1CKPS1 = 1;   // bits 5-4  Prescaler Rate Select bits
+    T1CONbits.T1CKPS0 = 1;   // bit 4
+    T1CONbits.T1OSCEN = 1;   // Oscillator Enable Control bit 1 = on
+    T1CONbits.T1SYNC = 1;    // External Clock Input Synchronization Control bit
+    T1CONbits.TMR1CS = 0;    // Clock Source Select bit..0 = Internal clock (FOSC/4)
+    T1CONbits.TMR1ON = 1;    // bit 0 enables timer
+    TMR1H = 0;             // preset for timer1 MSB register
+    TMR1L = 0;             // preset for timer1 LSB register
+
+    
     //---------LLAMADO DE FUNCIONES DESDE LIBRERIAS
     osc_config(4);          //se llama funcion de oscilador a 4MHz
     ADC_config();           //se llama funcion de ADC
-    spi_config();           //se llama funcion de comunicacion SPI
+    spiInit(SPI_SLAVE_SS_EN, SPI_DATA_SAMPLE_MIDDLE, SPI_CLOCK_IDLE_LOW, SPI_IDLE_2_ACTIVE);
     
     //---------CONFIGURACIOND DE INTERRUPCIONES
     INTCONbits.GIE=1;           //se habilita interrupciones globales
-    PIE1bits.RCIE=1;            //se habilita interrupcion de recepcion uart
-    PIR1bits.RCIF=0;
+    PIE1bits.TMR1IE=1;         //se habilita interrupcion del timer1
+    PIR1bits.TMR1IF=0;          //se apaga bandera de interrupcion timer1
+    PIE1bits.SSPIE = 1;         //se habilita interrupcion del MSSP
+    PIR1bits.SSPIF = 0;         //se apaga bandera de interrupcion MSSP
+    
 }
 /*-----------------------------------------------------------------------------
  --------------------------------- FUNCIONES ----------------------------------

@@ -2650,27 +2650,71 @@ typedef uint16_t uintptr_t;
 void osc_config(uint8_t freq);
 # 36 "Main_maestro.c" 2
 
-# 1 "./ADC_CONFIG.h" 1
-# 13 "./ADC_CONFIG.h"
-void ADC_config(void);
-# 37 "Main_maestro.c" 2
-
 # 1 "./UART_CONFIG.h" 1
 # 17 "./UART_CONFIG.h"
 void uart_config(void);
-# 38 "Main_maestro.c" 2
+# 37 "Main_maestro.c" 2
 
 # 1 "./SPI_config.h" 1
-# 13 "./SPI_config.h"
-void spi_config(void);
-# 39 "Main_maestro.c" 2
-# 48 "Main_maestro.c"
+# 14 "./SPI_config.h"
+typedef enum
+{
+    SPI_MASTER_OSC_DIV4 = 0b00100000,
+    SPI_MASTER_OSC_DIV16 = 0b00100001,
+    SPI_MASTER_OSC_DIV64 = 0b00100010,
+    SPI_MASTER_TMR2 = 0b00100011,
+    SPI_SLAVE_SS_EN = 0b00100100,
+    SPI_SLAVE_SS_DIS = 0b00100101
+}Spi_Type;
+
+typedef enum
+{
+    SPI_DATA_SAMPLE_MIDDLE = 0b00000000,
+    SPI_DATA_SAMPLE_END = 0b10000000
+}Spi_Data_Sample;
+
+typedef enum
+{
+    SPI_CLOCK_IDLE_HIGH = 0b00010000,
+    SPI_CLOCK_IDLE_LOW = 0b00000000
+}Spi_Clock_Idle;
+
+typedef enum
+{
+    SPI_IDLE_2_ACTIVE = 0b00000000,
+    SPI_ACTIVE_2_IDLE = 0b01000000
+}Spi_Transmit_Edge;
+
+
+
+
+void spiInit(Spi_Type, Spi_Data_Sample, Spi_Clock_Idle, Spi_Transmit_Edge);
+void spiWrite(char);
+unsigned spiDataReady();
+char spiRead();
+char spiRead();
+# 38 "Main_maestro.c" 2
+# 47 "Main_maestro.c"
 void setup(void);
-# 57 "Main_maestro.c"
+
+
+
+
+int cuenta1_timer1;
+
+
+
 void __attribute__((picinterrupt(("")))) isr(void)
 {
 
-
+    if (PIR1bits.TMR1IF)
+    {
+        cuenta1_timer1++;
+        PORTB++;
+        TMR1H = 0;
+        TMR1L = 0;
+        PIR1bits.TMR1IF=0;
+    }
 
 }
 
@@ -2684,9 +2728,31 @@ void main(void)
 
     while(1)
     {
+        switch(cuenta1_timer1)
+        {
+            case(0):
+                PORTCbits.RC2=0;
+                break;
 
+            case(1):
+                PORTB++;
+                break;
+
+            case(2):
+                spiWrite(PORTB);
+                break;
+
+            case(3):
+                PORTD=spiRead();
+                break;
+
+            case(4):
+                PORTCbits.RC2=1;
+                cuenta1_timer1=0;
+                break;
+
+        }
     }
-
 }
 
 
@@ -2696,28 +2762,33 @@ void setup(void)
 
     ANSEL=0;
     ANSELH=0;
-    ANSELbits.ANS0=1;
-    ANSELbits.ANS1=1;
 
 
     TRISB=0;
-    TRISCbits.TRISC6=0;
-    TRISCbits.TRISC7=1;
-
-    TRISDbits.TRISD5=0;
-    TRISDbits.TRISD6=0;
-    TRISDbits.TRISD7=0;
+    TRISCbits.TRISC2=0;
+    TRISCbits.TRISC3=0;
+    TRISCbits.TRISC4=1;
+    TRISD=0;
 
 
     PORTB=0;
+    PORTCbits.RC2=1;
     PORTD=0;
 
 
-    osc_config(4);
-    ADC_config();
-    uart_config();
-    spi_config();
+    T1CONbits.T1CKPS1 = 1;
+    T1CONbits.T1CKPS0 = 1;
+    T1CONbits.T1OSCEN = 1;
+    T1CONbits.T1SYNC = 1;
+    T1CONbits.TMR1CS = 0;
+    T1CONbits.TMR1ON = 1;
+    TMR1H = 0;
+    TMR1L = 0;
 
+
+    osc_config(4);
+    uart_config();
+    spiInit(SPI_MASTER_OSC_DIV4, SPI_DATA_SAMPLE_MIDDLE, SPI_CLOCK_IDLE_LOW, SPI_IDLE_2_ACTIVE);
 
     INTCONbits.GIE=1;
     PIE1bits.RCIE=1;

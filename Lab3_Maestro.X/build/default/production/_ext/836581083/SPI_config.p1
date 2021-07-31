@@ -1,4 +1,72 @@
 Version 4.0 HI-TECH Software Intermediate Code
+"21 C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_Maestro.X/SPI_config.c
+[; ;C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_Maestro.X/SPI_config.c: 21: void spiInit(Spi_Type sType, Spi_Data_Sample sDataSample, Spi_Clock_Idle sClockIdle, Spi_Transmit_Edge sTransmitEdge)
+[c E1292 32 33 34 35 36 37 .. ]
+[n E1292 . SPI_MASTER_OSC_DIV4 SPI_MASTER_OSC_DIV16 SPI_MASTER_OSC_DIV64 SPI_MASTER_TMR2 SPI_SLAVE_SS_EN SPI_SLAVE_SS_DIS  ]
+[c E1300 0 128 .. ]
+[n E1300 . SPI_DATA_SAMPLE_MIDDLE SPI_DATA_SAMPLE_END  ]
+[c E1304 16 0 .. ]
+[n E1304 . SPI_CLOCK_IDLE_HIGH SPI_CLOCK_IDLE_LOW  ]
+[c E1308 0 64 .. ]
+[n E1308 . SPI_IDLE_2_ACTIVE SPI_ACTIVE_2_IDLE  ]
+"1546 C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 1546:     struct {
+[s S57 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S57 . TRISC0 TRISC1 TRISC2 TRISC3 TRISC4 TRISC5 TRISC6 TRISC7 ]
+"1545
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 1545: typedef union {
+[u S56 `S57 1 ]
+[n S56 . . ]
+"1557
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 1557: extern volatile TRISCbits_t TRISCbits __attribute__((address(0x087)));
+[v _TRISCbits `VS56 ~T0 @X0 0 e@135 ]
+"2177
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 2177: extern volatile unsigned char SSPSTAT __attribute__((address(0x094)));
+[v _SSPSTAT `Vuc ~T0 @X0 0 e@148 ]
+"4457
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 4457: extern volatile __bit TRISC3 __attribute__((address(0x43B)));
+[v _TRISC3 `Vb ~T0 @X0 0 e@1083 ]
+"850
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 850: extern volatile unsigned char SSPCON __attribute__((address(0x014)));
+[v _SSPCON `Vuc ~T0 @X0 0 e@20 ]
+"2183
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 2183:     struct {
+[s S82 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S82 . BF UA R_nW S P D_nA CKE SMP ]
+"2193
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 2193:     struct {
+[s S83 :2 `uc 1 :1 `uc 1 :2 `uc 1 :1 `uc 1 ]
+[n S83 . . R . D ]
+"2199
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 2199:     struct {
+[s S84 :2 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S84 . . I2C_READ I2C_START I2C_STOP I2C_DATA ]
+"2206
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 2206:     struct {
+[s S85 :2 `uc 1 :1 `uc 1 :2 `uc 1 :1 `uc 1 ]
+[n S85 . . nW . nA ]
+"2212
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 2212:     struct {
+[s S86 :2 `uc 1 :1 `uc 1 :2 `uc 1 :1 `uc 1 ]
+[n S86 . . nWRITE . nADDRESS ]
+"2218
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 2218:     struct {
+[s S87 :2 `uc 1 :1 `uc 1 :2 `uc 1 :1 `uc 1 ]
+[n S87 . . R_W . D_A ]
+"2224
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 2224:     struct {
+[s S88 :2 `uc 1 :1 `uc 1 :2 `uc 1 :1 `uc 1 ]
+[n S88 . . READ_WRITE . DATA_ADDRESS ]
+"2182
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 2182: typedef union {
+[u S81 `S82 1 `S83 1 `S84 1 `S85 1 `S86 1 `S87 1 `S88 1 ]
+[n S81 . . . . . . . . ]
+"2231
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 2231: extern volatile SSPSTATbits_t SSPSTATbits __attribute__((address(0x094)));
+[v _SSPSTATbits `VS81 ~T0 @X0 0 e@148 ]
+"843
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 843: extern volatile unsigned char SSPBUF __attribute__((address(0x013)));
+[v _SSPBUF `Vuc ~T0 @X0 0 e@19 ]
 "54 C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h
 [; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 54: __asm("INDF equ 00h");
 [; <" INDF equ 00h ;# ">
@@ -234,12 +302,146 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 3546: __asm("EECON2 equ 018Dh");
 [; <" EECON2 equ 018Dh ;# ">
 "21 C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_Maestro.X/SPI_config.c
-[; ;C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_Maestro.X/SPI_config.c: 21: void spi_config(void)
-[v _spi_config `(v ~T0 @X0 1 ef ]
+[; ;C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_Maestro.X/SPI_config.c: 21: void spiInit(Spi_Type sType, Spi_Data_Sample sDataSample, Spi_Clock_Idle sClockIdle, Spi_Transmit_Edge sTransmitEdge)
+[v _spiInit `(v ~T0 @X0 1 ef4`E1292`E1300`E1304`E1308 ]
 "22
-[; ;C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_Maestro.X/SPI_config.c: 22: {}
+[; ;C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_Maestro.X/SPI_config.c: 22: {
 {
-[e :U _spi_config ]
+[e :U _spiInit ]
+"21
+[; ;C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_Maestro.X/SPI_config.c: 21: void spiInit(Spi_Type sType, Spi_Data_Sample sDataSample, Spi_Clock_Idle sClockIdle, Spi_Transmit_Edge sTransmitEdge)
+[v _sType `E1292 ~T0 @X0 1 r1 ]
+[v _sDataSample `E1300 ~T0 @X0 1 r2 ]
+[v _sClockIdle `E1304 ~T0 @X0 1 r3 ]
+[v _sTransmitEdge `E1308 ~T0 @X0 1 r4 ]
+"22
+[; ;C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_Maestro.X/SPI_config.c: 22: {
 [f ]
+"23
+[; ;C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_Maestro.X/SPI_config.c: 23:     TRISCbits.TRISC5 = 0;
+[e = . . _TRISCbits 0 5 -> -> 0 `i `uc ]
+"24
+[; ;C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_Maestro.X/SPI_config.c: 24:     if(sType & 0b00000100)
+[e $ ! != & -> _sType `ui -> -> 4 `i `ui -> -> 0 `i `ui 139  ]
+"25
+[; ;C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_Maestro.X/SPI_config.c: 25:     {
+{
+"26
+[; ;C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_Maestro.X/SPI_config.c: 26:         SSPSTAT = sTransmitEdge;
+[e = _SSPSTAT -> _sTransmitEdge `uc ]
+"27
+[; ;C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_Maestro.X/SPI_config.c: 27:         TRISC3 = 1;
+[e = _TRISC3 -> -> 1 `i `b ]
+"28
+[; ;C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_Maestro.X/SPI_config.c: 28:     }
+}
+[e $U 140  ]
+"29
+[; ;C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_Maestro.X/SPI_config.c: 29:     else
+[e :U 139 ]
+"30
+[; ;C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_Maestro.X/SPI_config.c: 30:     {
+{
+"31
+[; ;C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_Maestro.X/SPI_config.c: 31:         SSPSTAT = sDataSample | sTransmitEdge;
+[e = _SSPSTAT -> | -> _sDataSample `ui -> _sTransmitEdge `ui `uc ]
+"32
+[; ;C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_Maestro.X/SPI_config.c: 32:         TRISC3 = 0;
+[e = _TRISC3 -> -> 0 `i `b ]
+"33
+[; ;C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_Maestro.X/SPI_config.c: 33:     }
+}
+[e :U 140 ]
+"35
+[; ;C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_Maestro.X/SPI_config.c: 35:     SSPCON = sType | sClockIdle;
+[e = _SSPCON -> | -> _sType `ui -> _sClockIdle `ui `uc ]
+"36
+[; ;C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_Maestro.X/SPI_config.c: 36: }
 [e :UE 138 ]
+}
+"38
+[; ;C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_Maestro.X/SPI_config.c: 38: static void spiReceiveWait()
+[v _spiReceiveWait `(v ~T0 @X0 1 sf ]
+"39
+[; ;C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_Maestro.X/SPI_config.c: 39: {
+{
+[e :U _spiReceiveWait ]
+[f ]
+"40
+[; ;C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_Maestro.X/SPI_config.c: 40:     while ( !SSPSTATbits.BF );
+[e $U 142  ]
+[e :U 143 ]
+[e :U 142 ]
+[e $ ! != -> . . _SSPSTATbits 0 0 `i -> 0 `i 143  ]
+[e :U 144 ]
+"41
+[; ;C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_Maestro.X/SPI_config.c: 41: }
+[e :UE 141 ]
+}
+"43
+[; ;C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_Maestro.X/SPI_config.c: 43: void spiWrite(char dat)
+[v _spiWrite `(v ~T0 @X0 1 ef1`uc ]
+"44
+[; ;C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_Maestro.X/SPI_config.c: 44: {
+{
+[e :U _spiWrite ]
+"43
+[; ;C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_Maestro.X/SPI_config.c: 43: void spiWrite(char dat)
+[v _dat `uc ~T0 @X0 1 r1 ]
+"44
+[; ;C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_Maestro.X/SPI_config.c: 44: {
+[f ]
+"45
+[; ;C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_Maestro.X/SPI_config.c: 45:     SSPBUF = dat;
+[e = _SSPBUF -> _dat `uc ]
+"46
+[; ;C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_Maestro.X/SPI_config.c: 46: }
+[e :UE 145 ]
+}
+"48
+[; ;C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_Maestro.X/SPI_config.c: 48: unsigned spiDataReady()
+[v _spiDataReady `(ui ~T0 @X0 1 ef ]
+"49
+[; ;C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_Maestro.X/SPI_config.c: 49: {
+{
+[e :U _spiDataReady ]
+[f ]
+"50
+[; ;C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_Maestro.X/SPI_config.c: 50:     if(SSPSTATbits.BF)
+[e $ ! != -> . . _SSPSTATbits 0 0 `i -> 0 `i 147  ]
+"51
+[; ;C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_Maestro.X/SPI_config.c: 51:         return 1;
+[e ) -> -> 1 `i `ui ]
+[e $UE 146  ]
+[e $U 148  ]
+"52
+[; ;C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_Maestro.X/SPI_config.c: 52:     else
+[e :U 147 ]
+"53
+[; ;C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_Maestro.X/SPI_config.c: 53:         return 0;
+[e ) -> -> 0 `i `ui ]
+[e $UE 146  ]
+[e :U 148 ]
+"54
+[; ;C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_Maestro.X/SPI_config.c: 54: }
+[e :UE 146 ]
+}
+"56
+[; ;C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_Maestro.X/SPI_config.c: 56: char spiRead()
+[v _spiRead `(uc ~T0 @X0 1 ef ]
+"57
+[; ;C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_Maestro.X/SPI_config.c: 57: {
+{
+[e :U _spiRead ]
+[f ]
+"58
+[; ;C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_Maestro.X/SPI_config.c: 58:     spiReceiveWait();
+[e ( _spiReceiveWait ..  ]
+"59
+[; ;C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_Maestro.X/SPI_config.c: 59:     return(SSPBUF);
+[e ) -> _SSPBUF `uc ]
+[e $UE 149  ]
+"60
+[; ;C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_Maestro.X/SPI_config.c: 60: }
+[e :UE 149 ]
 }
