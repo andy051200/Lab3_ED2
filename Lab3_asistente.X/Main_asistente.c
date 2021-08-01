@@ -40,17 +40,20 @@ Descripcion: un laboratoria bien fumado tbh pero chilero
 /*-----------------------------------------------------------------------------
  ------------------------DIRECTIVAS DE COMPILADOR------------------------------
  -----------------------------------------------------------------------------*/
-//#define _XTAL_FREQ 4000000
+#define _XTAL_FREQ 4000000
 
 /*-----------------------------------------------------------------------------
  ------------------------ PROTOTIPOS DE FUNCIONES ------------------------------
  -----------------------------------------------------------------------------*/
 void setup(void);           //prototipo de funcion de inicializacion pic
-
+void toggle_adc(void);
 /*-----------------------------------------------------------------------------
  ----------------------- VARIABLES A IMPLEMTENTAR------------------------------
  -----------------------------------------------------------------------------*/
 unsigned char cuenta1_timer0;
+unsigned char cuenta2_timer0;
+unsigned char conversion1;
+unsigned char conversion2;
 
 /*-----------------------------------------------------------------------------
  ---------------------------- INTERRUPCIONES ----------------------------------
@@ -61,6 +64,7 @@ void __interrupt() isr(void) //funcion de interrupciones
     if (INTCONbits.T0IF)
     {
         cuenta1_timer0++;
+        cuenta2_timer0++;
         INTCONbits.T0IF=0;
         TMR0 = 255;             // preset for timer register
     }
@@ -72,6 +76,34 @@ void __interrupt() isr(void) //funcion de interrupciones
         spiWrite(PORTB);        //se envia el valor hacia el PIC maestro
         PIR1bits.SSPIF=0;       //se apaga bandera de interrupcion
     }
+    
+    //------INTERRUPCION 
+    /*if (PIR1bits.ADIF)
+    {
+        if (ADCON0bits.GO==0)
+        {
+            switch(ADCON0bits.CHS)
+            {
+                case(0):
+                    conversion1=ADRESH; //conversion del pot1
+                    ADCON0bits.CHS=1;   //cambio de canal
+                    break;
+                    
+                case(1):
+                    conversion2=ADRESH; //conversion del pot1
+                    ADCON0bits.CHS=0;   //cambio de canal
+                    break;
+            }
+            if(cuenta2_timer0==250)
+            {
+                ADCON0bits.GO=1;
+                cuenta2_timer0=0;
+            }
+            else
+                ADCON0bits.GO=0;
+        }
+    }*/
+    
 }
 
 /*-----------------------------------------------------------------------------
@@ -84,7 +116,9 @@ void main(void)
     
     while(1)
     {
-        switch(cuenta1_timer0)
+        PORTB=conversion1;
+        PORTD=conversion2;
+        /*switch(cuenta1_timer0)
         {
             case(249):
                 PORTB++;
@@ -95,7 +129,7 @@ void main(void)
                 break;
         }
         if (PORTB==0xFF)
-            PORTB=0x00;
+            PORTB=0x00;*/
     }
 
 }
@@ -111,6 +145,8 @@ void setup(void)
     ANSELbits.ANS1=1;       //entrada para el potenciometro 2
     
     //---------CONFIGURACION DE IN/OUT
+    TRISAbits.TRISA0=1;
+    TRISAbits.TRISA1=1;
     TRISAbits.TRISA5=1;     //entrada control para datos desde PIC maestro
     TRISB=0;                //todo el portB como salida
     TRISD=0;                //todo el PortD como salida
@@ -136,8 +172,10 @@ void setup(void)
     
     //---------CONFIGURACIOND DE INTERRUPCIONES
     INTCONbits.GIE=1;           //se habilita interrupciones globales
-    INTCONbits.T0IE=1;
-    INTCONbits.T0IF=0;
+    INTCONbits.T0IE=1;          //se habilita interrupcion timer 0
+    INTCONbits.T0IF=0;          //se apaga bandera de interrupcion timer0
+    /*PIE1bits.ADIE=1;
+    PIR1bits.ADIF=0;*/
     PIE1bits.SSPIE = 1;         //se habilita interrupcion del MSSP
     PIR1bits.SSPIF = 0;         //se apaga bandera de interrupcion MSSP
     
@@ -145,3 +183,25 @@ void setup(void)
 /*-----------------------------------------------------------------------------
  --------------------------------- FUNCIONES ----------------------------------
  -----------------------------------------------------------------------------*/
+void toggle_adc(void)
+{
+    if (ADCON0bits.GO==0)
+    {
+        switch(ADCON0bits.CHS)
+        {
+            case(0):
+                PORTB=ADRESH;         //potenciometro 1
+                __delay_us(500);            //delay para cargar capacitor          
+                ADCON0bits.CHS=1;           //switch de canal
+                ADCON0bits.GO=1;            //se inicia otra conversion ADC
+                break;
+                    
+            case(1):
+                PORTD=ADRESH;         //potenciometro 2
+                __delay_us(500);            //delay para cargar capacitor
+                ADCON0bits.CHS=0;           //switch de canal
+                ADCON0bits.GO=1;            //se inicia otra conversion ADC
+                break;
+        }
+    }
+}

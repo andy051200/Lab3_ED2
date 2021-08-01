@@ -2696,11 +2696,14 @@ char spiRead();
 # 38 "Main_asistente.c" 2
 # 48 "Main_asistente.c"
 void setup(void);
-
+void toggle_adc(void);
 
 
 
 unsigned char cuenta1_timer0;
+unsigned char cuenta2_timer0;
+unsigned char conversion1;
+unsigned char conversion2;
 
 
 
@@ -2711,6 +2714,7 @@ void __attribute__((picinterrupt(("")))) isr(void)
     if (INTCONbits.T0IF)
     {
         cuenta1_timer0++;
+        cuenta2_timer0++;
         INTCONbits.T0IF=0;
         TMR0 = 255;
     }
@@ -2722,6 +2726,7 @@ void __attribute__((picinterrupt(("")))) isr(void)
         spiWrite(PORTB);
         PIR1bits.SSPIF=0;
     }
+# 107 "Main_asistente.c"
 }
 
 
@@ -2734,18 +2739,9 @@ void main(void)
 
     while(1)
     {
-        switch(cuenta1_timer0)
-        {
-            case(249):
-                PORTB++;
-                break;
-
-            case(250):
-                cuenta1_timer0=0;
-                break;
-        }
-        if (PORTB==0xFF)
-            PORTB=0x00;
+        PORTB=conversion1;
+        PORTD=conversion2;
+# 133 "Main_asistente.c"
     }
 
 }
@@ -2761,6 +2757,8 @@ void setup(void)
     ANSELbits.ANS1=1;
 
 
+    TRISAbits.TRISA0=1;
+    TRISAbits.TRISA1=1;
     TRISAbits.TRISA5=1;
     TRISB=0;
     TRISD=0;
@@ -2788,7 +2786,34 @@ void setup(void)
     INTCONbits.GIE=1;
     INTCONbits.T0IE=1;
     INTCONbits.T0IF=0;
+
+
     PIE1bits.SSPIE = 1;
     PIR1bits.SSPIF = 0;
 
+}
+
+
+
+void toggle_adc(void)
+{
+    if (ADCON0bits.GO==0)
+    {
+        switch(ADCON0bits.CHS)
+        {
+            case(0):
+                PORTB=ADRESH;
+                _delay((unsigned long)((500)*(4000000/4000000.0)));
+                ADCON0bits.CHS=1;
+                ADCON0bits.GO=1;
+                break;
+
+            case(1):
+                PORTD=ADRESH;
+                _delay((unsigned long)((500)*(4000000/4000000.0)));
+                ADCON0bits.CHS=0;
+                ADCON0bits.GO=1;
+                break;
+        }
+    }
 }
