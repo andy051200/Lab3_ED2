@@ -2722,11 +2722,34 @@ void __attribute__((picinterrupt(("")))) isr(void)
 
     if (PIR1bits.SSPIF)
     {
-        PORTD=spiRead();
+
         spiWrite(PORTB);
         PIR1bits.SSPIF=0;
     }
-# 107 "Main_asistente.c"
+
+
+    if (PIR1bits.ADIF)
+    {
+        if (ADCON0bits.GO==0)
+        {
+            switch(ADCON0bits.CHS)
+            {
+                case(0):
+                    conversion1=ADRESH;
+                    ADCON0bits.CHS=1;
+                    break;
+
+                case(1):
+                    conversion2=ADRESH;
+                    ADCON0bits.CHS=0;
+                    break;
+            }
+        }
+        _delay((unsigned long)((50)*(4000000/4000000.0)));
+        ADCON0bits.GO=1;
+        PIR1bits.ADIF=0;
+    }
+
 }
 
 
@@ -2735,13 +2758,12 @@ void __attribute__((picinterrupt(("")))) isr(void)
 void main(void)
 {
     setup();
-
-
+    _delay((unsigned long)((100)*(4000000/4000000.0)));
+    ADCON0bits.GO=1;
     while(1)
     {
         PORTB=conversion1;
-        PORTD=conversion2;
-# 133 "Main_asistente.c"
+# 128 "Main_asistente.c"
     }
 
 }
@@ -2786,34 +2808,9 @@ void setup(void)
     INTCONbits.GIE=1;
     INTCONbits.T0IE=1;
     INTCONbits.T0IF=0;
-
-
+    PIE1bits.ADIE=1;
+    PIR1bits.ADIF=0;
     PIE1bits.SSPIE = 1;
     PIR1bits.SSPIF = 0;
 
-}
-
-
-
-void toggle_adc(void)
-{
-    if (ADCON0bits.GO==0)
-    {
-        switch(ADCON0bits.CHS)
-        {
-            case(0):
-                PORTB=ADRESH;
-                _delay((unsigned long)((500)*(4000000/4000000.0)));
-                ADCON0bits.CHS=1;
-                ADCON0bits.GO=1;
-                break;
-
-            case(1):
-                PORTD=ADRESH;
-                _delay((unsigned long)((500)*(4000000/4000000.0)));
-                ADCON0bits.CHS=0;
-                ADCON0bits.GO=1;
-                break;
-        }
-    }
 }

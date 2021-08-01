@@ -11,7 +11,7 @@ Creado: 30 de julio de 2021
 Descripcion: un laboratoria bien fumado tbh pero chilero
 ------------------------------------------------------------------------------*/
 
-// CONFIG1
+// CONFIG1 
 #pragma config FOSC = INTRC_NOCLKOUT   //configuracion de oscilador interno
 #pragma config WDTE = OFF       // Watchdog Timer Enable bit
 #pragma config PWRTE = OFF      // Power-up Timer Enable bit (PWRT disabled)
@@ -72,13 +72,13 @@ void __interrupt() isr(void) //funcion de interrupciones
     //------INTERRUPCION RECEPCION DE DATOS DESDE PIC MAESTRO
     if (PIR1bits.SSPIF)
     {
-        PORTD=spiRead();        //se lee valor proveniente del PIC maestro
+        //PORTD=spiRead();        //se lee valor proveniente del PIC maestro
         spiWrite(PORTB);        //se envia el valor hacia el PIC maestro
         PIR1bits.SSPIF=0;       //se apaga bandera de interrupcion
     }
     
     //------INTERRUPCION 
-    /*if (PIR1bits.ADIF)
+    if (PIR1bits.ADIF)
     {
         if (ADCON0bits.GO==0)
         {
@@ -94,15 +94,11 @@ void __interrupt() isr(void) //funcion de interrupciones
                     ADCON0bits.CHS=0;   //cambio de canal
                     break;
             }
-            if(cuenta2_timer0==250)
-            {
-                ADCON0bits.GO=1;
-                cuenta2_timer0=0;
-            }
-            else
-                ADCON0bits.GO=0;
         }
-    }*/
+        __delay_us(50);
+        ADCON0bits.GO=1;
+        PIR1bits.ADIF=0;
+    }
     
 }
 
@@ -112,14 +108,14 @@ void __interrupt() isr(void) //funcion de interrupciones
 void main(void)
 {
     setup();        //se llama funcion de configuracion
-    
-    
+    __delay_us(100);
+    ADCON0bits.GO=1;
     while(1)
     {
         PORTB=conversion1;
-        PORTD=conversion2;
+        /*PORTD=conversion2;*/
         /*switch(cuenta1_timer0)
-        {
+        {    
             case(249):
                 PORTB++;
                 break;
@@ -127,9 +123,8 @@ void main(void)
             case(250):
                 cuenta1_timer0=0;
                 break;
-        }
-        if (PORTB==0xFF)
-            PORTB=0x00;*/
+        }*/
+        
     }
 
 }
@@ -174,8 +169,8 @@ void setup(void)
     INTCONbits.GIE=1;           //se habilita interrupciones globales
     INTCONbits.T0IE=1;          //se habilita interrupcion timer 0
     INTCONbits.T0IF=0;          //se apaga bandera de interrupcion timer0
-    /*PIE1bits.ADIE=1;
-    PIR1bits.ADIF=0;*/
+    PIE1bits.ADIE=1;
+    PIR1bits.ADIF=0;
     PIE1bits.SSPIE = 1;         //se habilita interrupcion del MSSP
     PIR1bits.SSPIF = 0;         //se apaga bandera de interrupcion MSSP
     
@@ -183,7 +178,7 @@ void setup(void)
 /*-----------------------------------------------------------------------------
  --------------------------------- FUNCIONES ----------------------------------
  -----------------------------------------------------------------------------*/
-void toggle_adc(void)
+/*void toggle_adc(void)
 {
     if (ADCON0bits.GO==0)
     {
@@ -204,4 +199,4 @@ void toggle_adc(void)
                 break;
         }
     }
-}
+}*/
