@@ -11,21 +11,21 @@
 # All addresses and the length are given in unqualified hexadecimal
 # in delta units.  Any other numeric values are decimal.
 %PSECTS
-$C:\Users\ANDYBO~1\AppData\Local\Temp\s7jc.o
+$C:\Users\ANDYBO~1\AppData\Local\Temp\sl3c.o
 reset_vec CODE 0 0 0 3 2
 end_init CODE 0 C C 3 2
 config CONFIG 4 2007 2007 2 2
 $dist/default/production\Lab3_asistente.X.production.o
 cinit CODE 0 F F 5 2
 text1 CODE 0 14 14 39 2
-text2 CODE 0 CC CC 16 2
+text2 CODE 0 D8 D8 16 2
 text3 CODE 0 4D 4D 37 2
-text4 CODE 0 E2 E2 16 2
-text5 CODE 0 84 84 27 2
-text6 CODE 0 108 108 6 2
-text7 CODE 0 F8 F8 9 2
-text8 CODE 0 101 101 7 2
-maintext CODE 0 AB AB 21 2
+text4 CODE 0 EE EE 16 2
+text5 CODE 0 84 84 2B 2
+text6 CODE 0 114 114 6 2
+text7 CODE 0 104 104 9 2
+text8 CODE 0 10D 10D 7 2
+maintext CODE 0 AF AF 29 2
 cstackCOMMON COMMON 1 70 70 8 1
 cstackBANK0 BANK0 1 20 20 2 1
 intentry CODE 0 4 4 8 2
@@ -46,13 +46,13 @@ BANK1 A0-EF 1
 BANK2 110-16F 1
 BANK3 190-1EF 1
 CONST 3-3 2
-CONST 10E-1FFF 2
+CONST 11A-1FFF 2
 ENTRY 3-3 2
-ENTRY 10E-1FFF 2
+ENTRY 11A-1FFF 2
 IDLOC 2000-2003 2
 STACK 110-16F 1
 CODE 3-3 2
-CODE 10E-1FFF 2
+CODE 11A-1FFF 2
 SFR0 0-1F 1
 SFR1 80-9F 1
 SFR2 100-10F 1
@@ -60,9 +60,9 @@ SFR3 180-18F 1
 COMMON 79-7D 1
 EEDATA 2100-21FF 2
 STRCODE 3-3 2
-STRCODE 10E-1FFF 2
+STRCODE 11A-1FFF 2
 STRING 3-3 2
-STRING 10E-1FFF 2
+STRING 11A-1FFF 2
 # %LINETAB Section
 # This section enumerates the file/line to address mappings.
 # The beginning of the section is indicated by %LINETAB.
@@ -77,41 +77,42 @@ STRING 10E-1FFF 2
 # All other numeric values are in decimal.
 %LINETAB
 $dist/default/production\Lab3_asistente.X.production.o
-F cinit CODE >948:C:\Users\ANDYBO~1\AppData\Local\Temp\s7jc.s
-F cinit CODE >951:C:\Users\ANDYBO~1\AppData\Local\Temp\s7jc.s
-F cinit CODE >962:C:\Users\ANDYBO~1\AppData\Local\Temp\s7jc.s
-10 cinit CODE >968:C:\Users\ANDYBO~1\AppData\Local\Temp\s7jc.s
-10 cinit CODE >970:C:\Users\ANDYBO~1\AppData\Local\Temp\s7jc.s
-11 cinit CODE >971:C:\Users\ANDYBO~1\AppData\Local\Temp\s7jc.s
+F cinit CODE >946:C:\Users\ANDYBO~1\AppData\Local\Temp\sl3c.s
+F cinit CODE >949:C:\Users\ANDYBO~1\AppData\Local\Temp\sl3c.s
+F cinit CODE >960:C:\Users\ANDYBO~1\AppData\Local\Temp\sl3c.s
+10 cinit CODE >966:C:\Users\ANDYBO~1\AppData\Local\Temp\sl3c.s
+10 cinit CODE >968:C:\Users\ANDYBO~1\AppData\Local\Temp\sl3c.s
+11 cinit CODE >969:C:\Users\ANDYBO~1\AppData\Local\Temp\sl3c.s
 4 intentry CODE >58:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
-101 text8 CODE >38:C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/SPI_config.c
-101 text8 CODE >40:C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/SPI_config.c
-107 text8 CODE >41:C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/SPI_config.c
-F8 text7 CODE >56:C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/SPI_config.c
-F8 text7 CODE >58:C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/SPI_config.c
-FD text7 CODE >59:C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/SPI_config.c
-100 text7 CODE >60:C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/SPI_config.c
-108 text6 CODE >43:C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/SPI_config.c
-109 text6 CODE >45:C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/SPI_config.c
-10D text6 CODE >46:C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/SPI_config.c
+10D text8 CODE >38:C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/SPI_config.c
+10D text8 CODE >40:C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/SPI_config.c
+113 text8 CODE >41:C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/SPI_config.c
+104 text7 CODE >56:C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/SPI_config.c
+104 text7 CODE >58:C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/SPI_config.c
+109 text7 CODE >59:C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/SPI_config.c
+10C text7 CODE >60:C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/SPI_config.c
+114 text6 CODE >43:C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/SPI_config.c
+115 text6 CODE >45:C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/SPI_config.c
+119 text6 CODE >46:C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/SPI_config.c
 84 text5 CODE >58:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
 84 text5 CODE >61:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
-8A text5 CODE >63:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
-8E text5 CODE >64:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
-8F text5 CODE >68:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
-93 text5 CODE >70:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
-9B text5 CODE >71:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
-A1 text5 CODE >72:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
-A4 text5 CODE >74:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
-E2 text4 CODE >22:C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/ADC_CONFIG.c
-E2 text4 CODE >25:C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/ADC_CONFIG.c
-E5 text4 CODE >26:C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/ADC_CONFIG.c
-E6 text4 CODE >27:C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/ADC_CONFIG.c
-E7 text4 CODE >29:C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/ADC_CONFIG.c
-ED text4 CODE >30:C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/ADC_CONFIG.c
-EF text4 CODE >31:C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/ADC_CONFIG.c
-F4 text4 CODE >32:C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/ADC_CONFIG.c
-F7 text4 CODE >33:C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/ADC_CONFIG.c
+88 text5 CODE >63:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
+8C text5 CODE >64:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
+8D text5 CODE >65:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
+91 text5 CODE >69:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
+97 text5 CODE >71:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
+9F text5 CODE >72:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
+A5 text5 CODE >73:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
+A8 text5 CODE >75:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
+EE text4 CODE >22:C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/ADC_CONFIG.c
+EE text4 CODE >25:C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/ADC_CONFIG.c
+F1 text4 CODE >26:C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/ADC_CONFIG.c
+F2 text4 CODE >27:C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/ADC_CONFIG.c
+F3 text4 CODE >29:C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/ADC_CONFIG.c
+F9 text4 CODE >30:C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/ADC_CONFIG.c
+FB text4 CODE >31:C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/ADC_CONFIG.c
+100 text4 CODE >32:C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/ADC_CONFIG.c
+103 text4 CODE >33:C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/ADC_CONFIG.c
 4D text3 CODE >16:C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/Osc_config.c
 4E text3 CODE >18:C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/Osc_config.c
 4F text3 CODE >21:C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/Osc_config.c
@@ -128,50 +129,52 @@ F7 text4 CODE >33:C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asist
 6C text3 CODE >38:C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/Osc_config.c
 6D text3 CODE >40:C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/Osc_config.c
 83 text3 CODE >42:C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/Osc_config.c
-CC text2 CODE >21:C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/SPI_config.c
-CD text2 CODE >23:C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/SPI_config.c
-D0 text2 CODE >24:C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/SPI_config.c
-D4 text2 CODE >26:C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/SPI_config.c
-D6 text2 CODE >27:C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/SPI_config.c
-D7 text2 CODE >28:C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/SPI_config.c
-D8 text2 CODE >31:C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/SPI_config.c
-DB text2 CODE >32:C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/SPI_config.c
-DC text2 CODE >33:C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/SPI_config.c
-DC text2 CODE >35:C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/SPI_config.c
-E1 text2 CODE >36:C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/SPI_config.c
-14 text1 CODE >102:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
+D8 text2 CODE >21:C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/SPI_config.c
+D9 text2 CODE >23:C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/SPI_config.c
+DC text2 CODE >24:C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/SPI_config.c
+E0 text2 CODE >26:C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/SPI_config.c
+E2 text2 CODE >27:C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/SPI_config.c
+E3 text2 CODE >28:C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/SPI_config.c
+E4 text2 CODE >31:C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/SPI_config.c
+E7 text2 CODE >32:C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/SPI_config.c
+E8 text2 CODE >33:C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/SPI_config.c
+E8 text2 CODE >35:C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/SPI_config.c
+ED text2 CODE >36:C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/SPI_config.c
 14 text1 CODE >105:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
-17 text1 CODE >106:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
-18 text1 CODE >107:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
-19 text1 CODE >108:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
-1A text1 CODE >111:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
-1D text1 CODE >112:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
-1E text1 CODE >113:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
-1F text1 CODE >116:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
-22 text1 CODE >117:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
-23 text1 CODE >120:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
-24 text1 CODE >121:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
-25 text1 CODE >122:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
-26 text1 CODE >123:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
-27 text1 CODE >124:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
-28 text1 CODE >125:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
-29 text1 CODE >126:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
-2A text1 CODE >127:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
-2B text1 CODE >131:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
-31 text1 CODE >132:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
-36 text1 CODE >133:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
-3F text1 CODE >136:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
-40 text1 CODE >137:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
+14 text1 CODE >108:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
+17 text1 CODE >109:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
+18 text1 CODE >110:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
+19 text1 CODE >111:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
+1A text1 CODE >114:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
+1D text1 CODE >115:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
+1E text1 CODE >116:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
+1F text1 CODE >119:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
+22 text1 CODE >120:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
+23 text1 CODE >123:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
+26 text1 CODE >124:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
+27 text1 CODE >125:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
+28 text1 CODE >126:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
+29 text1 CODE >127:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
+2A text1 CODE >128:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
+2B text1 CODE >129:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
+2F text1 CODE >133:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
+35 text1 CODE >134:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
+3A text1 CODE >135:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
 43 text1 CODE >138:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
-46 text1 CODE >139:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
-49 text1 CODE >140:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
-4C text1 CODE >142:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
-AB maintext CODE >79:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
-AB maintext CODE >81:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
-B1 maintext CODE >89:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
+44 text1 CODE >139:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
+45 text1 CODE >140:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
+46 text1 CODE >141:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
+49 text1 CODE >142:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
+4C text1 CODE >144:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
+AF maintext CODE >80:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
+AF maintext CODE >82:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
 B5 maintext CODE >90:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
-B6 maintext CODE >93:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
-B7 maintext CODE >95:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
+B9 maintext CODE >91:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
+BA maintext CODE >94:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
+BB maintext CODE >95:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
+BC maintext CODE >96:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
+CE maintext CODE >97:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
+D3 maintext CODE >98:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
 # %SYMTAB Section
 # An enumeration of all symbols in the program.
 # The beginning of the section is indicated by %SYMTAB.
@@ -185,28 +188,29 @@ B7 maintext CODE >95:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_as
 # is the name of the object file in which the symbol was defined.
 %SYMTAB
 ___latbits 2 0 ABS 0 - dist/default/production\Lab3_asistente.X.production.o
-__Hspace_0 10E 0 ABS 0 - -
+__Hspace_0 11A 0 ABS 0 - -
 __Hspace_1 79 0 ABS 0 - -
 __Hspace_2 0 0 ABS 0 - -
 __Hspace_3 0 0 ABS 0 - -
 __Hspace_4 4010 0 ABS 0 - -
 spiInit@sTransmitEdge 76 0 COMMON 1 cstackCOMMON dist/default/production\Lab3_asistente.X.production.o
 __Heeprom_data 0 0 EEDATA 3 eeprom_data -
-_T1CONbits 10 0 ABS 0 - dist/default/production\Lab3_asistente.X.production.o
 __Hstrings 0 0 ABS 0 strings -
-___sp 0 0 STACK 2 stack C:\Users\ANDYBO~1\AppData\Local\Temp\s7jc.o
-_main 156 0 CODE 0 maintext dist/default/production\Lab3_asistente.X.production.o
+_TMR0 1 0 ABS 0 - dist/default/production\Lab3_asistente.X.production.o
+___sp 0 0 STACK 2 stack C:\Users\ANDYBO~1\AppData\Local\Temp\sl3c.o
+_main 15E 0 CODE 0 maintext dist/default/production\Lab3_asistente.X.production.o
 btemp 7E 0 ABS 0 - dist/default/production\Lab3_asistente.X.production.o
-start 18 0 CODE 0 init C:\Users\ANDYBO~1\AppData\Local\Temp\s7jc.o
+start 18 0 CODE 0 init C:\Users\ANDYBO~1\AppData\Local\Temp\sl3c.o
 __size_of_main 0 0 ABS 0 - dist/default/production\Lab3_asistente.X.production.o
 __HbssCOMMON 0 0 ABS 0 bssCOMMON -
+_OPTION_REGbits 81 0 ABS 0 - dist/default/production\Lab3_asistente.X.production.o
 __Hpowerup 0 0 CODE 0 powerup -
-intlevel0 0 0 ENTRY 0 functab C:\Users\ANDYBO~1\AppData\Local\Temp\s7jc.o
-intlevel1 0 0 ENTRY 0 functab C:\Users\ANDYBO~1\AppData\Local\Temp\s7jc.o
-intlevel2 0 0 ENTRY 0 functab C:\Users\ANDYBO~1\AppData\Local\Temp\s7jc.o
-intlevel3 0 0 ENTRY 0 functab C:\Users\ANDYBO~1\AppData\Local\Temp\s7jc.o
-intlevel4 0 0 ENTRY 0 functab C:\Users\ANDYBO~1\AppData\Local\Temp\s7jc.o
-intlevel5 0 0 ENTRY 0 functab C:\Users\ANDYBO~1\AppData\Local\Temp\s7jc.o
+intlevel0 0 0 ENTRY 0 functab C:\Users\ANDYBO~1\AppData\Local\Temp\sl3c.o
+intlevel1 0 0 ENTRY 0 functab C:\Users\ANDYBO~1\AppData\Local\Temp\sl3c.o
+intlevel2 0 0 ENTRY 0 functab C:\Users\ANDYBO~1\AppData\Local\Temp\sl3c.o
+intlevel3 0 0 ENTRY 0 functab C:\Users\ANDYBO~1\AppData\Local\Temp\sl3c.o
+intlevel4 0 0 ENTRY 0 functab C:\Users\ANDYBO~1\AppData\Local\Temp\sl3c.o
+intlevel5 0 0 ENTRY 0 functab C:\Users\ANDYBO~1\AppData\Local\Temp\sl3c.o
 __LbssCOMMON 0 0 ABS 0 bssCOMMON -
 _OSCCONbits 8F 0 ABS 0 - dist/default/production\Lab3_asistente.X.production.o
 wtemp0 7E 0 ABS 0 - dist/default/production\Lab3_asistente.X.production.o
@@ -217,8 +221,8 @@ _ANSELH 189 0 ABS 0 - dist/default/production\Lab3_asistente.X.production.o
 __size_of_spiInit 0 0 ABS 0 - dist/default/production\Lab3_asistente.X.production.o
 __size_of_spiRead 0 0 ABS 0 - dist/default/production\Lab3_asistente.X.production.o
 __Lmaintext 0 0 ABS 0 maintext -
-___stackhi 0 0 ABS 0 - C:\Users\ANDYBO~1\AppData\Local\Temp\s7jc.o
-___stacklo 0 0 ABS 0 - C:\Users\ANDYBO~1\AppData\Local\Temp\s7jc.o
+___stackhi 0 0 ABS 0 - C:\Users\ANDYBO~1\AppData\Local\Temp\sl3c.o
+___stacklo 0 0 ABS 0 - C:\Users\ANDYBO~1\AppData\Local\Temp\sl3c.o
 __size_of_setup 0 0 ABS 0 - dist/default/production\Lab3_asistente.X.production.o
 spiInit@sDataSample 74 0 COMMON 1 cstackCOMMON dist/default/production\Lab3_asistente.X.production.o
 start_initialization 1E 0 CODE 0 cinit dist/default/production\Lab3_asistente.X.production.o
@@ -229,7 +233,7 @@ __pcstackBANK0 20 0 BANK0 1 cstackBANK0 dist/default/production\Lab3_asistente.X
 _SSPBUF 13 0 ABS 0 - dist/default/production\Lab3_asistente.X.production.o
 _SSPCON 14 0 ABS 0 - dist/default/production\Lab3_asistente.X.production.o
 _TRISC3 43B 0 ABS 0 - dist/default/production\Lab3_asistente.X.production.o
-___int_sp 0 0 STACK 2 stack C:\Users\ANDYBO~1\AppData\Local\Temp\s7jc.o
+___int_sp 0 0 STACK 2 stack C:\Users\ANDYBO~1\AppData\Local\Temp\sl3c.o
 __Hbank0 0 0 ABS 0 bank0 -
 __Hbank1 0 0 ABS 0 bank1 -
 __Hbank2 0 0 ABS 0 bank2 -
@@ -238,8 +242,8 @@ __Hcinit 28 0 CODE 0 cinit -
 __size_of_spiReceiveWait 0 0 ABS 0 - dist/default/production\Lab3_asistente.X.production.o
 __Hstack 0 0 STACK 2 stack -
 __Hmaintext 0 0 ABS 0 maintext -
-__end_of_spiInit 1C4 0 CODE 0 text2 dist/default/production\Lab3_asistente.X.production.o
-__end_of_spiRead 202 0 CODE 0 text7 dist/default/production\Lab3_asistente.X.production.o
+__end_of_spiInit 1DC 0 CODE 0 text2 dist/default/production\Lab3_asistente.X.production.o
+__end_of_spiRead 21A 0 CODE 0 text7 dist/default/production\Lab3_asistente.X.production.o
 __Hcommon 0 0 ABS 0 common -
 __Hconfig 4012 0 CONFIG 4 config -
 __Lbank0 0 0 ABS 0 bank0 -
@@ -267,18 +271,18 @@ __Lsfr3 0 0 ABS 0 sfr3 -
 __Ltext 0 0 ABS 0 text -
 __LcstackBANK0 0 0 ABS 0 cstackBANK0 -
 __HcstackCOMMON 0 0 ABS 0 cstackCOMMON -
-__S0 10E 0 ABS 0 - -
+__S0 11A 0 ABS 0 - -
 __S1 79 0 ABS 0 - -
 __S2 0 0 ABS 0 - -
 __S3 0 0 ABS 0 - -
 _isr 108 0 CODE 0 text5 dist/default/production\Lab3_asistente.X.production.o
 __end_of_osc_config 108 0 CODE 0 text3 dist/default/production\Lab3_asistente.X.production.o
 saved_w 7E 0 ABS 0 - dist/default/production\Lab3_asistente.X.production.o
-__end_of_isr 156 0 CODE 0 text5 dist/default/production\Lab3_asistente.X.production.o
+__end_of_isr 15E 0 CODE 0 text5 dist/default/production\Lab3_asistente.X.production.o
 __Lintentry 8 0 CODE 0 intentry -
-reset_vec 0 0 CODE 0 reset_vec C:\Users\ANDYBO~1\AppData\Local\Temp\s7jc.o
+reset_vec 0 0 CODE 0 reset_vec C:\Users\ANDYBO~1\AppData\Local\Temp\sl3c.o
 _PIE1bits 8C 0 ABS 0 - dist/default/production\Lab3_asistente.X.production.o
-__pmaintext 156 0 CODE 0 maintext dist/default/production\Lab3_asistente.X.production.o
+__pmaintext 15E 0 CODE 0 maintext dist/default/production\Lab3_asistente.X.production.o
 __Lcommon 0 0 ABS 0 common -
 __Lconfig 0 0 CONFIG 4 config -
 _ADCON0bits 1F 0 ABS 0 - dist/default/production\Lab3_asistente.X.production.o
@@ -289,7 +293,7 @@ __Lspace_2 0 0 ABS 0 - -
 __Lspace_3 0 0 ABS 0 - -
 __Lspace_4 0 0 ABS 0 - -
 __pbssCOMMON 78 0 COMMON 1 bssCOMMON dist/default/production\Lab3_asistente.X.production.o
-_ADC_config 1C4 0 CODE 0 text4 dist/default/production\Lab3_asistente.X.production.o
+_ADC_config 1DC 0 CODE 0 text4 dist/default/production\Lab3_asistente.X.production.o
 __HcstackBANK0 0 0 ABS 0 cstackBANK0 -
 _PIR1bits C 0 ABS 0 - dist/default/production\Lab3_asistente.X.production.o
 __Lend_init 18 0 CODE 0 end_init -
@@ -299,39 +303,37 @@ __Hintentry 18 0 CODE 0 intentry -
 __Lstrings 0 0 ABS 0 strings -
 __Hreset_vec 6 0 CODE 0 reset_vec -
 __ptext1 28 0 CODE 0 text1 dist/default/production\Lab3_asistente.X.production.o
-__ptext2 198 0 CODE 0 text2 dist/default/production\Lab3_asistente.X.production.o
+__ptext2 1B0 0 CODE 0 text2 dist/default/production\Lab3_asistente.X.production.o
 __ptext3 9A 0 CODE 0 text3 dist/default/production\Lab3_asistente.X.production.o
-__ptext4 1C4 0 CODE 0 text4 dist/default/production\Lab3_asistente.X.production.o
+__ptext4 1DC 0 CODE 0 text4 dist/default/production\Lab3_asistente.X.production.o
 __ptext5 108 0 CODE 0 text5 dist/default/production\Lab3_asistente.X.production.o
-__ptext6 210 0 CODE 0 text6 dist/default/production\Lab3_asistente.X.production.o
-__ptext7 1F0 0 CODE 0 text7 dist/default/production\Lab3_asistente.X.production.o
-__ptext8 202 0 CODE 0 text8 dist/default/production\Lab3_asistente.X.production.o
-_spiInit 198 0 CODE 0 text2 dist/default/production\Lab3_asistente.X.production.o
-_spiRead 1F0 0 CODE 0 text7 dist/default/production\Lab3_asistente.X.production.o
+__ptext6 228 0 CODE 0 text6 dist/default/production\Lab3_asistente.X.production.o
+__ptext7 208 0 CODE 0 text7 dist/default/production\Lab3_asistente.X.production.o
+__ptext8 21A 0 CODE 0 text8 dist/default/production\Lab3_asistente.X.production.o
+_spiInit 1B0 0 CODE 0 text2 dist/default/production\Lab3_asistente.X.production.o
+_spiRead 208 0 CODE 0 text7 dist/default/production\Lab3_asistente.X.production.o
 spiWrite@dat 70 0 COMMON 1 cstackCOMMON dist/default/production\Lab3_asistente.X.production.o
 __Lpowerup 0 0 CODE 0 powerup -
 __size_of_osc_config 0 0 ABS 0 - dist/default/production\Lab3_asistente.X.production.o
 spiInit@sType 77 0 COMMON 1 cstackCOMMON dist/default/production\Lab3_asistente.X.production.o
 __Leeprom_data 0 0 EEDATA 3 eeprom_data -
 __Lreset_vec 0 0 CODE 0 reset_vec -
-_cuenta1_timer1 78 0 COMMON 1 bssCOMMON dist/default/production\Lab3_asistente.X.production.o
+_cuenta1_timer0 78 0 COMMON 1 bssCOMMON dist/default/production\Lab3_asistente.X.production.o
 __end_of__initialization 20 0 CODE 0 cinit dist/default/production\Lab3_asistente.X.production.o
 __size_of_spiWrite 0 0 ABS 0 - dist/default/production\Lab3_asistente.X.production.o
-__end_of_ADC_config 1F0 0 CODE 0 text4 dist/default/production\Lab3_asistente.X.production.o
+__end_of_ADC_config 208 0 CODE 0 text4 dist/default/production\Lab3_asistente.X.production.o
 __Lfunctab 0 0 ENTRY 0 functab -
-_spiReceiveWait 202 0 CODE 0 text8 dist/default/production\Lab3_asistente.X.production.o
+_spiReceiveWait 21A 0 CODE 0 text8 dist/default/production\Lab3_asistente.X.production.o
 __Lclrtext 0 0 ABS 0 clrtext -
 _ANSELbits 188 0 ABS 0 - dist/default/production\Lab3_asistente.X.production.o
 __pcstackCOMMON 70 0 COMMON 1 cstackCOMMON dist/default/production\Lab3_asistente.X.production.o
 _SSPSTAT 94 0 ABS 0 - dist/default/production\Lab3_asistente.X.production.o
 __Hend_init 1E 0 CODE 0 end_init -
-__end_of_main 198 0 CODE 0 maintext dist/default/production\Lab3_asistente.X.production.o
+__end_of_main 1B0 0 CODE 0 maintext dist/default/production\Lab3_asistente.X.production.o
 osc_config@freq 76 0 COMMON 1 cstackCOMMON dist/default/production\Lab3_asistente.X.production.o
 _ANSEL 188 0 ABS 0 - dist/default/production\Lab3_asistente.X.production.o
 _PORTB 6 0 ABS 0 - dist/default/production\Lab3_asistente.X.production.o
 _PORTD 8 0 ABS 0 - dist/default/production\Lab3_asistente.X.production.o
-_TMR1H F 0 ABS 0 - dist/default/production\Lab3_asistente.X.production.o
-_TMR1L E 0 ABS 0 - dist/default/production\Lab3_asistente.X.production.o
 _TRISB 86 0 ABS 0 - dist/default/production\Lab3_asistente.X.production.o
 _TRISD 88 0 ABS 0 - dist/default/production\Lab3_asistente.X.production.o
 __end_of_setup 9A 0 CODE 0 text1 dist/default/production\Lab3_asistente.X.production.o
@@ -344,9 +346,9 @@ __pintentry 8 0 CODE 0 intentry dist/default/production\Lab3_asistente.X.product
 __size_of_isr 0 0 ABS 0 - dist/default/production\Lab3_asistente.X.production.o
 spiInit@sClockIdle 75 0 COMMON 1 cstackCOMMON dist/default/production\Lab3_asistente.X.production.o
 __initialization 1E 0 CODE 0 cinit dist/default/production\Lab3_asistente.X.production.o
-_spiWrite 210 0 CODE 0 text6 dist/default/production\Lab3_asistente.X.production.o
-__end_of_spiReceiveWait 210 0 CODE 0 text8 dist/default/production\Lab3_asistente.X.production.o
-__end_of_spiWrite 21C 0 CODE 0 text6 dist/default/production\Lab3_asistente.X.production.o
+_spiWrite 228 0 CODE 0 text6 dist/default/production\Lab3_asistente.X.production.o
+__end_of_spiReceiveWait 228 0 CODE 0 text8 dist/default/production\Lab3_asistente.X.production.o
+__end_of_spiWrite 234 0 CODE 0 text6 dist/default/production\Lab3_asistente.X.production.o
 # %SPLITSTAB Section
 # This section enumerates all the psect splits performed by the assembler.
 # The beginning of the section is indicated by %SPLITSTAB.
@@ -374,7 +376,7 @@ __end_of_spiWrite 21C 0 CODE 0 text6 dist/default/production\Lab3_asistente.X.pr
 %SEGMENTS
 cstackCOMMON 1 70 70 9 1
 cstackBANK0 1 20 20 2 1
-intentry 0 4 8 10A 2
+intentry 0 4 8 116 2
 reset_vec 0 0 0 3 2
 # %NOTES Section
 # This section contains data of all the note-psects.  The beginning of the section

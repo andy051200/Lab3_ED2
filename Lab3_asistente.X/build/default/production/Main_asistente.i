@@ -2700,7 +2700,7 @@ void setup(void);
 
 
 
-unsigned char cuenta1_timer1;
+unsigned char cuenta1_timer0;
 
 
 
@@ -2708,10 +2708,11 @@ unsigned char cuenta1_timer1;
 void __attribute__((picinterrupt(("")))) isr(void)
 {
 
-    if (PIR1bits.TMR1IF)
+    if (INTCONbits.T0IF)
     {
-        cuenta1_timer1++;
-        PIR1bits.TMR1IF=0;
+        cuenta1_timer0++;
+        INTCONbits.T0IF=0;
+        TMR0 = 255;
     }
 
 
@@ -2733,16 +2734,18 @@ void main(void)
 
     while(1)
     {
-        switch(cuenta1_timer1)
+        switch(cuenta1_timer0)
         {
-            case(1):
+            case(249):
                 PORTB++;
                 break;
 
-            case(2):
-                cuenta1_timer1=0;
+            case(250):
+                cuenta1_timer0=0;
                 break;
         }
+        if (PORTB==0xFF)
+            PORTB=0x00;
     }
 
 }
@@ -2767,14 +2770,13 @@ void setup(void)
     PORTD=0;
 
 
-    T1CONbits.T1CKPS1 = 1;
-    T1CONbits.T1CKPS0 = 1;
-    T1CONbits.T1OSCEN = 1;
-    T1CONbits.T1SYNC = 1;
-    T1CONbits.TMR1CS = 0;
-    T1CONbits.TMR1ON = 1;
-    TMR1H = 0;
-    TMR1L = 0;
+    OPTION_REGbits.T0CS = 0;
+    OPTION_REGbits.T0SE = 0;
+    OPTION_REGbits.PSA = 0;
+    OPTION_REGbits.PS2 = 1;
+    OPTION_REGbits.PS1 = 1;
+    OPTION_REGbits.PS0 = 1;
+    TMR0 = 255;
 
 
 
@@ -2784,8 +2786,8 @@ void setup(void)
 
 
     INTCONbits.GIE=1;
-    PIE1bits.TMR1IE=1;
-    PIR1bits.TMR1IF=0;
+    INTCONbits.T0IE=1;
+    INTCONbits.T0IF=0;
     PIE1bits.SSPIE = 1;
     PIR1bits.SSPIF = 0;
 

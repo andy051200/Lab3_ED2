@@ -50,7 +50,7 @@ void setup(void);           //prototipo de funcion de inicializacion pic
 /*-----------------------------------------------------------------------------
  ----------------------- VARIABLES A IMPLEMTENTAR------------------------------
  -----------------------------------------------------------------------------*/
-unsigned char cuenta1_timer1;
+unsigned char cuenta1_timer0;
 
 /*-----------------------------------------------------------------------------
  ---------------------------- INTERRUPCIONES ----------------------------------
@@ -58,10 +58,11 @@ unsigned char cuenta1_timer1;
 void __interrupt() isr(void) //funcion de interrupciones
 {
     //------INTERRUPCION DEL TIMER1
-    if (PIR1bits.TMR1IF)
+    if (INTCONbits.T0IF)
     {
-        cuenta1_timer1++;
-        PIR1bits.TMR1IF=0;
+        cuenta1_timer0++;
+        INTCONbits.T0IF=0;
+        TMR0 = 255;             // preset for timer register
     }
     
     //------INTERRUPCION RECEPCION DE DATOS DESDE PIC MAESTRO
@@ -83,16 +84,18 @@ void main(void)
     
     while(1)
     {
-        switch(cuenta1_timer1)
+        switch(cuenta1_timer0)
         {
-            case(1):
+            case(249):
                 PORTB++;
                 break;
                 
-            case(2):
-                cuenta1_timer1=0;
+            case(250):
+                cuenta1_timer0=0;
                 break;
         }
+        if (PORTB==0xFF)
+            PORTB=0x00;
     }
 
 }
@@ -116,15 +119,14 @@ void setup(void)
     PORTB=0;
     PORTD=0;
     
-    //---------CONFIGURACION DEL TIMER1
-    T1CONbits.T1CKPS1 = 1;   // bits 5-4  Prescaler Rate Select bits
-    T1CONbits.T1CKPS0 = 1;   // bit 4
-    T1CONbits.T1OSCEN = 1;   // Oscillator Enable Control bit 1 = on
-    T1CONbits.T1SYNC = 1;    // External Clock Input Synchronization Control bit
-    T1CONbits.TMR1CS = 0;    // Clock Source Select bit..0 = Internal clock (FOSC/4)
-    T1CONbits.TMR1ON = 1;    // bit 0 enables timer
-    TMR1H = 0;             // preset for timer1 MSB register
-    TMR1L = 0;             // preset for timer1 LSB register
+   //---------CONFIGURACION DEL TIMER0
+    OPTION_REGbits.T0CS = 0;  // bit 5  TMR0 Clock Source Select bit...0 = Internal Clock (CLKO) 1 = Transition on T0CKI pin
+    OPTION_REGbits.T0SE = 0;  // bit 4 TMR0 Source Edge Select bit 0 = low/high 1 = high/low
+    OPTION_REGbits.PSA = 0;   // bit 3  Prescaler Assignment bit...0 = Prescaler is assigned to the Timer0
+    OPTION_REGbits.PS2 = 1;   // bits 2-0  PS2:PS0: Prescaler Rate Select bits
+    OPTION_REGbits.PS1 = 1;
+    OPTION_REGbits.PS0 = 1;
+    TMR0 = 255;             // preset for timer register
 
     
     //---------LLAMADO DE FUNCIONES DESDE LIBRERIAS
@@ -134,8 +136,8 @@ void setup(void)
     
     //---------CONFIGURACIOND DE INTERRUPCIONES
     INTCONbits.GIE=1;           //se habilita interrupciones globales
-    PIE1bits.TMR1IE=1;         //se habilita interrupcion del timer1
-    PIR1bits.TMR1IF=0;          //se apaga bandera de interrupcion timer1
+    INTCONbits.T0IE=1;
+    INTCONbits.T0IF=0;
     PIE1bits.SSPIE = 1;         //se habilita interrupcion del MSSP
     PIR1bits.SSPIF = 0;         //se apaga bandera de interrupcion MSSP
     

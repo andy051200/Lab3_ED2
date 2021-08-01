@@ -2700,20 +2700,20 @@ void setup(void);
 
 
 
-int cuenta1_timer1;
+unsigned char cuenta1_timer0;
 
 
 
 void __attribute__((picinterrupt(("")))) isr(void)
 {
 
-    if (PIR1bits.TMR1IF)
+    if (INTCONbits.T0IF==1)
     {
-        cuenta1_timer1++;
-        PORTB++;
-        TMR1H = 0;
-        TMR1L = 0;
-        PIR1bits.TMR1IF=0;
+        cuenta1_timer0++;
+
+        INTCONbits.T0IF=0;
+        TMR0 = 255;
+# 73 "Main_maestro.c"
     }
 
 }
@@ -2724,34 +2724,32 @@ void __attribute__((picinterrupt(("")))) isr(void)
 void main(void)
 {
     setup();
-
-
     while(1)
     {
-        switch(cuenta1_timer1)
+        switch(cuenta1_timer0)
         {
             case(0):
                 PORTCbits.RC2=0;
                 break;
 
-            case(1):
-                PORTB++;
-                break;
-
             case(2):
                 spiWrite(PORTB);
-                break;
-
-            case(3):
                 PORTD=spiRead();
+
                 break;
 
             case(4):
                 PORTCbits.RC2=1;
-                cuenta1_timer1=0;
+                break;
+
+            case(249):
+                PORTB++;
+                cuenta1_timer0=0;
                 break;
 
         }
+        if (PORTB==0xff)
+            PORTB=0;
     }
 }
 
@@ -2776,14 +2774,14 @@ void setup(void)
     PORTD=0;
 
 
-    T1CONbits.T1CKPS1 = 1;
-    T1CONbits.T1CKPS0 = 1;
-    T1CONbits.T1OSCEN = 1;
-    T1CONbits.T1SYNC = 1;
-    T1CONbits.TMR1CS = 0;
-    T1CONbits.TMR1ON = 1;
-    TMR1H = 0;
-    TMR1L = 0;
+    OPTION_REGbits.T0CS = 0;
+    OPTION_REGbits.T0SE = 0;
+    OPTION_REGbits.PSA = 0;
+    OPTION_REGbits.PS2 = 1;
+    OPTION_REGbits.PS1 = 1;
+    OPTION_REGbits.PS0 = 1;
+    TMR0 = 255;
+
 
 
     osc_config(4);
@@ -2791,6 +2789,11 @@ void setup(void)
     spiInit(SPI_MASTER_OSC_DIV4, SPI_DATA_SAMPLE_MIDDLE, SPI_CLOCK_IDLE_LOW, SPI_IDLE_2_ACTIVE);
 
     INTCONbits.GIE=1;
-    PIE1bits.RCIE=1;
-    PIR1bits.RCIF=0;
+    PIE1bits.TMR1IE=1;
+    INTCONbits.T0IE=1;
+    INTCONbits.T0IF=0;
+
+
+    PIR1bits.TMR1IF=0;
+    return;
 }
