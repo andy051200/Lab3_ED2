@@ -2722,8 +2722,9 @@ void __attribute__((picinterrupt(("")))) isr(void)
 
     if (PIR1bits.SSPIF)
     {
+        PORTD=spiRead();
+        spiWrite(conversion1);
 
-        spiWrite(PORTB);
         PIR1bits.SSPIF=0;
     }
 
@@ -2763,7 +2764,7 @@ void main(void)
     while(1)
     {
         PORTB=conversion1;
-# 128 "Main_asistente.c"
+# 129 "Main_asistente.c"
     }
 
 }

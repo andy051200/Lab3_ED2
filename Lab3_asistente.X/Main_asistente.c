@@ -72,8 +72,9 @@ void __interrupt() isr(void) //funcion de interrupciones
     //------INTERRUPCION RECEPCION DE DATOS DESDE PIC MAESTRO
     if (PIR1bits.SSPIF)
     {
-        //PORTD=spiRead();        //se lee valor proveniente del PIC maestro
-        spiWrite(PORTB);        //se envia el valor hacia el PIC maestro
+        PORTD=spiRead();        //se lee valor proveniente del PIC maestro
+        spiWrite(conversion1);        //se envia el valor hacia el PIC maestro
+        
         PIR1bits.SSPIF=0;       //se apaga bandera de interrupcion
     }
     

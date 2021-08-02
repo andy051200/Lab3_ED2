@@ -34,8 +34,9 @@ Descripcion: un laboratoria bien fumado tbh pero chilero
 #include <stdint.h>             //se incluye libreria
 #include <pic16f887.h>          //se incluye libreria del pic
 #include "Osc_config.h"
-#include "UART_CONFIG.h"
+#include "ADC_CONFIG.h"
 #include "SPI_config.h"
+
 /*-----------------------------------------------------------------------------
  ------------------------DIRECTIVAS DE COMPILADOR------------------------------
  -----------------------------------------------------------------------------*/
@@ -45,33 +46,27 @@ Descripcion: un laboratoria bien fumado tbh pero chilero
  ------------------------ PROTOTIPOS DE FUNCIONES ------------------------------
  -----------------------------------------------------------------------------*/
 void setup(void);           //prototipo de funcion de inicializacion pic
-
+void toggle_adc(void);
 /*-----------------------------------------------------------------------------
  ----------------------- VARIABLES A IMPLEMTENTAR------------------------------
  -----------------------------------------------------------------------------*/
-unsigned char cuenta1_timer0;         //control de mandar datos
+unsigned char cuenta1_timer0;
+unsigned char cuenta2_timer0;
+
+
 /*-----------------------------------------------------------------------------
  ---------------------------- INTERRUPCIONES ----------------------------------
  -----------------------------------------------------------------------------*/
 void __interrupt() isr(void) //funcion de interrupciones
 {
-    //------INTERRUPCION DEL TIMER1, CADA 0.5sec
-    if (INTCONbits.T0IF==1)
+    //------INTERRUPCION DEL TIMER1
+    if (INTCONbits.T0IF)
     {
         cuenta1_timer0++;
-        //PORTB++;
+        cuenta2_timer0++;
         INTCONbits.T0IF=0;
-        TMR0 = 255; 
-        
-        /*if (cuenta1_timer1==4)
-        {
-            PORTD=~PORTD;
-            cuenta1_timer1=0;
-        }*/
-        
-       
+        TMR0 = 255;             // preset for timer register
     }
- 
 }
 
 /*-----------------------------------------------------------------------------
@@ -79,7 +74,9 @@ void __interrupt() isr(void) //funcion de interrupciones
  -----------------------------------------------------------------------------*/
 void main(void)
 {
-    setup();
+    setup();        //se llama funcion de configuracion
+    
+    
     while(1)
     {
         switch(cuenta1_timer0)
@@ -89,9 +86,8 @@ void main(void)
                 break;
                 
             case(2):
-                spiWrite(PORTB);
+                spiWrite(0);
                 PORTD=spiRead();
-                //PORTD=~PORTD;
                 break;
                 
             case(4):
@@ -99,14 +95,15 @@ void main(void)
                 break;
         
             case(249):
-                PORTB++;
                 cuenta1_timer0=0;
                 break;
 
         }
         if (PORTB==0xff)
             PORTB=0;
+       
     }
+
 }
 /*-----------------------------------------------------------------------------
  ---------------------------------- SET UP -----------------------------------
@@ -114,8 +111,8 @@ void main(void)
 void setup(void)
 {
     //---------CONFIGURACION DE ENTRADAS ANALOGICAS
-    ANSEL=0;                    //solo se limpian entradas analogicas
-    ANSELH=0;                   //solo se limpian entradas analogicas
+    ANSEL=0;                //solo se limpian entradas analogicas
+    ANSELH=0;               //solo se limpian entradas analogicas
     
     //---------CONFIGURACION DE IN/OUT
     TRISB=0;                    //todo el portB como salida
@@ -123,13 +120,14 @@ void setup(void)
     TRISCbits.TRISC3=0;         //salida reloj control
     TRISCbits.TRISC4=1;         //salida para datos desde PIC maestro  
     TRISD=0;                    //todo el portB como salida
-     
+    
     //---------LIMPIEZA DE PUERTOS
+     //---------LIMPIEZA DE PUERTOS
     PORTB=0;
     PORTCbits.RC2=1;            //mantiene prendido el pin
     PORTD=0;
     
-    //---------CONFIGURACION DEL TIMER0
+   //---------CONFIGURACION DEL TIMER0
     OPTION_REGbits.T0CS = 0;  // bit 5  TMR0 Clock Source Select bit...0 = Internal Clock (CLKO) 1 = Transition on T0CKI pin
     OPTION_REGbits.T0SE = 0;  // bit 4 TMR0 Source Edge Select bit 0 = low/high 1 = high/low
     OPTION_REGbits.PSA = 0;   // bit 3  Prescaler Assignment bit...0 = Prescaler is assigned to the Timer0
@@ -139,19 +137,20 @@ void setup(void)
     TMR0 = 255;             // preset for timer register
 
     
-   //---------LLAMADO DE FUNCIONES DESDE LIBRERIAS
-    osc_config(4);          //Freq Osc a 4MGhz
-    uart_config();          //configuracion de comunicacion UART
+    //---------LLAMADO DE FUNCIONES DESDE LIBRERIAS
+    osc_config(4);          //se llama funcion de oscilador a 4MHz
+    //ADC_config();           //se llama funcion de ADC
     spiInit(SPI_MASTER_OSC_DIV4, SPI_DATA_SAMPLE_MIDDLE, SPI_CLOCK_IDLE_LOW, SPI_IDLE_2_ACTIVE);
+    
     //---------CONFIGURACIOND DE INTERRUPCIONES
     INTCONbits.GIE=1;           //se habilita interrupciones globales
-    PIE1bits.TMR1IE=1;          //se habilita interrupcion del timer1
-    INTCONbits.T0IE=1;
-    INTCONbits.T0IF=0;
-    //PIE1bits.RCIE=1;            //se habilita interrupcion de recepcion uart
-    //PIR1bits.RCIF=0;            //se apaga bandera de interrupcion uart
-    PIR1bits.TMR1IF=0;          //se apaga bandera de interrupcion timer1
-    return;
+    INTCONbits.T0IE=1;          //se habilita interrupcion timer 0
+    INTCONbits.T0IF=0;          //se apaga bandera de interrupcion timer0
+    /*PIE1bits.ADIE=1;
+    PIR1bits.ADIF=0;*/
+    /*PIE1bits.SSPIE = 1;         //se habilita interrupcion del MSSP
+    PIR1bits.SSPIF = 0;         //se apaga bandera de interrupcion MSSP*/
+    
 }
 /*-----------------------------------------------------------------------------
  --------------------------------- FUNCIONES ----------------------------------

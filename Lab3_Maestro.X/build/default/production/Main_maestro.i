@@ -2650,9 +2650,9 @@ typedef uint16_t uintptr_t;
 void osc_config(uint8_t freq);
 # 36 "Main_maestro.c" 2
 
-# 1 "./UART_CONFIG.h" 1
-# 17 "./UART_CONFIG.h"
-void uart_config(void);
+# 1 "./ADC_CONFIG.h" 1
+# 13 "./ADC_CONFIG.h"
+void ADC_config(void);
 # 37 "Main_maestro.c" 2
 
 # 1 "./SPI_config.h" 1
@@ -2694,28 +2694,29 @@ unsigned spiDataReady();
 char spiRead();
 char spiRead();
 # 38 "Main_maestro.c" 2
-# 47 "Main_maestro.c"
+# 48 "Main_maestro.c"
 void setup(void);
-
+void toggle_adc(void);
 
 
 
 unsigned char cuenta1_timer0;
+unsigned char cuenta2_timer0;
+
+
 
 
 
 void __attribute__((picinterrupt(("")))) isr(void)
 {
 
-    if (INTCONbits.T0IF==1)
+    if (INTCONbits.T0IF)
     {
         cuenta1_timer0++;
-
+        cuenta2_timer0++;
         INTCONbits.T0IF=0;
         TMR0 = 255;
-# 73 "Main_maestro.c"
     }
-
 }
 
 
@@ -2724,6 +2725,8 @@ void __attribute__((picinterrupt(("")))) isr(void)
 void main(void)
 {
     setup();
+
+
     while(1)
     {
         switch(cuenta1_timer0)
@@ -2733,9 +2736,8 @@ void main(void)
                 break;
 
             case(2):
-                spiWrite(PORTB);
+                spiWrite(0);
                 PORTD=spiRead();
-
                 break;
 
             case(4):
@@ -2743,14 +2745,15 @@ void main(void)
                 break;
 
             case(249):
-                PORTB++;
                 cuenta1_timer0=0;
                 break;
 
         }
         if (PORTB==0xff)
             PORTB=0;
+
     }
+
 }
 
 
@@ -2769,6 +2772,7 @@ void setup(void)
     TRISD=0;
 
 
+
     PORTB=0;
     PORTCbits.RC2=1;
     PORTD=0;
@@ -2785,15 +2789,16 @@ void setup(void)
 
 
     osc_config(4);
-    uart_config();
+
     spiInit(SPI_MASTER_OSC_DIV4, SPI_DATA_SAMPLE_MIDDLE, SPI_CLOCK_IDLE_LOW, SPI_IDLE_2_ACTIVE);
 
+
     INTCONbits.GIE=1;
-    PIE1bits.TMR1IE=1;
     INTCONbits.T0IE=1;
     INTCONbits.T0IF=0;
 
 
-    PIR1bits.TMR1IF=0;
-    return;
+
+
+
 }
