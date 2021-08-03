@@ -2515,3 +2515,19 @@ void uart_config(void)
     RCSTAbits.CREN = 1;
 
 }
+
+void send_char (char dato)
+{
+    while(!TXIF);
+    TXREG = dato;
+}
+
+void send_str(char st[])
+{
+    int i = 0;
+    while (st[i] != 0){
+        send_char(st[i]);
+        i++;
+        _delay((unsigned long)((30)*(4000000/4000000.0)));
+    }
+}

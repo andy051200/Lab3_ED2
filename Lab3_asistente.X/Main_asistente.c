@@ -54,6 +54,7 @@ unsigned char cuenta1_timer0;
 unsigned char cuenta2_timer0;
 unsigned char conversion1;
 unsigned char conversion2;
+unsigned char recibido1;
 
 /*-----------------------------------------------------------------------------
  ---------------------------- INTERRUPCIONES ----------------------------------
@@ -72,8 +73,12 @@ void __interrupt() isr(void) //funcion de interrupciones
     //------INTERRUPCION RECEPCION DE DATOS DESDE PIC MAESTRO
     if (PIR1bits.SSPIF)
     {
-        PORTD=spiRead();        //se lee valor proveniente del PIC maestro
-        spiWrite(conversion1);        //se envia el valor hacia el PIC maestro
+        recibido1=spiRead();
+        if (recibido1==1)
+            spiWrite(conversion1);
+        
+        else if (recibido1==2)
+            spiWrite(conversion2);
         
         PIR1bits.SSPIF=0;       //se apaga bandera de interrupcion
     }
@@ -112,22 +117,7 @@ void main(void)
     __delay_us(100);
     ADCON0bits.GO=1;
     while(1)
-    {
-        PORTB=conversion1;
-        /*PORTD=conversion2;*/
-        /*switch(cuenta1_timer0)
-        {    
-            case(249):
-                PORTB++;
-                break;
-                
-            case(250):
-                cuenta1_timer0=0;
-                break;
-        }*/
-        
-    }
-
+    {}
 }
 /*-----------------------------------------------------------------------------
  ---------------------------------- SET UP -----------------------------------

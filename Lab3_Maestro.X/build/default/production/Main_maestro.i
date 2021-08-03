@@ -2650,11 +2650,6 @@ typedef uint16_t uintptr_t;
 void osc_config(uint8_t freq);
 # 36 "Main_maestro.c" 2
 
-# 1 "./ADC_CONFIG.h" 1
-# 13 "./ADC_CONFIG.h"
-void ADC_config(void);
-# 37 "Main_maestro.c" 2
-
 # 1 "./SPI_config.h" 1
 # 14 "./SPI_config.h"
 typedef enum
@@ -2693,6 +2688,13 @@ void spiWrite(char);
 unsigned spiDataReady();
 char spiRead();
 char spiRead();
+# 37 "Main_maestro.c" 2
+
+# 1 "./UART_CONFIG.h" 1
+# 17 "./UART_CONFIG.h"
+void uart_config(void);
+void send_char (char dato);
+void send_str(char st[]);
 # 38 "Main_maestro.c" 2
 # 48 "Main_maestro.c"
 void setup(void);
@@ -2703,6 +2705,8 @@ void toggle_adc(void);
 unsigned char cuenta1_timer0;
 unsigned char cuenta2_timer0;
 
+unsigned char uart_recibido1;
+unsigned char uart_recibido2;
 
 
 
@@ -2736,11 +2740,16 @@ void main(void)
                 break;
 
             case(2):
-                spiWrite(0);
-                PORTD=spiRead();
+                spiWrite(1);
+                uart_recibido1=spiRead();
                 break;
 
             case(4):
+                spiWrite(2);
+                uart_recibido2=spiRead();
+                break;
+
+            case(6):
                 PORTCbits.RC2=1;
                 break;
 
@@ -2749,8 +2758,12 @@ void main(void)
                 break;
 
         }
-        if (PORTB==0xff)
-            PORTB=0;
+        PORTB=uart_recibido1;
+        PORTD=uart_recibido2;
+
+
+
+
 
     }
 
@@ -2789,13 +2802,17 @@ void setup(void)
 
 
     osc_config(4);
-
+    uart_config();
     spiInit(SPI_MASTER_OSC_DIV4, SPI_DATA_SAMPLE_MIDDLE, SPI_CLOCK_IDLE_LOW, SPI_IDLE_2_ACTIVE);
 
 
     INTCONbits.GIE=1;
     INTCONbits.T0IE=1;
     INTCONbits.T0IF=0;
+    PIE1bits.TXIE=1;
+    PIE1bits.RCIE=1;
+    PIR1bits.TXIF=0;
+    PIR1bits.RCIF=0;
 
 
 

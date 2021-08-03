@@ -30,9 +30,6 @@ Version 4.0 HI-TECH Software Intermediate Code
 "553
 [; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 553: extern volatile PIR1bits_t PIR1bits __attribute__((address(0x00C)));
 [v _PIR1bits `VS18 ~T0 @X0 0 e@12 ]
-"352
-[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 352: extern volatile unsigned char PORTD __attribute__((address(0x008)));
-[v _PORTD `Vuc ~T0 @X0 0 e@8 ]
 "49 ./SPI_config.h
 [; ;./SPI_config.h: 49: char spiRead();
 [v _spiRead `(uc ~T0 @X0 0 e? ]
@@ -73,10 +70,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 "48 Main_asistente.c
 [; ;Main_asistente.c: 48: void setup(void);
 [v _setup `(v ~T0 @X0 0 ef ]
-"228 C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h
-[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 228: extern volatile unsigned char PORTB __attribute__((address(0x006)));
-[v _PORTB `Vuc ~T0 @X0 0 e@6 ]
-"3387
+"3387 C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h
 [; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 3387: extern volatile unsigned char ANSEL __attribute__((address(0x188)));
 [v _ANSEL `Vuc ~T0 @X0 0 e@392 ]
 "3449
@@ -110,6 +104,12 @@ Version 4.0 HI-TECH Software Intermediate Code
 "1602
 [; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 1602: extern volatile unsigned char TRISD __attribute__((address(0x088)));
 [v _TRISD `Vuc ~T0 @X0 0 e@136 ]
+"228
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 228: extern volatile unsigned char PORTB __attribute__((address(0x006)));
+[v _PORTB `Vuc ~T0 @X0 0 e@6 ]
+"352
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 352: extern volatile unsigned char PORTD __attribute__((address(0x008)));
+[v _PORTD `Vuc ~T0 @X0 0 e@8 ]
 "1352
 [; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 1352:     struct {
 [s S50 :3 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
@@ -131,8 +131,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 "13 ./ADC_CONFIG.h
 [; ;./ADC_CONFIG.h: 13: void ADC_config(void);
 [v _ADC_config `(v ~T0 @X0 0 ef ]
-"167 Main_asistente.c
-[; ;Main_asistente.c: 167:     spiInit(SPI_SLAVE_SS_EN, SPI_DATA_SAMPLE_MIDDLE, SPI_CLOCK_IDLE_LOW, SPI_IDLE_2_ACTIVE);
+"157 Main_asistente.c
+[; ;Main_asistente.c: 157:     spiInit(SPI_SLAVE_SS_EN, SPI_DATA_SAMPLE_MIDDLE, SPI_CLOCK_IDLE_LOW, SPI_IDLE_2_ACTIVE);
 [c E1295 32 33 34 35 36 37 .. ]
 [n E1295 . SPI_MASTER_OSC_DIV4 SPI_MASTER_OSC_DIV16 SPI_MASTER_OSC_DIV64 SPI_MASTER_TMR2 SPI_SLAVE_SS_EN SPI_SLAVE_SS_DIS  ]
 [c E1303 0 128 .. ]
@@ -425,258 +425,269 @@ Version 4.0 HI-TECH Software Intermediate Code
 "56
 [; ;Main_asistente.c: 56: unsigned char conversion2;
 [v _conversion2 `uc ~T0 @X0 1 e ]
+"57
+[; ;Main_asistente.c: 57: unsigned char recibido1;
+[v _recibido1 `uc ~T0 @X0 1 e ]
 [v $root$_isr `(v ~T0 @X0 0 e ]
-"61
-[; ;Main_asistente.c: 61: void __attribute__((picinterrupt(("")))) isr(void)
-[v _isr `(v ~T1 @X0 1 ef ]
 "62
-[; ;Main_asistente.c: 62: {
+[; ;Main_asistente.c: 62: void __attribute__((picinterrupt(("")))) isr(void)
+[v _isr `(v ~T1 @X0 1 ef ]
+"63
+[; ;Main_asistente.c: 63: {
 {
 [e :U _isr ]
 [f ]
-"64
-[; ;Main_asistente.c: 64:     if (INTCONbits.T0IF)
-[e $ ! != -> . . _INTCONbits 0 2 `i -> 0 `i 139  ]
 "65
-[; ;Main_asistente.c: 65:     {
-{
+[; ;Main_asistente.c: 65:     if (INTCONbits.T0IF)
+[e $ ! != -> . . _INTCONbits 0 2 `i -> 0 `i 139  ]
 "66
-[; ;Main_asistente.c: 66:         cuenta1_timer0++;
-[e ++ _cuenta1_timer0 -> -> 1 `i `uc ]
+[; ;Main_asistente.c: 66:     {
+{
 "67
-[; ;Main_asistente.c: 67:         cuenta2_timer0++;
-[e ++ _cuenta2_timer0 -> -> 1 `i `uc ]
+[; ;Main_asistente.c: 67:         cuenta1_timer0++;
+[e ++ _cuenta1_timer0 -> -> 1 `i `uc ]
 "68
-[; ;Main_asistente.c: 68:         INTCONbits.T0IF=0;
-[e = . . _INTCONbits 0 2 -> -> 0 `i `uc ]
+[; ;Main_asistente.c: 68:         cuenta2_timer0++;
+[e ++ _cuenta2_timer0 -> -> 1 `i `uc ]
 "69
-[; ;Main_asistente.c: 69:         TMR0 = 255;
-[e = _TMR0 -> -> 255 `i `uc ]
+[; ;Main_asistente.c: 69:         INTCONbits.T0IF=0;
+[e = . . _INTCONbits 0 2 -> -> 0 `i `uc ]
 "70
-[; ;Main_asistente.c: 70:     }
+[; ;Main_asistente.c: 70:         TMR0 = 255;
+[e = _TMR0 -> -> 255 `i `uc ]
+"71
+[; ;Main_asistente.c: 71:     }
 }
 [e :U 139 ]
-"73
-[; ;Main_asistente.c: 73:     if (PIR1bits.SSPIF)
-[e $ ! != -> . . _PIR1bits 0 3 `i -> 0 `i 140  ]
 "74
-[; ;Main_asistente.c: 74:     {
-{
+[; ;Main_asistente.c: 74:     if (PIR1bits.SSPIF)
+[e $ ! != -> . . _PIR1bits 0 3 `i -> 0 `i 140  ]
 "75
-[; ;Main_asistente.c: 75:         PORTD=spiRead();
-[e = _PORTD -> ( _spiRead ..  `uc ]
+[; ;Main_asistente.c: 75:     {
+{
 "76
-[; ;Main_asistente.c: 76:         spiWrite(conversion1);
-[e ( _spiWrite (1 -> _conversion1 `uc ]
+[; ;Main_asistente.c: 76:         recibido1=spiRead();
+[e = _recibido1 -> ( _spiRead ..  `uc ]
+"77
+[; ;Main_asistente.c: 77:         if (recibido1==1)
+[e $ ! == -> _recibido1 `i -> 1 `i 141  ]
 "78
-[; ;Main_asistente.c: 78:         PIR1bits.SSPIF=0;
+[; ;Main_asistente.c: 78:             spiWrite(conversion1);
+[e ( _spiWrite (1 -> _conversion1 `uc ]
+[e $U 142  ]
+"80
+[; ;Main_asistente.c: 80:         else if (recibido1==2)
+[e :U 141 ]
+[e $ ! == -> _recibido1 `i -> 2 `i 143  ]
+"81
+[; ;Main_asistente.c: 81:             spiWrite(conversion2);
+[e ( _spiWrite (1 -> _conversion2 `uc ]
+[e :U 143 ]
+[e :U 142 ]
+"83
+[; ;Main_asistente.c: 83:         PIR1bits.SSPIF=0;
 [e = . . _PIR1bits 0 3 -> -> 0 `i `uc ]
-"79
-[; ;Main_asistente.c: 79:     }
+"84
+[; ;Main_asistente.c: 84:     }
 }
 [e :U 140 ]
-"82
-[; ;Main_asistente.c: 82:     if (PIR1bits.ADIF)
-[e $ ! != -> . . _PIR1bits 0 6 `i -> 0 `i 141  ]
-"83
-[; ;Main_asistente.c: 83:     {
-{
-"84
-[; ;Main_asistente.c: 84:         if (ADCON0bits.GO==0)
-[e $ ! == -> . . _ADCON0bits 1 1 `i -> 0 `i 142  ]
-"85
-[; ;Main_asistente.c: 85:         {
-{
-"86
-[; ;Main_asistente.c: 86:             switch(ADCON0bits.CHS)
-[e $U 144  ]
 "87
-[; ;Main_asistente.c: 87:             {
-{
+[; ;Main_asistente.c: 87:     if (PIR1bits.ADIF)
+[e $ ! != -> . . _PIR1bits 0 6 `i -> 0 `i 144  ]
 "88
-[; ;Main_asistente.c: 88:                 case(0):
-[e :U 145 ]
+[; ;Main_asistente.c: 88:     {
+{
 "89
-[; ;Main_asistente.c: 89:                     conversion1=ADRESH;
-[e = _conversion1 _ADRESH ]
+[; ;Main_asistente.c: 89:         if (ADCON0bits.GO==0)
+[e $ ! == -> . . _ADCON0bits 1 1 `i -> 0 `i 145  ]
 "90
-[; ;Main_asistente.c: 90:                     ADCON0bits.CHS=1;
-[e = . . _ADCON0bits 0 2 -> -> 1 `i `uc ]
+[; ;Main_asistente.c: 90:         {
+{
 "91
-[; ;Main_asistente.c: 91:                     break;
-[e $U 143  ]
+[; ;Main_asistente.c: 91:             switch(ADCON0bits.CHS)
+[e $U 147  ]
+"92
+[; ;Main_asistente.c: 92:             {
+{
 "93
-[; ;Main_asistente.c: 93:                 case(1):
-[e :U 146 ]
+[; ;Main_asistente.c: 93:                 case(0):
+[e :U 148 ]
 "94
-[; ;Main_asistente.c: 94:                     conversion2=ADRESH;
-[e = _conversion2 _ADRESH ]
+[; ;Main_asistente.c: 94:                     conversion1=ADRESH;
+[e = _conversion1 _ADRESH ]
 "95
-[; ;Main_asistente.c: 95:                     ADCON0bits.CHS=0;
-[e = . . _ADCON0bits 0 2 -> -> 0 `i `uc ]
+[; ;Main_asistente.c: 95:                     ADCON0bits.CHS=1;
+[e = . . _ADCON0bits 0 2 -> -> 1 `i `uc ]
 "96
 [; ;Main_asistente.c: 96:                     break;
-[e $U 143  ]
-"97
-[; ;Main_asistente.c: 97:             }
-}
-[e $U 143  ]
-[e :U 144 ]
-[e [\ -> . . _ADCON0bits 0 2 `i , $ -> 0 `i 145
- , $ -> 1 `i 146
- 143 ]
-[e :U 143 ]
+[e $U 146  ]
 "98
-[; ;Main_asistente.c: 98:         }
-}
-[e :U 142 ]
+[; ;Main_asistente.c: 98:                 case(1):
+[e :U 149 ]
 "99
-[; ;Main_asistente.c: 99:         _delay((unsigned long)((50)*(4000000/4000000.0)));
-[e ( __delay (1 -> * -> -> 50 `i `d / -> -> 4000000 `l `d .4000000.0 `ul ]
+[; ;Main_asistente.c: 99:                     conversion2=ADRESH;
+[e = _conversion2 _ADRESH ]
 "100
-[; ;Main_asistente.c: 100:         ADCON0bits.GO=1;
-[e = . . _ADCON0bits 1 1 -> -> 1 `i `uc ]
+[; ;Main_asistente.c: 100:                     ADCON0bits.CHS=0;
+[e = . . _ADCON0bits 0 2 -> -> 0 `i `uc ]
 "101
-[; ;Main_asistente.c: 101:         PIR1bits.ADIF=0;
-[e = . . _PIR1bits 0 6 -> -> 0 `i `uc ]
+[; ;Main_asistente.c: 101:                     break;
+[e $U 146  ]
 "102
-[; ;Main_asistente.c: 102:     }
+[; ;Main_asistente.c: 102:             }
 }
-[e :U 141 ]
+[e $U 146  ]
+[e :U 147 ]
+[e [\ -> . . _ADCON0bits 0 2 `i , $ -> 0 `i 148
+ , $ -> 1 `i 149
+ 146 ]
+[e :U 146 ]
+"103
+[; ;Main_asistente.c: 103:         }
+}
+[e :U 145 ]
 "104
-[; ;Main_asistente.c: 104: }
+[; ;Main_asistente.c: 104:         _delay((unsigned long)((50)*(4000000/4000000.0)));
+[e ( __delay (1 -> * -> -> 50 `i `d / -> -> 4000000 `l `d .4000000.0 `ul ]
+"105
+[; ;Main_asistente.c: 105:         ADCON0bits.GO=1;
+[e = . . _ADCON0bits 1 1 -> -> 1 `i `uc ]
+"106
+[; ;Main_asistente.c: 106:         PIR1bits.ADIF=0;
+[e = . . _PIR1bits 0 6 -> -> 0 `i `uc ]
+"107
+[; ;Main_asistente.c: 107:     }
+}
+[e :U 144 ]
+"109
+[; ;Main_asistente.c: 109: }
 [e :UE 138 ]
 }
 [v $root$_main `(v ~T0 @X0 0 e ]
-"109
-[; ;Main_asistente.c: 109: void main(void)
+"114
+[; ;Main_asistente.c: 114: void main(void)
 [v _main `(v ~T0 @X0 1 ef ]
-"110
-[; ;Main_asistente.c: 110: {
+"115
+[; ;Main_asistente.c: 115: {
 {
 [e :U _main ]
 [f ]
-"111
-[; ;Main_asistente.c: 111:     setup();
-[e ( _setup ..  ]
-"112
-[; ;Main_asistente.c: 112:     _delay((unsigned long)((100)*(4000000/4000000.0)));
-[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 4000000 `l `d .4000000.0 `ul ]
-"113
-[; ;Main_asistente.c: 113:     ADCON0bits.GO=1;
-[e = . . _ADCON0bits 1 1 -> -> 1 `i `uc ]
-"114
-[; ;Main_asistente.c: 114:     while(1)
-[e :U 149 ]
-"115
-[; ;Main_asistente.c: 115:     {
-{
 "116
-[; ;Main_asistente.c: 116:         PORTB=conversion1;
-[e = _PORTB _conversion1 ]
-"129
-[; ;Main_asistente.c: 129:     }
+[; ;Main_asistente.c: 116:     setup();
+[e ( _setup ..  ]
+"117
+[; ;Main_asistente.c: 117:     _delay((unsigned long)((100)*(4000000/4000000.0)));
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 4000000 `l `d .4000000.0 `ul ]
+"118
+[; ;Main_asistente.c: 118:     ADCON0bits.GO=1;
+[e = . . _ADCON0bits 1 1 -> -> 1 `i `uc ]
+"119
+[; ;Main_asistente.c: 119:     while(1)
+[e :U 152 ]
+"120
+[; ;Main_asistente.c: 120:     {}
+{
 }
-[e :U 148 ]
-[e $U 149  ]
-[e :U 150 ]
-"131
-[; ;Main_asistente.c: 131: }
-[e :UE 147 ]
+[e :U 151 ]
+[e $U 152  ]
+[e :U 153 ]
+"121
+[; ;Main_asistente.c: 121: }
+[e :UE 150 ]
 }
-"135
-[; ;Main_asistente.c: 135: void setup(void)
+"125
+[; ;Main_asistente.c: 125: void setup(void)
 [v _setup `(v ~T0 @X0 1 ef ]
-"136
-[; ;Main_asistente.c: 136: {
+"126
+[; ;Main_asistente.c: 126: {
 {
 [e :U _setup ]
 [f ]
-"138
-[; ;Main_asistente.c: 138:     ANSEL=0;
+"128
+[; ;Main_asistente.c: 128:     ANSEL=0;
 [e = _ANSEL -> -> 0 `i `uc ]
-"139
-[; ;Main_asistente.c: 139:     ANSELH=0;
+"129
+[; ;Main_asistente.c: 129:     ANSELH=0;
 [e = _ANSELH -> -> 0 `i `uc ]
-"140
-[; ;Main_asistente.c: 140:     ANSELbits.ANS0=1;
+"130
+[; ;Main_asistente.c: 130:     ANSELbits.ANS0=1;
 [e = . . _ANSELbits 0 0 -> -> 1 `i `uc ]
-"141
-[; ;Main_asistente.c: 141:     ANSELbits.ANS1=1;
+"131
+[; ;Main_asistente.c: 131:     ANSELbits.ANS1=1;
 [e = . . _ANSELbits 0 1 -> -> 1 `i `uc ]
-"144
-[; ;Main_asistente.c: 144:     TRISAbits.TRISA0=1;
+"134
+[; ;Main_asistente.c: 134:     TRISAbits.TRISA0=1;
 [e = . . _TRISAbits 0 0 -> -> 1 `i `uc ]
-"145
-[; ;Main_asistente.c: 145:     TRISAbits.TRISA1=1;
+"135
+[; ;Main_asistente.c: 135:     TRISAbits.TRISA1=1;
 [e = . . _TRISAbits 0 1 -> -> 1 `i `uc ]
-"146
-[; ;Main_asistente.c: 146:     TRISAbits.TRISA5=1;
+"136
+[; ;Main_asistente.c: 136:     TRISAbits.TRISA5=1;
 [e = . . _TRISAbits 0 5 -> -> 1 `i `uc ]
-"147
-[; ;Main_asistente.c: 147:     TRISB=0;
+"137
+[; ;Main_asistente.c: 137:     TRISB=0;
 [e = _TRISB -> -> 0 `i `uc ]
-"148
-[; ;Main_asistente.c: 148:     TRISD=0;
+"138
+[; ;Main_asistente.c: 138:     TRISD=0;
 [e = _TRISD -> -> 0 `i `uc ]
-"151
-[; ;Main_asistente.c: 151:     PORTB=0;
+"141
+[; ;Main_asistente.c: 141:     PORTB=0;
 [e = _PORTB -> -> 0 `i `uc ]
-"152
-[; ;Main_asistente.c: 152:     PORTD=0;
+"142
+[; ;Main_asistente.c: 142:     PORTD=0;
 [e = _PORTD -> -> 0 `i `uc ]
-"155
-[; ;Main_asistente.c: 155:     OPTION_REGbits.T0CS = 0;
+"145
+[; ;Main_asistente.c: 145:     OPTION_REGbits.T0CS = 0;
 [e = . . _OPTION_REGbits 0 3 -> -> 0 `i `uc ]
-"156
-[; ;Main_asistente.c: 156:     OPTION_REGbits.T0SE = 0;
+"146
+[; ;Main_asistente.c: 146:     OPTION_REGbits.T0SE = 0;
 [e = . . _OPTION_REGbits 0 2 -> -> 0 `i `uc ]
-"157
-[; ;Main_asistente.c: 157:     OPTION_REGbits.PSA = 0;
+"147
+[; ;Main_asistente.c: 147:     OPTION_REGbits.PSA = 0;
 [e = . . _OPTION_REGbits 0 1 -> -> 0 `i `uc ]
-"158
-[; ;Main_asistente.c: 158:     OPTION_REGbits.PS2 = 1;
+"148
+[; ;Main_asistente.c: 148:     OPTION_REGbits.PS2 = 1;
 [e = . . _OPTION_REGbits 1 2 -> -> 1 `i `uc ]
-"159
-[; ;Main_asistente.c: 159:     OPTION_REGbits.PS1 = 1;
+"149
+[; ;Main_asistente.c: 149:     OPTION_REGbits.PS1 = 1;
 [e = . . _OPTION_REGbits 1 1 -> -> 1 `i `uc ]
-"160
-[; ;Main_asistente.c: 160:     OPTION_REGbits.PS0 = 1;
+"150
+[; ;Main_asistente.c: 150:     OPTION_REGbits.PS0 = 1;
 [e = . . _OPTION_REGbits 1 0 -> -> 1 `i `uc ]
-"161
-[; ;Main_asistente.c: 161:     TMR0 = 255;
+"151
+[; ;Main_asistente.c: 151:     TMR0 = 255;
 [e = _TMR0 -> -> 255 `i `uc ]
-"165
-[; ;Main_asistente.c: 165:     osc_config(4);
+"155
+[; ;Main_asistente.c: 155:     osc_config(4);
 [e ( _osc_config (1 -> -> 4 `i `uc ]
-"166
-[; ;Main_asistente.c: 166:     ADC_config();
+"156
+[; ;Main_asistente.c: 156:     ADC_config();
 [e ( _ADC_config ..  ]
-"167
-[; ;Main_asistente.c: 167:     spiInit(SPI_SLAVE_SS_EN, SPI_DATA_SAMPLE_MIDDLE, SPI_CLOCK_IDLE_LOW, SPI_IDLE_2_ACTIVE);
+"157
+[; ;Main_asistente.c: 157:     spiInit(SPI_SLAVE_SS_EN, SPI_DATA_SAMPLE_MIDDLE, SPI_CLOCK_IDLE_LOW, SPI_IDLE_2_ACTIVE);
 [e ( _spiInit (4 , , , . `E1295 4 . `E1303 0 . `E1307 1 . `E1311 0 ]
-"170
-[; ;Main_asistente.c: 170:     INTCONbits.GIE=1;
+"160
+[; ;Main_asistente.c: 160:     INTCONbits.GIE=1;
 [e = . . _INTCONbits 0 7 -> -> 1 `i `uc ]
-"171
-[; ;Main_asistente.c: 171:     INTCONbits.T0IE=1;
+"161
+[; ;Main_asistente.c: 161:     INTCONbits.T0IE=1;
 [e = . . _INTCONbits 0 5 -> -> 1 `i `uc ]
-"172
-[; ;Main_asistente.c: 172:     INTCONbits.T0IF=0;
+"162
+[; ;Main_asistente.c: 162:     INTCONbits.T0IF=0;
 [e = . . _INTCONbits 0 2 -> -> 0 `i `uc ]
-"173
-[; ;Main_asistente.c: 173:     PIE1bits.ADIE=1;
+"163
+[; ;Main_asistente.c: 163:     PIE1bits.ADIE=1;
 [e = . . _PIE1bits 0 6 -> -> 1 `i `uc ]
-"174
-[; ;Main_asistente.c: 174:     PIR1bits.ADIF=0;
+"164
+[; ;Main_asistente.c: 164:     PIR1bits.ADIF=0;
 [e = . . _PIR1bits 0 6 -> -> 0 `i `uc ]
-"175
-[; ;Main_asistente.c: 175:     PIE1bits.SSPIE = 1;
+"165
+[; ;Main_asistente.c: 165:     PIE1bits.SSPIE = 1;
 [e = . . _PIE1bits 0 3 -> -> 1 `i `uc ]
-"176
-[; ;Main_asistente.c: 176:     PIR1bits.SSPIF = 0;
+"166
+[; ;Main_asistente.c: 166:     PIR1bits.SSPIF = 0;
 [e = . . _PIR1bits 0 3 -> -> 0 `i `uc ]
-"178
-[; ;Main_asistente.c: 178: }
-[e :UE 151 ]
+"168
+[; ;Main_asistente.c: 168: }
+[e :UE 154 ]
 }

@@ -2704,6 +2704,7 @@ unsigned char cuenta1_timer0;
 unsigned char cuenta2_timer0;
 unsigned char conversion1;
 unsigned char conversion2;
+unsigned char recibido1;
 
 
 
@@ -2722,8 +2723,12 @@ void __attribute__((picinterrupt(("")))) isr(void)
 
     if (PIR1bits.SSPIF)
     {
-        PORTD=spiRead();
-        spiWrite(conversion1);
+        recibido1=spiRead();
+        if (recibido1==1)
+            spiWrite(conversion1);
+
+        else if (recibido1==2)
+            spiWrite(conversion2);
 
         PIR1bits.SSPIF=0;
     }
@@ -2762,11 +2767,7 @@ void main(void)
     _delay((unsigned long)((100)*(4000000/4000000.0)));
     ADCON0bits.GO=1;
     while(1)
-    {
-        PORTB=conversion1;
-# 129 "Main_asistente.c"
-    }
-
+    {}
 }
 
 

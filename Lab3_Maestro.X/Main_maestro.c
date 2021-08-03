@@ -34,8 +34,8 @@ Descripcion: un laboratoria bien fumado tbh pero chilero
 #include <stdint.h>             //se incluye libreria
 #include <pic16f887.h>          //se incluye libreria del pic
 #include "Osc_config.h"
-#include "ADC_CONFIG.h"
 #include "SPI_config.h"
+#include "UART_CONFIG.h"
 
 /*-----------------------------------------------------------------------------
  ------------------------DIRECTIVAS DE COMPILADOR------------------------------
@@ -52,7 +52,9 @@ void toggle_adc(void);
  -----------------------------------------------------------------------------*/
 unsigned char cuenta1_timer0;
 unsigned char cuenta2_timer0;
-
+//char s[30]=[];
+unsigned char uart_recibido1;
+unsigned char uart_recibido2;
 
 /*-----------------------------------------------------------------------------
  ---------------------------- INTERRUPCIONES ----------------------------------
@@ -86,11 +88,16 @@ void main(void)
                 break;
                 
             case(2):
-                spiWrite(0);
-                PORTD=spiRead();
+                spiWrite(1);                //le notifica que mande pot1
+                uart_recibido1=spiRead();   //recibe pot1
+                break;
+            
+            case(4):
+                spiWrite(2);                //le notifica que mande pot2
+                uart_recibido2=spiRead();   //recibe pot2
                 break;
                 
-            case(4):
+            case(6):
                 PORTCbits.RC2=1;
                 break;
         
@@ -99,9 +106,13 @@ void main(void)
                 break;
 
         }
-        if (PORTB==0xff)
+        PORTB=uart_recibido1;
+        PORTD=uart_recibido2;
+        /*if (PORTB==0xff)
             PORTB=0;
-       
+       //-----pedazo para mandar en uart
+        //sprintf(s,'contador1 %3.2F \R',uart_recibido);*/
+
     }
 
 }
@@ -139,13 +150,17 @@ void setup(void)
     
     //---------LLAMADO DE FUNCIONES DESDE LIBRERIAS
     osc_config(4);          //se llama funcion de oscilador a 4MHz
-    //ADC_config();           //se llama funcion de ADC
+    uart_config();           //se llama funcion de ADC
     spiInit(SPI_MASTER_OSC_DIV4, SPI_DATA_SAMPLE_MIDDLE, SPI_CLOCK_IDLE_LOW, SPI_IDLE_2_ACTIVE);
     
     //---------CONFIGURACIOND DE INTERRUPCIONES
     INTCONbits.GIE=1;           //se habilita interrupciones globales
     INTCONbits.T0IE=1;          //se habilita interrupcion timer 0
     INTCONbits.T0IF=0;          //se apaga bandera de interrupcion timer0
+    PIE1bits.TXIE=1;
+    PIE1bits.RCIE=1;
+    PIR1bits.TXIF=0;
+    PIR1bits.RCIF=0;
     /*PIE1bits.ADIE=1;
     PIR1bits.ADIF=0;*/
     /*PIE1bits.SSPIE = 1;         //se habilita interrupcion del MSSP
