@@ -52,7 +52,7 @@ void mandar_datos(void);
  ----------------------- VARIABLES A IMPLEMTENTAR------------------------------
  -----------------------------------------------------------------------------*/
 unsigned char cuenta1_timer0;
-unsigned char cuenta2_timer0;
+unsigned char cuenta1_timer1;
 unsigned char cuenta_uart=0;
 unsigned char uart_recibido1;
 unsigned char uart_recibido2;
@@ -74,18 +74,25 @@ void __interrupt() isr(void) //funcion de interrupciones
     //------INTERRUPCION DEL TIMER1
     if (PIR1bits.TXIF)
     {
-        //cuenta_uart++;      //se suma variable guia
-        //mandar_datos();     //invoco funcion para mandar uart
+        cuenta_uart++;      //se suma variable guia
+        mandar_datos();     //invoco funcion para mandar uart
         PIR1bits.TXIF=0;    //apago interrupcion
     }
-    
+    /*if (PIR1bits.TMR1IF)
+    {
+        PORTB++;
+        cuenta1_timer1++;
+        TMR1H = 12;             // preset for timer1 MSB register
+        TMR1L = 38;             // preset for timer1 LSB register
+        PIR1bits.TMR1IF=0;
+    }
     if (INTCONbits.T0IF)
     {
         cuenta1_timer0++;
-        cuenta2_timer0++;
-        INTCONbits.T0IF=0;
+        PORTD++;
         TMR0 = 255;             // preset for timer register
-    }
+        INTCONbits.T0IF=0;
+    }*/
 }
 
 /*-----------------------------------------------------------------------------
@@ -94,15 +101,14 @@ void __interrupt() isr(void) //funcion de interrupciones
 void main(void)
 {
     setup();        //se llama funcion de configuracion
-    PORTCbits.RC2=1;            //mantiene prendido el pin
+    //PORTCbits.RC2=1;            //mantiene prendido el pin
+    
     while(1)
     {
-        PORTD=~PORTD;
-        __delay_ms(500);
-        PORTD=~PORTD;
-        /*
+        
         PORTCbits.RC2=0;
         __delay_ms(1);
+        
         spiWrite(0b0001);                //le notifica que mande pot1
         uart_recibido1=spiRead();   //recibe pot1
         __delay_ms(1);
@@ -112,21 +118,23 @@ void main(void)
         spiWrite(0b0010);                //le notifica que mande pot2
         uart_recibido2=spiRead();   //recibe pot2
         __delay_ms(1);
-        PORTCbits.RC2=1;*/
+        PORTCbits.RC2=1;
         
-        
-        /*switch(cuenta1_timer0)
+        /*
+        switch(cuenta1_timer1)
         {
             case(0):
                 PORTCbits.RC2=0;
                 break;
                 
             case(2):
-                spiWrite(0b0001);                //le notifica que mande pot1
+                PORTCbits.RC2=0;
+                spiWrite(1);                //le notifica que mande pot1
                 uart_recibido1=spiRead();   //recibe pot1
                 break;
             
             case(8):
+                PORTCbits.RC2=0;
                 spiWrite(0b0010);                //le notifica que mande pot2
                 uart_recibido2=spiRead();   //recibe pot2
                 break;
@@ -136,6 +144,7 @@ void main(void)
                 break;
         
             case(249):
+                PORTCbits.RC2=1;
                 cuenta1_timer0=0;           //se espera el disque delay
                 break;
 
@@ -154,7 +163,7 @@ void main(void)
         
         //CONVERSION A ASCII POTENCIOMETRO 2
         uart_cen_pot2=(map_pot2_cen+0x30);  //se le suma 0x30 para ascii
-        uart_dec_pot2=(map_pot2_dec+0x30);  //se le suma 0x30 para ascii
+        uart_dec_pot2=(map_pot2_dec+0x30);  //se le suma 0x30 para ascii*/
         
         
         PORTB=uart_recibido1;
@@ -195,6 +204,17 @@ void setup(void)
     OPTION_REGbits.PS0 = 1;
     TMR0 = 255;             // preset for timer register
 
+    //CONFIGURACION DEL TIMER1
+    T1CONbits.T1CKPS1 = 1;   // bits 5-4  Prescaler Rate Select bits
+    T1CONbits.T1CKPS0 = 1;   // bit 4
+    T1CONbits.T1OSCEN = 1;   // bit 3 Timer1 Oscillator Enable Control bit 1 = on
+    T1CONbits.T1SYNC = 1;    // bit 2 Timer1 External Clock Input Synchronization Control bit...1 = Do not synchronize external clock input
+    T1CONbits.TMR1CS = 0;    // bit 1 Timer1 Clock Source Select bit...0 = Internal clock (FOSC/4)
+    T1CONbits.TMR1ON = 1;    // bit 0 enables timer
+    TMR1H = 12;             // preset for timer1 MSB register
+    TMR1L = 38;             // preset for timer1 LSB register
+
+    
     
     //---------LLAMADO DE FUNCIONES DESDE LIBRERIAS
     osc_config(4);          //se llama funcion de oscilador a 4MHz
@@ -210,16 +230,17 @@ void setup(void)
 	//SETUP RECIBIR
 	RCSTAbits.SPEN = 1;
 	RCSTAbits.RX9 = 0;
-	RCSTAbits.CREN = 1;
-
+	RCSTAbits.CREN = 0;
 	TXSTAbits.TXEN = 1;
     
     
     //---------CONFIGURACIOND DE INTERRUPCIONES
     INTCONbits.GIE=1;           //se habilita interrupciones globales
     INTCONbits.PEIE=1;          //interrupcion por perifericos
-    INTCONbits.T0IE=1;          //se habilita interrupcion timer 0
+    /*INTCONbits.T0IE=1;          //se habilita interrupcion timer 0
     INTCONbits.T0IF=0;          //se apaga bandera de interrupcion timer0
+    PIE1bits.TMR1IE=1;
+    PIR1bits.TMR1IF=0;*/
     PIE1bits.TXIE=1;            //enable interrupcion de tx uart
     PIR1bits.TXIF=0;            //apago bandera interrupcion tx uart
     

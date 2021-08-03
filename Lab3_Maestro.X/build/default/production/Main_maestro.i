@@ -2697,7 +2697,7 @@ void mandar_datos(void);
 
 
 unsigned char cuenta1_timer0;
-unsigned char cuenta2_timer0;
+unsigned char cuenta1_timer1;
 unsigned char cuenta_uart=0;
 unsigned char uart_recibido1;
 unsigned char uart_recibido2;
@@ -2719,18 +2719,11 @@ void __attribute__((picinterrupt(("")))) isr(void)
 
     if (PIR1bits.TXIF)
     {
-
-
+        cuenta_uart++;
+        mandar_datos();
         PIR1bits.TXIF=0;
     }
-
-    if (INTCONbits.T0IF)
-    {
-        cuenta1_timer0++;
-        cuenta2_timer0++;
-        INTCONbits.T0IF=0;
-        TMR0 = 255;
-    }
+# 96 "Main_maestro.c"
 }
 
 
@@ -2739,13 +2732,25 @@ void __attribute__((picinterrupt(("")))) isr(void)
 void main(void)
 {
     setup();
-    PORTCbits.RC2=1;
+
+
     while(1)
     {
-        PORTD=~PORTD;
-        _delay((unsigned long)((500)*(4000000/4000.0)));
-        PORTD=~PORTD;
-# 144 "Main_maestro.c"
+
+        PORTCbits.RC2=0;
+        _delay((unsigned long)((1)*(4000000/4000.0)));
+
+        spiWrite(0b0001);
+        uart_recibido1=spiRead();
+        _delay((unsigned long)((1)*(4000000/4000.0)));
+        PORTCbits.RC2=1;
+        PORTCbits.RC2=0;
+        _delay((unsigned long)((1)*(4000000/4000.0)));
+        spiWrite(0b0010);
+        uart_recibido2=spiRead();
+        _delay((unsigned long)((1)*(4000000/4000.0)));
+        PORTCbits.RC2=1;
+# 153 "Main_maestro.c"
         map_pot1_cen=((2*(uart_recibido1)/100)%10);
         map_pot1_dec=((2*(uart_recibido1)/10)%10);
 
@@ -2801,6 +2806,17 @@ void setup(void)
     TMR0 = 255;
 
 
+    T1CONbits.T1CKPS1 = 1;
+    T1CONbits.T1CKPS0 = 1;
+    T1CONbits.T1OSCEN = 1;
+    T1CONbits.T1SYNC = 1;
+    T1CONbits.TMR1CS = 0;
+    T1CONbits.TMR1ON = 1;
+    TMR1H = 12;
+    TMR1L = 38;
+
+
+
 
     osc_config(4);
     spiInit(SPI_MASTER_OSC_DIV4, SPI_DATA_SAMPLE_MIDDLE, SPI_CLOCK_IDLE_LOW, SPI_IDLE_2_ACTIVE);
@@ -2815,16 +2831,17 @@ void setup(void)
 
  RCSTAbits.SPEN = 1;
  RCSTAbits.RX9 = 0;
- RCSTAbits.CREN = 1;
-
+ RCSTAbits.CREN = 0;
  TXSTAbits.TXEN = 1;
 
 
 
     INTCONbits.GIE=1;
     INTCONbits.PEIE=1;
-    INTCONbits.T0IE=1;
-    INTCONbits.T0IF=0;
+
+
+
+
     PIE1bits.TXIE=1;
     PIR1bits.TXIF=0;
 
