@@ -2755,7 +2755,6 @@ void __attribute__((picinterrupt(("")))) isr(void)
         ADCON0bits.GO=1;
         PIR1bits.ADIF=0;
     }
-
 }
 
 
@@ -2767,7 +2766,10 @@ void main(void)
     _delay((unsigned long)((100)*(4000000/4000000.0)));
     ADCON0bits.GO=1;
     while(1)
-    {}
+    {
+        PORTB=conversion1;
+        PORTD=conversion2;
+    }
 }
 
 

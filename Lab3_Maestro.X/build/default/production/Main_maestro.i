@@ -2719,8 +2719,8 @@ void __attribute__((picinterrupt(("")))) isr(void)
 
     if (PIR1bits.TXIF)
     {
-        cuenta_uart++;
-        mandar_datos();
+
+
         PIR1bits.TXIF=0;
     }
 
@@ -2739,34 +2739,13 @@ void __attribute__((picinterrupt(("")))) isr(void)
 void main(void)
 {
     setup();
+    PORTCbits.RC2=1;
     while(1)
     {
-        switch(cuenta1_timer0)
-        {
-            case(0):
-                PORTCbits.RC2=0;
-                break;
-
-            case(2):
-                spiWrite(1);
-                uart_recibido1=spiRead();
-                break;
-
-            case(8):
-                spiWrite(2);
-                uart_recibido2=spiRead();
-                break;
-
-            case(10):
-                PORTCbits.RC2=1;
-                break;
-
-            case(249):
-                cuenta1_timer0=0;
-                break;
-
-        }
-
+        PORTD=~PORTD;
+        _delay((unsigned long)((500)*(4000000/4000.0)));
+        PORTD=~PORTD;
+# 144 "Main_maestro.c"
         map_pot1_cen=((2*(uart_recibido1)/100)%10);
         map_pot1_dec=((2*(uart_recibido1)/10)%10);
 
@@ -2808,7 +2787,6 @@ void setup(void)
     TRISD=0;
 
 
-
     PORTB=0;
     PORTCbits.RC2=1;
     PORTD=0;
@@ -2825,23 +2803,21 @@ void setup(void)
 
 
     osc_config(4);
-
     spiInit(SPI_MASTER_OSC_DIV4, SPI_DATA_SAMPLE_MIDDLE, SPI_CLOCK_IDLE_LOW, SPI_IDLE_2_ACTIVE);
 
 
-    TXSTAbits.TX9 = 0;
     TXSTAbits.SYNC = 0;
-    TXSTAbits.BRGH = 1;
-    BAUDCTLbits.BRG16 = 0;
-    SPBRGH = 0;
-    SPBRG = 25;
-    PIE1bits.TXIE = 1;
-    TXSTAbits.TXEN = 1;
+ TXSTAbits.BRGH = 1;
+ TXSTAbits.TX9 = 0;
+ BAUDCTLbits.BRG16 = 0;
+ SPBRGH = 0;
+ SPBRG = 25;
 
+ RCSTAbits.SPEN = 1;
+ RCSTAbits.RX9 = 0;
+ RCSTAbits.CREN = 1;
 
-    RCSTAbits.SPEN = 1;
-    RCSTAbits. RX9 = 0;
-    RCSTAbits.CREN = 1;
+ TXSTAbits.TXEN = 1;
 
 
 
@@ -2850,11 +2826,7 @@ void setup(void)
     INTCONbits.T0IE=1;
     INTCONbits.T0IF=0;
     PIE1bits.TXIE=1;
-    PIE1bits.RCIE=1;
     PIR1bits.TXIF=0;
-    PIR1bits.RCIF=0;
-
-
 
 
 
@@ -2866,36 +2838,48 @@ void mandar_datos(void)
 {
     switch(cuenta_uart)
     {
+        case 0:
+            TXREG=0x20;
+            break;
+
         case(1):
-            uart_cen_pot1;
+            TXREG=uart_cen_pot1;
             break;
 
         case(2):
-            0x2E;
+            TXREG=0x2E;
             break;
 
         case(3):
-            uart_dec_pot1;
+            TXREG=uart_dec_pot1;
             break;
 
         case(4):
-            0x20;
+            TXREG=0x20;
             break;
 
         case(5):
-            uart_cen_pot2;
+            TXREG=0x20;
             break;
 
         case(6):
-            0x2E;
+            TXREG=uart_cen_pot2;
             break;
 
         case(7):
-            uart_dec_pot2;
+            TXREG=0x2E;
             break;
 
         case(8):
-            0x0D;
+            TXREG=uart_cen_pot2;
+            break;
+
+        case(9):
+            TXREG=13;
+            break;
+
+        case(200):
+            TXREG=cuenta_uart;
             cuenta_uart=0;
             break;
     }

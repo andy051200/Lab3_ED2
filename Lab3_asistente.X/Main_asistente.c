@@ -64,23 +64,23 @@ void __interrupt() isr(void) //funcion de interrupciones
     //------INTERRUPCION DEL TIMER1
     if (INTCONbits.T0IF)
     {
-        cuenta1_timer0++;
-        cuenta2_timer0++;
-        INTCONbits.T0IF=0;
-        TMR0 = 255;             // preset for timer register
+        cuenta1_timer0++;       //variable control 1
+        cuenta2_timer0++;       //variable control 2
+        INTCONbits.T0IF=0;      //se apaga bandera de interrupcion
+        TMR0 = 255;             // reinicio del timer
     }
     
     //------INTERRUPCION RECEPCION DE DATOS DESDE PIC MAESTRO
     if (PIR1bits.SSPIF)
     {
         recibido1=spiRead();
-        if (recibido1==1)
-            spiWrite(conversion1);
+        if (recibido1==1)           //si master manda 1
+            spiWrite(conversion1);  //se le manda pot1
         
-        else if (recibido1==2)
-            spiWrite(conversion2);
+        else if (recibido1==2)      //si el master manda 2
+            spiWrite(conversion2);  //se le manda pot2
         
-        PIR1bits.SSPIF=0;       //se apaga bandera de interrupcion
+        PIR1bits.SSPIF=0;           //se apaga bandera de interrupcion
     }
     
     //------INTERRUPCION 
@@ -116,7 +116,10 @@ void main(void)
     __delay_us(100);
     ADCON0bits.GO=1;
     while(1)
-    {}
+    {
+        PORTB=conversion1;
+        PORTD=conversion2;
+    }
 }
 /*-----------------------------------------------------------------------------
  ---------------------------------- SET UP -----------------------------------

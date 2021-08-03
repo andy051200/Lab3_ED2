@@ -3,7 +3,7 @@
 [d edition pro ]
 [d chip 16F887 ]
 [d frameptr 0 ]
-"157 C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
+"159 C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
 [e E1295 . `uc
 SPI_MASTER_OSC_DIV4 32
 SPI_MASTER_OSC_DIV16 33
@@ -67,9 +67,9 @@ SPI_ACTIVE_2_IDLE 64
 [v ___memcpyee __memcpyee `(v  1 e 1 0 ]
 "62 C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
 [v _isr isr `II(v  1 e 1 0 ]
-"114
+"113
 [v _main main `(v  1 e 1 0 ]
-"125
+"127
 [v _setup setup `(v  1 e 1 0 ]
 "59 C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h
 [v _TMR0 TMR0 `VEuc  1 e 1 @1 ]
@@ -148,7 +148,7 @@ SPI_ACTIVE_2_IDLE 64
 ]
 [u S199 . 1 `S188 1 . 1 0 `S195 1 . 1 0 ]
 [v _OPTION_REGbits OPTION_REGbits `VES199  1 e 1 @129 ]
-[s S163 . 1 `uc 1 TRISA0 1 0 :1:0 
+[s S165 . 1 `uc 1 TRISA0 1 0 :1:0 
 `uc 1 TRISA1 1 0 :1:1 
 `uc 1 TRISA2 1 0 :1:2 
 `uc 1 TRISA3 1 0 :1:3 
@@ -158,8 +158,8 @@ SPI_ACTIVE_2_IDLE 64
 `uc 1 TRISA7 1 0 :1:7 
 ]
 "1433
-[u S172 . 1 `S163 1 . 1 0 ]
-[v _TRISAbits TRISAbits `VES172  1 e 1 @133 ]
+[u S174 . 1 `S165 1 . 1 0 ]
+[v _TRISAbits TRISAbits `VES174  1 e 1 @133 ]
 "1478
 [v _TRISB TRISB `VEuc  1 e 1 @134 ]
 [s S439 . 1 `uc 1 TRISC0 1 0 :1:0 
@@ -257,7 +257,7 @@ SPI_ACTIVE_2_IDLE 64
 [v _ADCON1bits ADCON1bits `VES347  1 e 1 @159 ]
 "3387
 [v _ANSEL ANSEL `VEuc  1 e 1 @392 ]
-[s S142 . 1 `uc 1 ANS0 1 0 :1:0 
+[s S144 . 1 `uc 1 ANS0 1 0 :1:0 
 `uc 1 ANS1 1 0 :1:1 
 `uc 1 ANS2 1 0 :1:2 
 `uc 1 ANS3 1 0 :1:3 
@@ -267,8 +267,8 @@ SPI_ACTIVE_2_IDLE 64
 `uc 1 ANS7 1 0 :1:7 
 ]
 "3404
-[u S151 . 1 `S142 1 . 1 0 ]
-[v _ANSELbits ANSELbits `VES151  1 e 1 @392 ]
+[u S153 . 1 `S144 1 . 1 0 ]
+[v _ANSELbits ANSELbits `VES153  1 e 1 @392 ]
 "3449
 [v _ANSELH ANSELH `VEuc  1 e 1 @393 ]
 "4457
@@ -283,15 +283,15 @@ SPI_ACTIVE_2_IDLE 64
 [v _conversion2 conversion2 `uc  1 e 1 0 ]
 "57
 [v _recibido1 recibido1 `uc  1 e 1 0 ]
-"114
+"113
 [v _main main `(v  1 e 1 0 ]
 {
-"121
+"123
 } 0
-"125
+"127
 [v _setup setup `(v  1 e 1 0 ]
 {
-"168
+"170
 } 0
 "21 C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/SPI_config.c
 [v _spiInit spiInit `(v  1 e 1 0 ]
@@ -321,7 +321,7 @@ SPI_ACTIVE_2_IDLE 64
 "62 C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_asistente.X\Main_asistente.c
 [v _isr isr `II(v  1 e 1 0 ]
 {
-"109
+"108
 } 0
 "43 C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_asistente.X/SPI_config.c
 [v _spiWrite spiWrite `(v  1 e 1 0 ]

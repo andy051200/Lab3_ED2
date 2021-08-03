@@ -74,9 +74,9 @@ void __interrupt() isr(void) //funcion de interrupciones
     //------INTERRUPCION DEL TIMER1
     if (PIR1bits.TXIF)
     {
-        cuenta_uart++;
-        mandar_datos();     //invoco funcion para mandar uart
-        PIR1bits.TXIF=0;
+        //cuenta_uart++;      //se suma variable guia
+        //mandar_datos();     //invoco funcion para mandar uart
+        PIR1bits.TXIF=0;    //apago interrupcion
     }
     
     if (INTCONbits.T0IF)
@@ -94,33 +94,52 @@ void __interrupt() isr(void) //funcion de interrupciones
 void main(void)
 {
     setup();        //se llama funcion de configuracion
+    PORTCbits.RC2=1;            //mantiene prendido el pin
     while(1)
     {
-        switch(cuenta1_timer0)
+        PORTD=~PORTD;
+        __delay_ms(500);
+        PORTD=~PORTD;
+        /*
+        PORTCbits.RC2=0;
+        __delay_ms(1);
+        spiWrite(0b0001);                //le notifica que mande pot1
+        uart_recibido1=spiRead();   //recibe pot1
+        __delay_ms(1);
+        PORTCbits.RC2=1;
+        PORTCbits.RC2=0;
+        __delay_ms(1);
+        spiWrite(0b0010);                //le notifica que mande pot2
+        uart_recibido2=spiRead();   //recibe pot2
+        __delay_ms(1);
+        PORTCbits.RC2=1;*/
+        
+        
+        /*switch(cuenta1_timer0)
         {
             case(0):
                 PORTCbits.RC2=0;
                 break;
                 
             case(2):
-                spiWrite(1);                //le notifica que mande pot1
+                spiWrite(0b0001);                //le notifica que mande pot1
                 uart_recibido1=spiRead();   //recibe pot1
                 break;
             
             case(8):
-                spiWrite(2);                //le notifica que mande pot2
+                spiWrite(0b0010);                //le notifica que mande pot2
                 uart_recibido2=spiRead();   //recibe pot2
                 break;
                 
             case(10):
-                PORTCbits.RC2=1;            //se pone en 1 el Slave select
+                PORTCbits.RC2=1;
                 break;
         
             case(249):
                 cuenta1_timer0=0;           //se espera el disque delay
                 break;
 
-        }
+        }*/
         //MAPEO DE POTENCIOMETRO 1
         map_pot1_cen=((2*(uart_recibido1)/100)%10);    //centenas de pot1
         map_pot1_dec=((2*(uart_recibido1)/10)%10);     //decenas de pot1
@@ -158,11 +177,10 @@ void setup(void)
     TRISCbits.TRISC2=0;         //salida de control de asistente o slave select
     TRISCbits.TRISC3=0;         //salida reloj control
     TRISCbits.TRISC4=1;         //salida para datos desde PIC maestro  
-    TRISCbits.TRISC6=0;
-    TRISCbits.TRISC7=1;
+    TRISCbits.TRISC6=0;         //salida TX uart
+    TRISCbits.TRISC7=1;         //entrada RX uart
     TRISD=0;                    //todo el portB como salida
     
-    //---------LIMPIEZA DE PUERTOS
     //---------LIMPIEZA DE PUERTOS
     PORTB=0;
     PORTCbits.RC2=1;            //mantiene prendido el pin
@@ -180,38 +198,32 @@ void setup(void)
     
     //---------LLAMADO DE FUNCIONES DESDE LIBRERIAS
     osc_config(4);          //se llama funcion de oscilador a 4MHz
-    //uart_config();           //se llama funcion de ADC
     spiInit(SPI_MASTER_OSC_DIV4, SPI_DATA_SAMPLE_MIDDLE, SPI_CLOCK_IDLE_LOW, SPI_IDLE_2_ACTIVE);
     
-    //uart
-    TXSTAbits.TX9 = 0; //TRANSMISION DE 8 BITS
-    TXSTAbits.SYNC = 0; //ASINCRONO
-    TXSTAbits.BRGH = 1; //HIGH SPEED
-    BAUDCTLbits.BRG16 = 0; //BAUD RATE DE 8 BITS
-    SPBRGH = 0;
-    SPBRG = 25;
-    PIE1bits.TXIE = 1;
-    TXSTAbits.TXEN = 1;
-    
-    //CONFIG RX
-    RCSTAbits.SPEN = 1;
-    RCSTAbits. RX9 = 0;
-    RCSTAbits.CREN = 1;
+    //---------CPONFIGURACION UART
+    TXSTAbits.SYNC = 0;
+	TXSTAbits.BRGH = 1;
+	TXSTAbits.TX9 = 0;
+	BAUDCTLbits.BRG16 = 0;
+	SPBRGH = 0;
+	SPBRG = 25;
+	//SETUP RECIBIR
+	RCSTAbits.SPEN = 1;
+	RCSTAbits.RX9 = 0;
+	RCSTAbits.CREN = 1;
+
+	TXSTAbits.TXEN = 1;
     
     
     //---------CONFIGURACIOND DE INTERRUPCIONES
     INTCONbits.GIE=1;           //se habilita interrupciones globales
-    INTCONbits.PEIE=1;
+    INTCONbits.PEIE=1;          //interrupcion por perifericos
     INTCONbits.T0IE=1;          //se habilita interrupcion timer 0
     INTCONbits.T0IF=0;          //se apaga bandera de interrupcion timer0
-    PIE1bits.TXIE=1;
-    PIE1bits.RCIE=1;
-    PIR1bits.TXIF=0;
-    PIR1bits.RCIF=0;
-    /*PIE1bits.ADIE=1;
-    PIR1bits.ADIF=0;*/
-    /*PIE1bits.SSPIE = 1;         //se habilita interrupcion del MSSP
-    PIR1bits.SSPIF = 0;         //se apaga bandera de interrupcion MSSP*/
+    PIE1bits.TXIE=1;            //enable interrupcion de tx uart
+    PIR1bits.TXIF=0;            //apago bandera interrupcion tx uart
+    
+    
     
 }
 /*-----------------------------------------------------------------------------
@@ -221,36 +233,48 @@ void mandar_datos(void)
 {
     switch(cuenta_uart)
     {
+        case 0:
+            TXREG=0x20;
+            break;
+            
         case(1):
-            uart_cen_pot1;  //se mandan centenas en ascii de pot1
+            TXREG=uart_cen_pot1;  //se mandan centenas en ascii de pot1
             break;
             
         case(2):
-            0x2E;           //se manda el punto decimal
+            TXREG=0x2E;           //se manda el punto decimal
             break;
             
         case(3):
-            uart_dec_pot1;  //se mandan decenas en ascii de pot1
+            TXREG=uart_dec_pot1;  //se manda el punto decimal
             break;
             
         case(4):
-            0x20;           //se deja espacio
+            TXREG=0x20;           //se deja espacio
             break;
             
         case(5):
-            uart_cen_pot2;  //se mandan centenas en ascii de pot2
+            TXREG=0x20;           //se deja espacio
             break;
             
         case(6):
-            0x2E;
+            TXREG=uart_cen_pot2;  //se mandan centenas en ascii de pot2
             break;
             
         case(7):
-            uart_dec_pot2;
+            TXREG=0x2E;           //se manda el punto decimal
             break;
             
-        case(8):  
-            0x0D;               //se da enter a los datos mandados
+        case(8):
+            TXREG=uart_cen_pot2;
+            break;
+            
+        case(9):  
+            TXREG=13;               //se da enter a los datos mandados
+            break;
+            
+        case(200):
+            TXREG=cuenta_uart;
             cuenta_uart=0;
             break;
     }
