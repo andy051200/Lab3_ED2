@@ -105,7 +105,6 @@ void __interrupt() isr(void) //funcion de interrupciones
         ADCON0bits.GO=1;
         PIR1bits.ADIF=0;
     }
-    
 }
 
 /*-----------------------------------------------------------------------------

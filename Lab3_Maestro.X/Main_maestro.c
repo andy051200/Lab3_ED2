@@ -35,7 +35,7 @@ Descripcion: un laboratoria bien fumado tbh pero chilero
 #include <pic16f887.h>          //se incluye libreria del pic
 #include "Osc_config.h"
 #include "SPI_config.h"
-#include "UART_CONFIG.h"
+//#include "UART_CONFIG.h"
 
 /*-----------------------------------------------------------------------------
  ------------------------DIRECTIVAS DE COMPILADOR------------------------------
@@ -47,14 +47,24 @@ Descripcion: un laboratoria bien fumado tbh pero chilero
  -----------------------------------------------------------------------------*/
 void setup(void);           //prototipo de funcion de inicializacion pic
 void toggle_adc(void);
+void mandar_datos(void);
 /*-----------------------------------------------------------------------------
  ----------------------- VARIABLES A IMPLEMTENTAR------------------------------
  -----------------------------------------------------------------------------*/
 unsigned char cuenta1_timer0;
 unsigned char cuenta2_timer0;
-//char s[30]=[];
+unsigned char cuenta_uart=0;
 unsigned char uart_recibido1;
 unsigned char uart_recibido2;
+unsigned char map_pot1_cen;
+unsigned char map_pot1_dec;
+unsigned char map_pot2_cen;
+unsigned char map_pot2_dec;
+unsigned char uart_cen_pot1;
+unsigned char uart_dec_pot1;
+unsigned char uart_cen_pot2;
+unsigned char uart_dec_pot2;
+
 
 /*-----------------------------------------------------------------------------
  ---------------------------- INTERRUPCIONES ----------------------------------
@@ -62,6 +72,13 @@ unsigned char uart_recibido2;
 void __interrupt() isr(void) //funcion de interrupciones
 {
     //------INTERRUPCION DEL TIMER1
+    if (PIR1bits.TXIF)
+    {
+        cuenta_uart++;
+        mandar_datos();     //invoco funcion para mandar uart
+        PIR1bits.TXIF=0;
+    }
+    
     if (INTCONbits.T0IF)
     {
         cuenta1_timer0++;
@@ -77,8 +94,6 @@ void __interrupt() isr(void) //funcion de interrupciones
 void main(void)
 {
     setup();        //se llama funcion de configuracion
-    
-    
     while(1)
     {
         switch(cuenta1_timer0)
@@ -92,26 +107,39 @@ void main(void)
                 uart_recibido1=spiRead();   //recibe pot1
                 break;
             
-            case(4):
+            case(8):
                 spiWrite(2);                //le notifica que mande pot2
                 uart_recibido2=spiRead();   //recibe pot2
                 break;
                 
-            case(6):
-                PORTCbits.RC2=1;
+            case(10):
+                PORTCbits.RC2=1;            //se pone en 1 el Slave select
                 break;
         
             case(249):
-                cuenta1_timer0=0;
+                cuenta1_timer0=0;           //se espera el disque delay
                 break;
 
         }
+        //MAPEO DE POTENCIOMETRO 1
+        map_pot1_cen=((2*(uart_recibido1)/100)%10);    //centenas de pot1
+        map_pot1_dec=((2*(uart_recibido1)/10)%10);     //decenas de pot1
+        
+        //MAPEO DE POTENCIOMETRO 2
+        map_pot2_cen=((2*(uart_recibido2)/100)%10);    //centenas de pot2
+        map_pot2_dec=((2*(uart_recibido2)/10)%10);     //decenas de pot2
+        
+        //CONVERSION A ASCII POTENCIOMETRO 1
+        uart_cen_pot1=(map_pot1_cen+0x30);  //se le suma 0x30 para ascii
+        uart_dec_pot1=(map_pot1_dec+0x30);  //se le suma 0x30 para ascii
+        
+        //CONVERSION A ASCII POTENCIOMETRO 2
+        uart_cen_pot2=(map_pot2_cen+0x30);  //se le suma 0x30 para ascii
+        uart_dec_pot2=(map_pot2_dec+0x30);  //se le suma 0x30 para ascii
+        
+        
         PORTB=uart_recibido1;
         PORTD=uart_recibido2;
-        /*if (PORTB==0xff)
-            PORTB=0;
-       //-----pedazo para mandar en uart
-        //sprintf(s,'contador1 %3.2F \R',uart_recibido);*/
 
     }
 
@@ -130,10 +158,12 @@ void setup(void)
     TRISCbits.TRISC2=0;         //salida de control de asistente o slave select
     TRISCbits.TRISC3=0;         //salida reloj control
     TRISCbits.TRISC4=1;         //salida para datos desde PIC maestro  
+    TRISCbits.TRISC6=0;
+    TRISCbits.TRISC7=1;
     TRISD=0;                    //todo el portB como salida
     
     //---------LIMPIEZA DE PUERTOS
-     //---------LIMPIEZA DE PUERTOS
+    //---------LIMPIEZA DE PUERTOS
     PORTB=0;
     PORTCbits.RC2=1;            //mantiene prendido el pin
     PORTD=0;
@@ -150,11 +180,28 @@ void setup(void)
     
     //---------LLAMADO DE FUNCIONES DESDE LIBRERIAS
     osc_config(4);          //se llama funcion de oscilador a 4MHz
-    uart_config();           //se llama funcion de ADC
+    //uart_config();           //se llama funcion de ADC
     spiInit(SPI_MASTER_OSC_DIV4, SPI_DATA_SAMPLE_MIDDLE, SPI_CLOCK_IDLE_LOW, SPI_IDLE_2_ACTIVE);
+    
+    //uart
+    TXSTAbits.TX9 = 0; //TRANSMISION DE 8 BITS
+    TXSTAbits.SYNC = 0; //ASINCRONO
+    TXSTAbits.BRGH = 1; //HIGH SPEED
+    BAUDCTLbits.BRG16 = 0; //BAUD RATE DE 8 BITS
+    SPBRGH = 0;
+    SPBRG = 25;
+    PIE1bits.TXIE = 1;
+    TXSTAbits.TXEN = 1;
+    
+    //CONFIG RX
+    RCSTAbits.SPEN = 1;
+    RCSTAbits. RX9 = 0;
+    RCSTAbits.CREN = 1;
+    
     
     //---------CONFIGURACIOND DE INTERRUPCIONES
     INTCONbits.GIE=1;           //se habilita interrupciones globales
+    INTCONbits.PEIE=1;
     INTCONbits.T0IE=1;          //se habilita interrupcion timer 0
     INTCONbits.T0IF=0;          //se apaga bandera de interrupcion timer0
     PIE1bits.TXIE=1;
@@ -170,3 +217,42 @@ void setup(void)
 /*-----------------------------------------------------------------------------
  --------------------------------- FUNCIONES ----------------------------------
  -----------------------------------------------------------------------------*/
+void mandar_datos(void)
+{
+    switch(cuenta_uart)
+    {
+        case(1):
+            uart_cen_pot1;  //se mandan centenas en ascii de pot1
+            break;
+            
+        case(2):
+            0x2E;           //se manda el punto decimal
+            break;
+            
+        case(3):
+            uart_dec_pot1;  //se mandan decenas en ascii de pot1
+            break;
+            
+        case(4):
+            0x20;           //se deja espacio
+            break;
+            
+        case(5):
+            uart_cen_pot2;  //se mandan centenas en ascii de pot2
+            break;
+            
+        case(6):
+            0x2E;
+            break;
+            
+        case(7):
+            uart_dec_pot2;
+            break;
+            
+        case(8):  
+            0x0D;               //se da enter a los datos mandados
+            cuenta_uart=0;
+            break;
+    }
+    
+}

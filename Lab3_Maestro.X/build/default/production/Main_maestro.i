@@ -2689,30 +2689,40 @@ unsigned spiDataReady();
 char spiRead();
 char spiRead();
 # 37 "Main_maestro.c" 2
-
-# 1 "./UART_CONFIG.h" 1
-# 17 "./UART_CONFIG.h"
-void uart_config(void);
-void send_char (char dato);
-void send_str(char st[]);
-# 38 "Main_maestro.c" 2
 # 48 "Main_maestro.c"
 void setup(void);
 void toggle_adc(void);
+void mandar_datos(void);
 
 
 
 unsigned char cuenta1_timer0;
 unsigned char cuenta2_timer0;
-
+unsigned char cuenta_uart=0;
 unsigned char uart_recibido1;
 unsigned char uart_recibido2;
+unsigned char map_pot1_cen;
+unsigned char map_pot1_dec;
+unsigned char map_pot2_cen;
+unsigned char map_pot2_dec;
+unsigned char uart_cen_pot1;
+unsigned char uart_dec_pot1;
+unsigned char uart_cen_pot2;
+unsigned char uart_dec_pot2;
+
 
 
 
 
 void __attribute__((picinterrupt(("")))) isr(void)
 {
+
+    if (PIR1bits.TXIF)
+    {
+        cuenta_uart++;
+        mandar_datos();
+        PIR1bits.TXIF=0;
+    }
 
     if (INTCONbits.T0IF)
     {
@@ -2729,8 +2739,6 @@ void __attribute__((picinterrupt(("")))) isr(void)
 void main(void)
 {
     setup();
-
-
     while(1)
     {
         switch(cuenta1_timer0)
@@ -2744,12 +2752,12 @@ void main(void)
                 uart_recibido1=spiRead();
                 break;
 
-            case(4):
+            case(8):
                 spiWrite(2);
                 uart_recibido2=spiRead();
                 break;
 
-            case(6):
+            case(10):
                 PORTCbits.RC2=1;
                 break;
 
@@ -2758,12 +2766,25 @@ void main(void)
                 break;
 
         }
+
+        map_pot1_cen=((2*(uart_recibido1)/100)%10);
+        map_pot1_dec=((2*(uart_recibido1)/10)%10);
+
+
+        map_pot2_cen=((2*(uart_recibido2)/100)%10);
+        map_pot2_dec=((2*(uart_recibido2)/10)%10);
+
+
+        uart_cen_pot1=(map_pot1_cen+0x30);
+        uart_dec_pot1=(map_pot1_dec+0x30);
+
+
+        uart_cen_pot2=(map_pot2_cen+0x30);
+        uart_dec_pot2=(map_pot2_dec+0x30);
+
+
         PORTB=uart_recibido1;
         PORTD=uart_recibido2;
-
-
-
-
 
     }
 
@@ -2782,6 +2803,8 @@ void setup(void)
     TRISCbits.TRISC2=0;
     TRISCbits.TRISC3=0;
     TRISCbits.TRISC4=1;
+    TRISCbits.TRISC6=0;
+    TRISCbits.TRISC7=1;
     TRISD=0;
 
 
@@ -2802,11 +2825,28 @@ void setup(void)
 
 
     osc_config(4);
-    uart_config();
+
     spiInit(SPI_MASTER_OSC_DIV4, SPI_DATA_SAMPLE_MIDDLE, SPI_CLOCK_IDLE_LOW, SPI_IDLE_2_ACTIVE);
 
 
+    TXSTAbits.TX9 = 0;
+    TXSTAbits.SYNC = 0;
+    TXSTAbits.BRGH = 1;
+    BAUDCTLbits.BRG16 = 0;
+    SPBRGH = 0;
+    SPBRG = 25;
+    PIE1bits.TXIE = 1;
+    TXSTAbits.TXEN = 1;
+
+
+    RCSTAbits.SPEN = 1;
+    RCSTAbits. RX9 = 0;
+    RCSTAbits.CREN = 1;
+
+
+
     INTCONbits.GIE=1;
+    INTCONbits.PEIE=1;
     INTCONbits.T0IE=1;
     INTCONbits.T0IF=0;
     PIE1bits.TXIE=1;
@@ -2817,5 +2857,47 @@ void setup(void)
 
 
 
+
+}
+
+
+
+void mandar_datos(void)
+{
+    switch(cuenta_uart)
+    {
+        case(1):
+            uart_cen_pot1;
+            break;
+
+        case(2):
+            0x2E;
+            break;
+
+        case(3):
+            uart_dec_pot1;
+            break;
+
+        case(4):
+            0x20;
+            break;
+
+        case(5):
+            uart_cen_pot2;
+            break;
+
+        case(6):
+            0x2E;
+            break;
+
+        case(7):
+            uart_dec_pot2;
+            break;
+
+        case(8):
+            0x0D;
+            cuenta_uart=0;
+            break;
+    }
 
 }

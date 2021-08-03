@@ -15,6 +15,6 @@
 ----------- prototipo de funcion de configuracion de displays -----------------
 -----------------------------------------------------------------------------*/
 void uart_config(void);
-void send_char (char dato);
-void send_str(char st[]);
+
+//void mandar_datos(int wenas);
 #endif	/* UART_CONFIG_H */
