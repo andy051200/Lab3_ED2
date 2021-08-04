@@ -3,7 +3,7 @@
 [d edition pro ]
 [d chip 16F887 ]
 [d frameptr 0 ]
-"221 C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_Maestro.X\Main_maestro.c
+"181 C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_Maestro.X\Main_maestro.c
 [e E1294 . `uc
 SPI_MASTER_OSC_DIV4 32
 SPI_MASTER_OSC_DIV16 33
@@ -67,19 +67,19 @@ SPI_ACTIVE_2_IDLE 64
 [v ___eecpymem __eecpymem `(v  1 e 1 0 ]
 "39
 [v ___memcpyee __memcpyee `(v  1 e 1 0 ]
-"72 C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_Maestro.X\Main_maestro.c
+"70 C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_Maestro.X\Main_maestro.c
 [v _isr isr `II(v  1 e 1 0 ]
-"101
+"89
 [v _main main `(v  1 e 1 0 ]
-"178
+"140
 [v _setup setup `(v  1 e 1 0 ]
-"253
+"208
 [v _mandar_datos mandar_datos `(v  1 e 1 0 ]
 "59 C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h
 [v _TMR0 TMR0 `VEuc  1 e 1 @1 ]
 "228
 [v _PORTB PORTB `VEuc  1 e 1 @6 ]
-[s S49 . 1 `uc 1 RC0 1 0 :1:0 
+[s S50 . 1 `uc 1 RC0 1 0 :1:0 
 `uc 1 RC1 1 0 :1:1 
 `uc 1 RC2 1 0 :1:2 
 `uc 1 RC3 1 0 :1:3 
@@ -89,11 +89,11 @@ SPI_ACTIVE_2_IDLE 64
 `uc 1 RC7 1 0 :1:7 
 ]
 "307
-[u S58 . 1 `S49 1 . 1 0 ]
-[v _PORTCbits PORTCbits `VES58  1 e 1 @7 ]
+[u S59 . 1 `S50 1 . 1 0 ]
+[v _PORTCbits PORTCbits `VES59  1 e 1 @7 ]
 "352
 [v _PORTD PORTD `VEuc  1 e 1 @8 ]
-[s S317 . 1 `uc 1 RBIF 1 0 :1:0 
+[s S318 . 1 `uc 1 RBIF 1 0 :1:0 
 `uc 1 INTF 1 0 :1:1 
 `uc 1 T0IF 1 0 :1:2 
 `uc 1 RBIE 1 0 :1:3 
@@ -103,13 +103,13 @@ SPI_ACTIVE_2_IDLE 64
 `uc 1 GIE 1 0 :1:7 
 ]
 "482
-[s S326 . 1 `uc 1 . 1 0 :2:0 
+[s S327 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 TMR0IF 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 TMR0IE 1 0 :1:5 
 ]
-[u S331 . 1 `S317 1 . 1 0 `S326 1 . 1 0 ]
-[v _INTCONbits INTCONbits `VES331  1 e 1 @11 ]
+[u S332 . 1 `S318 1 . 1 0 `S327 1 . 1 0 ]
+[v _INTCONbits INTCONbits `VES332  1 e 1 @11 ]
 [s S22 . 1 `uc 1 TMR1IF 1 0 :1:0 
 `uc 1 TMR2IF 1 0 :1:1 
 `uc 1 CCP1IF 1 0 :1:2 
@@ -125,7 +125,7 @@ SPI_ACTIVE_2_IDLE 64
 [v _TMR1L TMR1L `VEuc  1 e 1 @14 ]
 "664
 [v _TMR1H TMR1H `VEuc  1 e 1 @15 ]
-[s S139 . 1 `uc 1 TMR1ON 1 0 :1:0 
+[s S140 . 1 `uc 1 TMR1ON 1 0 :1:0 
 `uc 1 TMR1CS 1 0 :1:1 
 `uc 1 nT1SYNC 1 0 :1:2 
 `uc 1 T1OSCEN 1 0 :1:3 
@@ -134,7 +134,7 @@ SPI_ACTIVE_2_IDLE 64
 `uc 1 T1GINV 1 0 :1:7 
 ]
 "700
-[s S147 . 1 `uc 1 . 1 0 :2:0 
+[s S148 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 T1INSYNC 1 0 :1:2 
 `uc 1 . 1 0 :1:3 
 `uc 1 T1CKPS0 1 0 :1:4 
@@ -142,16 +142,16 @@ SPI_ACTIVE_2_IDLE 64
 `uc 1 . 1 0 :1:6 
 `uc 1 T1GIV 1 0 :1:7 
 ]
-[s S155 . 1 `uc 1 . 1 0 :2:0 
+[s S156 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 T1SYNC 1 0 :1:2 
 ]
-[u S158 . 1 `S139 1 . 1 0 `S147 1 . 1 0 `S155 1 . 1 0 ]
-[v _T1CONbits T1CONbits `VES158  1 e 1 @16 ]
+[u S159 . 1 `S140 1 . 1 0 `S148 1 . 1 0 `S156 1 . 1 0 ]
+[v _T1CONbits T1CONbits `VES159  1 e 1 @16 ]
 "843
 [v _SSPBUF SSPBUF `VEuc  1 e 1 @19 ]
 "850
 [v _SSPCON SSPCON `VEuc  1 e 1 @20 ]
-[s S273 . 1 `uc 1 RX9D 1 0 :1:0 
+[s S274 . 1 `uc 1 RX9D 1 0 :1:0 
 `uc 1 OERR 1 0 :1:1 
 `uc 1 FERR 1 0 :1:2 
 `uc 1 ADDEN 1 0 :1:3 
@@ -161,20 +161,22 @@ SPI_ACTIVE_2_IDLE 64
 `uc 1 SPEN 1 0 :1:7 
 ]
 "1068
-[s S282 . 1 `uc 1 RCD8 1 0 :1:0 
+[s S283 . 1 `uc 1 RCD8 1 0 :1:0 
 `uc 1 . 1 0 :5:1 
 `uc 1 RC9 1 0 :1:6 
 ]
-[s S286 . 1 `uc 1 . 1 0 :6:0 
+[s S287 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 nRC8 1 0 :1:6 
 ]
-[s S289 . 1 `uc 1 . 1 0 :6:0 
+[s S290 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 RC8_9 1 0 :1:6 
 ]
-[u S292 . 1 `S273 1 . 1 0 `S282 1 . 1 0 `S286 1 . 1 0 `S289 1 . 1 0 ]
-[v _RCSTAbits RCSTAbits `VES292  1 e 1 @24 ]
+[u S293 . 1 `S274 1 . 1 0 `S283 1 . 1 0 `S287 1 . 1 0 `S290 1 . 1 0 ]
+[v _RCSTAbits RCSTAbits `VES293  1 e 1 @24 ]
 "1133
 [v _TXREG TXREG `VEuc  1 e 1 @25 ]
+"1140
+[v _RCREG RCREG `VEuc  1 e 1 @26 ]
 [s S601 . 1 `uc 1 ADON 1 0 :1:0 
 `uc 1 GO_nDONE 1 0 :1:1 
 `uc 1 CHS 1 0 :4:2 
@@ -198,7 +200,7 @@ SPI_ACTIVE_2_IDLE 64
 ]
 [u S621 . 1 `S601 1 . 1 0 `S606 1 . 1 0 `S615 1 . 1 0 `S618 1 . 1 0 ]
 [v _ADCON0bits ADCON0bits `VES621  1 e 1 @31 ]
-[s S112 . 1 `uc 1 PS 1 0 :3:0 
+[s S113 . 1 `uc 1 PS 1 0 :3:0 
 `uc 1 PSA 1 0 :1:3 
 `uc 1 T0SE 1 0 :1:4 
 `uc 1 T0CS 1 0 :1:5 
@@ -206,15 +208,15 @@ SPI_ACTIVE_2_IDLE 64
 `uc 1 nRBPU 1 0 :1:7 
 ]
 "1366
-[s S119 . 1 `uc 1 PS0 1 0 :1:0 
+[s S120 . 1 `uc 1 PS0 1 0 :1:0 
 `uc 1 PS1 1 0 :1:1 
 `uc 1 PS2 1 0 :1:2 
 ]
-[u S123 . 1 `S112 1 . 1 0 `S119 1 . 1 0 ]
-[v _OPTION_REGbits OPTION_REGbits `VES123  1 e 1 @129 ]
+[u S124 . 1 `S113 1 . 1 0 `S120 1 . 1 0 ]
+[v _OPTION_REGbits OPTION_REGbits `VES124  1 e 1 @129 ]
 "1478
 [v _TRISB TRISB `VEuc  1 e 1 @134 ]
-[s S90 . 1 `uc 1 TRISC0 1 0 :1:0 
+[s S91 . 1 `uc 1 TRISC0 1 0 :1:0 
 `uc 1 TRISC1 1 0 :1:1 
 `uc 1 TRISC2 1 0 :1:2 
 `uc 1 TRISC3 1 0 :1:3 
@@ -224,11 +226,11 @@ SPI_ACTIVE_2_IDLE 64
 `uc 1 TRISC7 1 0 :1:7 
 ]
 "1557
-[u S99 . 1 `S90 1 . 1 0 ]
-[v _TRISCbits TRISCbits `VES99  1 e 1 @135 ]
+[u S100 . 1 `S91 1 . 1 0 ]
+[v _TRISCbits TRISCbits `VES100  1 e 1 @135 ]
 "1602
 [v _TRISD TRISD `VEuc  1 e 1 @136 ]
-[s S349 . 1 `uc 1 TMR1IE 1 0 :1:0 
+[s S350 . 1 `uc 1 TMR1IE 1 0 :1:0 
 `uc 1 TMR2IE 1 0 :1:1 
 `uc 1 CCP1IE 1 0 :1:2 
 `uc 1 SSPIE 1 0 :1:3 
@@ -237,8 +239,8 @@ SPI_ACTIVE_2_IDLE 64
 `uc 1 ADIE 1 0 :1:6 
 ]
 "1718
-[u S357 . 1 `S349 1 . 1 0 ]
-[v _PIE1bits PIE1bits `VES357  1 e 1 @140 ]
+[u S358 . 1 `S350 1 . 1 0 ]
+[v _PIE1bits PIE1bits `VES358  1 e 1 @140 ]
 [s S481 . 1 `uc 1 SCS 1 0 :1:0 
 `uc 1 LTS 1 0 :1:1 
 `uc 1 HTS 1 0 :1:2 
@@ -298,7 +300,7 @@ SPI_ACTIVE_2_IDLE 64
 ]
 [u S730 . 1 `S690 1 . 1 0 `S699 1 . 1 0 `S704 1 . 1 0 `S710 1 . 1 0 `S715 1 . 1 0 `S720 1 . 1 0 `S725 1 . 1 0 ]
 [v _SSPSTATbits SSPSTATbits `VES730  1 e 1 @148 ]
-[s S213 . 1 `uc 1 TX9D 1 0 :1:0 
+[s S214 . 1 `uc 1 TX9D 1 0 :1:0 
 `uc 1 TRMT 1 0 :1:1 
 `uc 1 BRGH 1 0 :1:2 
 `uc 1 SENDB 1 0 :1:3 
@@ -308,15 +310,15 @@ SPI_ACTIVE_2_IDLE 64
 `uc 1 CSRC 1 0 :1:7 
 ]
 "2582
-[s S222 . 1 `uc 1 TXD8 1 0 :1:0 
+[s S223 . 1 `uc 1 TXD8 1 0 :1:0 
 `uc 1 . 1 0 :5:1 
 `uc 1 nTX8 1 0 :1:6 
 ]
-[s S226 . 1 `uc 1 . 1 0 :6:0 
+[s S227 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 TX8_9 1 0 :1:6 
 ]
-[u S229 . 1 `S213 1 . 1 0 `S222 1 . 1 0 `S226 1 . 1 0 ]
-[v _TXSTAbits TXSTAbits `VES229  1 e 1 @152 ]
+[u S230 . 1 `S214 1 . 1 0 `S223 1 . 1 0 `S227 1 . 1 0 ]
+[v _TXSTAbits TXSTAbits `VES230  1 e 1 @152 ]
 "2642
 [v _SPBRG SPBRG `VEuc  1 e 1 @153 ]
 "2704
@@ -330,7 +332,7 @@ SPI_ACTIVE_2_IDLE 64
 "2991
 [u S592 . 1 `S586 1 . 1 0 ]
 [v _ADCON1bits ADCON1bits `VES592  1 e 1 @159 ]
-[s S250 . 1 `uc 1 ABDEN 1 0 :1:0 
+[s S251 . 1 `uc 1 ABDEN 1 0 :1:0 
 `uc 1 WUE 1 0 :1:1 
 `uc 1 . 1 0 :1:2 
 `uc 1 BRG16 1 0 :1:3 
@@ -340,40 +342,42 @@ SPI_ACTIVE_2_IDLE 64
 `uc 1 ABDOVF 1 0 :1:7 
 ]
 "3352
-[u S259 . 1 `S250 1 . 1 0 ]
-[v _BAUDCTLbits BAUDCTLbits `VES259  1 e 1 @391 ]
+[u S260 . 1 `S251 1 . 1 0 ]
+[v _BAUDCTLbits BAUDCTLbits `VES260  1 e 1 @391 ]
 "3387
 [v _ANSEL ANSEL `VEuc  1 e 1 @392 ]
 "3449
 [v _ANSELH ANSELH `VEuc  1 e 1 @393 ]
 "4457
 [v _TRISC3 TRISC3 `VEb  1 e 0 @1083 ]
-"56 C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_Maestro.X\Main_maestro.c
+"54 C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_Maestro.X\Main_maestro.c
 [v _cuenta_uart cuenta_uart `uc  1 e 1 0 ]
-"57
+"55
 [v _uart_recibido1 uart_recibido1 `uc  1 e 1 0 ]
-"58
+"56
 [v _uart_recibido2 uart_recibido2 `uc  1 e 1 0 ]
-"59
+"57
 [v _map_pot1_cen map_pot1_cen `uc  1 e 1 0 ]
-"60
+"58
 [v _map_pot1_dec map_pot1_dec `uc  1 e 1 0 ]
-"61
+"59
 [v _map_pot2_cen map_pot2_cen `uc  1 e 1 0 ]
-"62
+"60
 [v _map_pot2_dec map_pot2_dec `uc  1 e 1 0 ]
-"63
+"61
 [v _uart_cen_pot1 uart_cen_pot1 `uc  1 e 1 0 ]
-"64
+"62
 [v _uart_dec_pot1 uart_dec_pot1 `uc  1 e 1 0 ]
-"65
+"63
 [v _uart_cen_pot2 uart_cen_pot2 `uc  1 e 1 0 ]
-"66
+"64
 [v _uart_dec_pot2 uart_dec_pot2 `uc  1 e 1 0 ]
-"101
+"65
+[v _desde_interfaz desde_interfaz `uc  1 e 1 0 ]
+"89
 [v _main main `(v  1 e 1 0 ]
 {
-"174
+"136
 } 0
 "43 C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_Maestro.X/SPI_config.c
 [v _spiWrite spiWrite `(v  1 e 1 0 ]
@@ -381,7 +385,7 @@ SPI_ACTIVE_2_IDLE 64
 [v spiWrite@dat dat `uc  1 a 1 wreg ]
 [v spiWrite@dat dat `uc  1 a 1 wreg ]
 "45
-[v spiWrite@dat dat `uc  1 a 1 0 ]
+[v spiWrite@dat dat `uc  1 a 1 6 ]
 "46
 } 0
 "56
@@ -394,10 +398,10 @@ SPI_ACTIVE_2_IDLE 64
 {
 "41
 } 0
-"178 C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_Maestro.X\Main_maestro.c
+"140 C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_Maestro.X\Main_maestro.c
 [v _setup setup `(v  1 e 1 0 ]
 {
-"249
+"204
 } 0
 "21 C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_Maestro.X/SPI_config.c
 [v _spiInit spiInit `(v  1 e 1 0 ]
@@ -408,7 +412,7 @@ SPI_ACTIVE_2_IDLE 64
 [v spiInit@sClockIdle sClockIdle `E1304  1 p 1 1 ]
 [v spiInit@sTransmitEdge sTransmitEdge `E1308  1 p 1 2 ]
 "23
-[v spiInit@sType sType `E1292  1 a 1 3 ]
+[v spiInit@sType sType `E1292  1 a 1 6 ]
 "36
 } 0
 "16 C:/Users/Andy Bonilla/Documents/GitHub/ED2/Lab3_ED2/Lab3_Maestro.X/Osc_config.c
@@ -416,40 +420,40 @@ SPI_ACTIVE_2_IDLE 64
 {
 [v osc_config@freq freq `uc  1 a 1 wreg ]
 [v osc_config@freq freq `uc  1 a 1 wreg ]
-[v osc_config@freq freq `uc  1 a 1 2 ]
+[v osc_config@freq freq `uc  1 a 1 6 ]
 "42
 } 0
 "5 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c90\common\awmod.c
 [v ___awmod __awmod `(i  1 e 2 0 ]
 {
 "10
-[v ___awmod@sign sign `uc  1 a 1 15 ]
-[v ___awmod@counter counter `uc  1 a 1 14 ]
+[v ___awmod@sign sign `uc  1 a 1 14 ]
+[v ___awmod@counter counter `uc  1 a 1 13 ]
 "5
-[v ___awmod@divisor divisor `i  1 p 2 9 ]
-[v ___awmod@dividend dividend `i  1 p 2 11 ]
+[v ___awmod@divisor divisor `i  1 p 2 8 ]
+[v ___awmod@dividend dividend `i  1 p 2 10 ]
 "34
 } 0
 "5 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c90\common\awdiv.c
 [v ___awdiv __awdiv `(i  1 e 2 0 ]
 {
 "10
-[v ___awdiv@quotient quotient `i  1 a 2 7 ]
+[v ___awdiv@quotient quotient `i  1 a 2 6 ]
 "11
-[v ___awdiv@sign sign `uc  1 a 1 6 ]
-[v ___awdiv@counter counter `uc  1 a 1 5 ]
+[v ___awdiv@sign sign `uc  1 a 1 5 ]
+[v ___awdiv@counter counter `uc  1 a 1 4 ]
 "5
 [v ___awdiv@divisor divisor `i  1 p 2 0 ]
 [v ___awdiv@dividend dividend `i  1 p 2 2 ]
 "41
 } 0
-"72 C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_Maestro.X\Main_maestro.c
+"70 C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_Maestro.X\Main_maestro.c
 [v _isr isr `II(v  1 e 1 0 ]
 {
-"96
+"84
 } 0
-"253
+"208
 [v _mandar_datos mandar_datos `(v  1 e 1 0 ]
 {
-"303
+"258
 } 0

@@ -13,35 +13,44 @@ import tkinter as tk            #se importa libreria de GUI
 from tkinter import *           #se importa libreria de GUI
 import serial                   #se importa libreria de comunicacion serial
 '''------------------------------------------------------------------------------
------------------------DEFINICION DE FUNCIONES-----------------------------------
+-----------------------DEFINICION DE OBJETOS------------------------------------
 ------------------------------------------------------------------------------'''
 from tkinter import *           #se llama la funcion
 root = Tk()                     #se le da nombre al objeto principal
 
-#char wenas[15]
-
+'''------------------------------------------------------------------------------
+-----------------------DEFINICION DE PUERTO SERIAL-------------------------------
+------------------------------------------------------------------------------'''
 #DEFINICION DE PUERTO SERIAL
-#port1=serial.Serial("COM3",9600)        #declarar puerto serial y braudeaje
+port1=serial.Serial('COM1')        #declarar puerto serial y braudeaje
+port1.baudrate = 9600  # set Baud rate to 9600
+port1.bytesize = 8     # Number of data bits = 8
+port1.parity   ='N'    # No parity
+port1.stopbits = 1     # Number of Stop bits = 1
 
 #variable is stored in the root object
 root.counter = 0                #se declara una variables en el objeto
 
+'''------------------------------------------------------------------------------
+-----------------------DEFINICION DE FUNCIONES-----------------------------------
+------------------------------------------------------------------------------'''
 #se define funcion para sumar
 def plus_clicked():                                          #se define funcion para sumar
     root.counter += 1
-    L['text'] = 'Contador verga: ' + str(root.counter)
-    port1.write(hex(31))   #se manda 1 en ascii
+    L['text'] = 'Contador : ' + str(root.counter)
+    port1.write(0x31)   #se manda 1 en ascii
+    print(0x31)
 
 #se define funcion para restar
 def minus_clicked():                                          #se define funcion para sumar
     root.counter -= 1
-    L['text'] = 'Contador verga: ' + str(root.counter)
-    port1.write(hex(32))   #se manda 1 en ascii
+    L['text'] = 'Contador : ' + str(root.counter)
+    port1.write(0x32)   #se manda 1 en ascii
+    print(0x32)
 
-def pot1():
-    cuenta_port=port1.read(1)
-    if (cuenta_port==hex(32))
-
+'''------------------------------------------------------------------------------
+----------------------------CUERPO DE INTERFAZ-----------------------------------
+------------------------------------------------------------------------------'''
 #TITULO
 titulo=tk.Label(root,text = "GUI para laboratorio 3, Electrónica Digital 2") #texto como titulo de GUI
 titulo.place(x=90, y=20)
@@ -62,7 +71,10 @@ b1.place(x=150, y=75)
 b2 = Button(root, text="Resta", command=minus_clicked)
 b2.place(x=200,y=75)
 
-#POTENCIOMETRO1
+#POTENCIOMETROS
+label_pots=tk.Label(root, text=port1.read)
+label_pots.place(x=135, y=150)
+
 #texto indicador
 label1 = tk.Label(root, text = "Valor potenciometro 1")        #texto para el cuadro de texto
 label1.place(x=70,y=110)                                                         #ubicacion del texto para contador
@@ -72,43 +84,13 @@ pot1.place(x=70,y=125)
 #POTENCIOMETRO2
 #texto indicador
 label2 = tk.Label(root, text = "Valor potenciometro 2")        #texto para el cuadro de texto
-label2.place(x=210,y=110)                                                         #ubicacion del texto para contador
+label2.place(x=210,y=110)                                      #ubicacion del texto para contador
 
 
-L = Label(root, text="No clicks yet.")
+L = Label(root, text="No clicks yet.")                      
 L.pack()
 
+'''------------------------------------------------------------------------------
+---------------------------------MAIN LOOP---------------------------------------
+------------------------------------------------------------------------------'''
 root.mainloop()
-
-#sprintf(s,'contador1%3.2F',)
-'''window = tk.Tk()
- 
-window.title("GUI Lab3, Electronica Digital 2")
-window.minsize(400,300)
-
-#BOTON PARA CONECTAR 
-
- 
-def salida():
-    exit()
-
-titulo=tk.Label(window,text = "GUI para laboratorio 3, Electrónica Digital 2") #texto como titulo de GUI
-titulo.place(x=90, y=20)                                                       #ubicacion en la pantalla
-
-#CUADRO DE TEXTO PARA CONTADOR PC-> PIC
-label = tk.Label(window, text = "Ingrese el valor del PortB MasterPic")        #texto para el cuadro de texto
-label.place(x=10,y=50)                                                         #ubicacion del texto para contador
-boton_suma=boton_enviar=tk.Button(window,text="Sumar")
-boton_suma.place(x=10,y=80)
-boton_resta=boton_enviar=tk.Button(window,text="Resta")
-boton_resta.place(x=60,y=80)
-
-#BOTON DE MANDAR POR UART A PIC
-boton_enviar=tk.Button(window,text="Enviar",command=salida)
-boton_enviar.place(x=150,y=80)
-
-#ESPACIO PARA MOSTRAR 
-
-window.mainloop()'''
-
-

@@ -51,8 +51,6 @@ void mandar_datos(void);
 /*-----------------------------------------------------------------------------
  ----------------------- VARIABLES A IMPLEMTENTAR------------------------------
  -----------------------------------------------------------------------------*/
-unsigned char cuenta1_timer0;
-unsigned char cuenta1_timer1;
 unsigned char cuenta_uart=0;
 unsigned char uart_recibido1;
 unsigned char uart_recibido2;
@@ -64,7 +62,7 @@ unsigned char uart_cen_pot1;
 unsigned char uart_dec_pot1;
 unsigned char uart_cen_pot2;
 unsigned char uart_dec_pot2;
-
+unsigned char desde_interfaz;
 
 /*-----------------------------------------------------------------------------
  ---------------------------- INTERRUPCIONES ----------------------------------
@@ -78,21 +76,11 @@ void __interrupt() isr(void) //funcion de interrupciones
         mandar_datos();     //invoco funcion para mandar uart
         PIR1bits.TXIF=0;    //apago interrupcion
     }
-    /*if (PIR1bits.TMR1IF)
+    if (PIR1bits.RCIF)
     {
-        PORTB++;
-        cuenta1_timer1++;
-        TMR1H = 12;             // preset for timer1 MSB register
-        TMR1L = 38;             // preset for timer1 LSB register
-        PIR1bits.TMR1IF=0;
-    }
-    if (INTCONbits.T0IF)
-    {
-        cuenta1_timer0++;
-        PORTD++;
-        TMR0 = 255;             // preset for timer register
-        INTCONbits.T0IF=0;
-    }*/
+        desde_interfaz=RCREG;   //jalo dato que mando la interfaz
+        PIR1bits.RCIF=0;        //apago bandera de interrupcion
+    }  
 }
 
 /*-----------------------------------------------------------------------------
@@ -101,8 +89,6 @@ void __interrupt() isr(void) //funcion de interrupciones
 void main(void)
 {
     setup();        //se llama funcion de configuracion
-    //PORTCbits.RC2=1;            //mantiene prendido el pin
-    
     while(1)
     {
         
@@ -120,35 +106,6 @@ void main(void)
         __delay_ms(1);
         PORTCbits.RC2=1;
         
-        /*
-        switch(cuenta1_timer1)
-        {
-            case(0):
-                PORTCbits.RC2=0;
-                break;
-                
-            case(2):
-                PORTCbits.RC2=0;
-                spiWrite(1);                //le notifica que mande pot1
-                uart_recibido1=spiRead();   //recibe pot1
-                break;
-            
-            case(8):
-                PORTCbits.RC2=0;
-                spiWrite(0b0010);                //le notifica que mande pot2
-                uart_recibido2=spiRead();   //recibe pot2
-                break;
-                
-            case(10):
-                PORTCbits.RC2=1;
-                break;
-        
-            case(249):
-                PORTCbits.RC2=1;
-                cuenta1_timer0=0;           //se espera el disque delay
-                break;
-
-        }*/
         //MAPEO DE POTENCIOMETRO 1
         map_pot1_cen=((2*(uart_recibido1)/100)%10);    //centenas de pot1
         map_pot1_dec=((2*(uart_recibido1)/10)%10);     //decenas de pot1
@@ -165,10 +122,15 @@ void main(void)
         uart_cen_pot2=(map_pot2_cen+0x30);  //se le suma 0x30 para ascii
         uart_dec_pot2=(map_pot2_dec+0x30);  //se le suma 0x30 para ascii*/
         
+        //PEDAZO PARA SUMAR/RESTAR CON GUI
+        if(desde_interfaz==0x31)
+            PORTB++;
+        else if (desde_interfaz==0x32)
+            PORTB--;
         
-        PORTB=uart_recibido1;
+        
+        //PORTB=uart_recibido1;
         PORTD=uart_recibido2;
-
     }
 
 }
@@ -195,7 +157,7 @@ void setup(void)
     PORTCbits.RC2=1;            //mantiene prendido el pin
     PORTD=0;
     
-   //---------CONFIGURACION DEL TIMER0
+    //---------CONFIGURACION DEL TIMER0
     OPTION_REGbits.T0CS = 0;  // bit 5  TMR0 Clock Source Select bit...0 = Internal Clock (CLKO) 1 = Transition on T0CKI pin
     OPTION_REGbits.T0SE = 0;  // bit 4 TMR0 Source Edge Select bit 0 = low/high 1 = high/low
     OPTION_REGbits.PSA = 0;   // bit 3  Prescaler Assignment bit...0 = Prescaler is assigned to the Timer0
@@ -204,7 +166,7 @@ void setup(void)
     OPTION_REGbits.PS0 = 1;
     TMR0 = 255;             // preset for timer register
 
-    //CONFIGURACION DEL TIMER1
+    //---------CONFIGURACION DEL TIMER1
     T1CONbits.T1CKPS1 = 1;   // bits 5-4  Prescaler Rate Select bits
     T1CONbits.T1CKPS0 = 1;   // bit 4
     T1CONbits.T1OSCEN = 1;   // bit 3 Timer1 Oscillator Enable Control bit 1 = on
@@ -214,38 +176,31 @@ void setup(void)
     TMR1H = 12;             // preset for timer1 MSB register
     TMR1L = 38;             // preset for timer1 LSB register
 
-    
-    
     //---------LLAMADO DE FUNCIONES DESDE LIBRERIAS
     osc_config(4);          //se llama funcion de oscilador a 4MHz
     spiInit(SPI_MASTER_OSC_DIV4, SPI_DATA_SAMPLE_MIDDLE, SPI_CLOCK_IDLE_LOW, SPI_IDLE_2_ACTIVE);
     
-    //---------CPONFIGURACION UART
-    TXSTAbits.SYNC = 0;
-	TXSTAbits.BRGH = 1;
-	TXSTAbits.TX9 = 0;
-	BAUDCTLbits.BRG16 = 0;
-	SPBRGH = 0;
+    //---------CONFIGURACION UART
+    TXSTAbits.SYNC = 0;     //comunicacion asincrona
+	TXSTAbits.BRGH = 1;     //comunicacion de alta velocidad
+	TXSTAbits.TX9 = 0;      //comunicacion de 8bits
+	BAUDCTLbits.BRG16 = 0;  //
+	SPBRGH = 0;             //configuracion de braudeaje segun Freq osc
 	SPBRG = 25;
 	//SETUP RECIBIR
-	RCSTAbits.SPEN = 1;
-	RCSTAbits.RX9 = 0;
-	RCSTAbits.CREN = 0;
-	TXSTAbits.TXEN = 1;
+	RCSTAbits.SPEN = 1;     //se habilita modulo
+	RCSTAbits.RX9 = 0;      //comunicacion de 8bits
+	RCSTAbits.CREN = 0;     //
+	TXSTAbits.TXEN = 1;     //
     
     
     //---------CONFIGURACIOND DE INTERRUPCIONES
     INTCONbits.GIE=1;           //se habilita interrupciones globales
     INTCONbits.PEIE=1;          //interrupcion por perifericos
-    /*INTCONbits.T0IE=1;          //se habilita interrupcion timer 0
-    INTCONbits.T0IF=0;          //se apaga bandera de interrupcion timer0
-    PIE1bits.TMR1IE=1;
-    PIR1bits.TMR1IF=0;*/
     PIE1bits.TXIE=1;            //enable interrupcion de tx uart
+    PIE1bits.RCIE=1;            //enable interrupcion de rx uart
     PIR1bits.TXIF=0;            //apago bandera interrupcion tx uart
-    
-    
-    
+    PIR1bits.RCIF=0;            //apago bandera interrupcion rx uart
 }
 /*-----------------------------------------------------------------------------
  --------------------------------- FUNCIONES ----------------------------------

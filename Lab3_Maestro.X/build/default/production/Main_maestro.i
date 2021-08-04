@@ -2696,8 +2696,6 @@ void mandar_datos(void);
 
 
 
-unsigned char cuenta1_timer0;
-unsigned char cuenta1_timer1;
 unsigned char cuenta_uart=0;
 unsigned char uart_recibido1;
 unsigned char uart_recibido2;
@@ -2709,7 +2707,7 @@ unsigned char uart_cen_pot1;
 unsigned char uart_dec_pot1;
 unsigned char uart_cen_pot2;
 unsigned char uart_dec_pot2;
-
+unsigned char desde_interfaz;
 
 
 
@@ -2723,7 +2721,11 @@ void __attribute__((picinterrupt(("")))) isr(void)
         mandar_datos();
         PIR1bits.TXIF=0;
     }
-# 96 "Main_maestro.c"
+    if (PIR1bits.RCIF)
+    {
+        desde_interfaz=RCREG;
+        PIR1bits.RCIF=0;
+    }
 }
 
 
@@ -2732,8 +2734,6 @@ void __attribute__((picinterrupt(("")))) isr(void)
 void main(void)
 {
     setup();
-
-
     while(1)
     {
 
@@ -2750,7 +2750,8 @@ void main(void)
         uart_recibido2=spiRead();
         _delay((unsigned long)((1)*(4000000/4000.0)));
         PORTCbits.RC2=1;
-# 153 "Main_maestro.c"
+
+
         map_pot1_cen=((2*(uart_recibido1)/100)%10);
         map_pot1_dec=((2*(uart_recibido1)/10)%10);
 
@@ -2767,9 +2768,14 @@ void main(void)
         uart_dec_pot2=(map_pot2_dec+0x30);
 
 
-        PORTB=uart_recibido1;
-        PORTD=uart_recibido2;
+        if(desde_interfaz==0x31)
+            PORTB++;
+        else if (desde_interfaz==0x32)
+            PORTB--;
 
+
+
+        PORTD=uart_recibido2;
     }
 
 }
@@ -2816,8 +2822,6 @@ void setup(void)
     TMR1L = 38;
 
 
-
-
     osc_config(4);
     spiInit(SPI_MASTER_OSC_DIV4, SPI_DATA_SAMPLE_MIDDLE, SPI_CLOCK_IDLE_LOW, SPI_IDLE_2_ACTIVE);
 
@@ -2838,15 +2842,10 @@ void setup(void)
 
     INTCONbits.GIE=1;
     INTCONbits.PEIE=1;
-
-
-
-
     PIE1bits.TXIE=1;
+    PIE1bits.RCIE=1;
     PIR1bits.TXIF=0;
-
-
-
+    PIR1bits.RCIF=0;
 }
 
 
