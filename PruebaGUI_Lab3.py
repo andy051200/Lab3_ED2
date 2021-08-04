@@ -15,7 +15,6 @@ import serial                   #se importa libreria de comunicacion serial
 '''------------------------------------------------------------------------------
 -----------------------DEFINICION DE OBJETOS------------------------------------
 ------------------------------------------------------------------------------'''
-from tkinter import *           #se llama la funcion
 root = Tk()                     #se le da nombre al objeto principal
 
 '''------------------------------------------------------------------------------
@@ -37,14 +36,14 @@ root.counter = 0                #se declara una variables en el objeto
 #se define funcion para sumar
 def plus_clicked():                                          #se define funcion para sumar
     root.counter += 1
-    L['text'] = 'Contador : ' + str(root.counter)
+    L['text'] = 'Contador: ' + str(root.counter)
     port1.write(0x31)   #se manda 1 en ascii
     print(0x31)
 
 #se define funcion para restar
 def minus_clicked():                                          #se define funcion para sumar
     root.counter -= 1
-    L['text'] = 'Contador : ' + str(root.counter)
+    L['text'] = 'Contador: ' + str(root.counter)
     port1.write(0x32)   #se manda 1 en ascii
     print(0x32)
 
@@ -67,7 +66,7 @@ label.place(x=115,y=50)
 b1 = Button(root, text="Suma", command=plus_clicked)
 b1.place(x=150, y=75)
 
-#boton de resta
+#boton de resta 
 b2 = Button(root, text="Resta", command=minus_clicked)
 b2.place(x=200,y=75)
 

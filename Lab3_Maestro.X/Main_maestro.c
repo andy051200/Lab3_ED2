@@ -130,7 +130,7 @@ void main(void)
         
         
         //PORTB=uart_recibido1;
-        PORTD=uart_recibido2;
+        PORTB=uart_recibido2;
     }
 
 }

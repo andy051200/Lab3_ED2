@@ -2775,7 +2775,7 @@ void main(void)
 
 
 
-        PORTD=uart_recibido2;
+        PORTB=uart_recibido2;
     }
 
 }

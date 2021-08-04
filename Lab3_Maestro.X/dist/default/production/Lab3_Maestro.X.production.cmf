@@ -11,7 +11,7 @@
 # All addresses and the length are given in unqualified hexadecimal
 # in delta units.  Any other numeric values are decimal.
 %PSECTS
-$C:\Users\ANDYBO~1\AppData\Local\Temp\skqc.o
+$C:\Users\ANDYBO~1\AppData\Local\Temp\sd8o.o
 reset_vec CODE 0 0 0 3 2
 end_init CODE 0 E E 3 2
 config CONFIG 4 2007 2007 2 2
@@ -80,25 +80,25 @@ STRING 334-1FFF 2
 # All other numeric values are in decimal.
 %LINETAB
 $dist/default/production\Lab3_Maestro.X.production.o
-11 cinit CODE >1133:C:\Users\ANDYBO~1\AppData\Local\Temp\skqc.s
-11 cinit CODE >1136:C:\Users\ANDYBO~1\AppData\Local\Temp\skqc.s
-11 cinit CODE >1183:C:\Users\ANDYBO~1\AppData\Local\Temp\skqc.s
-12 cinit CODE >1186:C:\Users\ANDYBO~1\AppData\Local\Temp\skqc.s
-13 cinit CODE >1187:C:\Users\ANDYBO~1\AppData\Local\Temp\skqc.s
-14 cinit CODE >1188:C:\Users\ANDYBO~1\AppData\Local\Temp\skqc.s
-15 cinit CODE >1189:C:\Users\ANDYBO~1\AppData\Local\Temp\skqc.s
-16 cinit CODE >1190:C:\Users\ANDYBO~1\AppData\Local\Temp\skqc.s
-17 cinit CODE >1191:C:\Users\ANDYBO~1\AppData\Local\Temp\skqc.s
-18 cinit CODE >1192:C:\Users\ANDYBO~1\AppData\Local\Temp\skqc.s
-19 cinit CODE >1193:C:\Users\ANDYBO~1\AppData\Local\Temp\skqc.s
-1A cinit CODE >1194:C:\Users\ANDYBO~1\AppData\Local\Temp\skqc.s
-1B cinit CODE >1195:C:\Users\ANDYBO~1\AppData\Local\Temp\skqc.s
-1C cinit CODE >1196:C:\Users\ANDYBO~1\AppData\Local\Temp\skqc.s
-1D cinit CODE >1197:C:\Users\ANDYBO~1\AppData\Local\Temp\skqc.s
-1E cinit CODE >1198:C:\Users\ANDYBO~1\AppData\Local\Temp\skqc.s
-1F cinit CODE >1204:C:\Users\ANDYBO~1\AppData\Local\Temp\skqc.s
-1F cinit CODE >1206:C:\Users\ANDYBO~1\AppData\Local\Temp\skqc.s
-20 cinit CODE >1207:C:\Users\ANDYBO~1\AppData\Local\Temp\skqc.s
+11 cinit CODE >1133:C:\Users\ANDYBO~1\AppData\Local\Temp\sd8o.s
+11 cinit CODE >1136:C:\Users\ANDYBO~1\AppData\Local\Temp\sd8o.s
+11 cinit CODE >1183:C:\Users\ANDYBO~1\AppData\Local\Temp\sd8o.s
+12 cinit CODE >1186:C:\Users\ANDYBO~1\AppData\Local\Temp\sd8o.s
+13 cinit CODE >1187:C:\Users\ANDYBO~1\AppData\Local\Temp\sd8o.s
+14 cinit CODE >1188:C:\Users\ANDYBO~1\AppData\Local\Temp\sd8o.s
+15 cinit CODE >1189:C:\Users\ANDYBO~1\AppData\Local\Temp\sd8o.s
+16 cinit CODE >1190:C:\Users\ANDYBO~1\AppData\Local\Temp\sd8o.s
+17 cinit CODE >1191:C:\Users\ANDYBO~1\AppData\Local\Temp\sd8o.s
+18 cinit CODE >1192:C:\Users\ANDYBO~1\AppData\Local\Temp\sd8o.s
+19 cinit CODE >1193:C:\Users\ANDYBO~1\AppData\Local\Temp\sd8o.s
+1A cinit CODE >1194:C:\Users\ANDYBO~1\AppData\Local\Temp\sd8o.s
+1B cinit CODE >1195:C:\Users\ANDYBO~1\AppData\Local\Temp\sd8o.s
+1C cinit CODE >1196:C:\Users\ANDYBO~1\AppData\Local\Temp\sd8o.s
+1D cinit CODE >1197:C:\Users\ANDYBO~1\AppData\Local\Temp\sd8o.s
+1E cinit CODE >1198:C:\Users\ANDYBO~1\AppData\Local\Temp\sd8o.s
+1F cinit CODE >1204:C:\Users\ANDYBO~1\AppData\Local\Temp\sd8o.s
+1F cinit CODE >1206:C:\Users\ANDYBO~1\AppData\Local\Temp\sd8o.s
+20 cinit CODE >1207:C:\Users\ANDYBO~1\AppData\Local\Temp\sd8o.s
 4 intentry CODE >70:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_Maestro.X\Main_maestro.c
 252 text10 CODE >208:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_Maestro.X\Main_maestro.c
 252 text10 CODE >210:C:\Users\Andy Bonilla\Documents\GitHub\ED2\Lab3_ED2\Lab3_Maestro.X\Main_maestro.c
@@ -309,14 +309,14 @@ __Heeprom_data 0 0 EEDATA 3 eeprom_data -
 _T1CONbits 10 0 ABS 0 - dist/default/production\Lab3_Maestro.X.production.o
 __Hstrings 0 0 ABS 0 strings -
 _TMR0 1 0 ABS 0 - dist/default/production\Lab3_Maestro.X.production.o
-___sp 0 0 STACK 2 stack C:\Users\ANDYBO~1\AppData\Local\Temp\skqc.o
+___sp 0 0 STACK 2 stack C:\Users\ANDYBO~1\AppData\Local\Temp\sd8o.o
 _main 46 0 CODE 0 maintext dist/default/production\Lab3_Maestro.X.production.o
 btemp 7E 0 ABS 0 - dist/default/production\Lab3_Maestro.X.production.o
 _map_pot1_cen 3A 0 BANK0 1 bssBANK0 dist/default/production\Lab3_Maestro.X.production.o
 _map_pot1_dec 39 0 BANK0 1 bssBANK0 dist/default/production\Lab3_Maestro.X.production.o
 _map_pot2_cen 38 0 BANK0 1 bssBANK0 dist/default/production\Lab3_Maestro.X.production.o
 _map_pot2_dec 37 0 BANK0 1 bssBANK0 dist/default/production\Lab3_Maestro.X.production.o
-start 1C 0 CODE 0 init C:\Users\ANDYBO~1\AppData\Local\Temp\skqc.o
+start 1C 0 CODE 0 init C:\Users\ANDYBO~1\AppData\Local\Temp\sd8o.o
 __size_of___awdiv 0 0 ABS 0 - dist/default/production\Lab3_Maestro.X.production.o
 __size_of___awmod 0 0 ABS 0 - dist/default/production\Lab3_Maestro.X.production.o
 __size_of_main 0 0 ABS 0 - dist/default/production\Lab3_Maestro.X.production.o
@@ -326,12 +326,12 @@ __HbssCOMMON 0 0 ABS 0 bssCOMMON -
 _OPTION_REGbits 81 0 ABS 0 - dist/default/production\Lab3_Maestro.X.production.o
 __Hpowerup 0 0 CODE 0 powerup -
 ___awmod@sign 2E 0 BANK0 1 cstackBANK0 dist/default/production\Lab3_Maestro.X.production.o
-intlevel0 0 0 ENTRY 0 functab C:\Users\ANDYBO~1\AppData\Local\Temp\skqc.o
-intlevel1 0 0 ENTRY 0 functab C:\Users\ANDYBO~1\AppData\Local\Temp\skqc.o
-intlevel2 0 0 ENTRY 0 functab C:\Users\ANDYBO~1\AppData\Local\Temp\skqc.o
-intlevel3 0 0 ENTRY 0 functab C:\Users\ANDYBO~1\AppData\Local\Temp\skqc.o
-intlevel4 0 0 ENTRY 0 functab C:\Users\ANDYBO~1\AppData\Local\Temp\skqc.o
-intlevel5 0 0 ENTRY 0 functab C:\Users\ANDYBO~1\AppData\Local\Temp\skqc.o
+intlevel0 0 0 ENTRY 0 functab C:\Users\ANDYBO~1\AppData\Local\Temp\sd8o.o
+intlevel1 0 0 ENTRY 0 functab C:\Users\ANDYBO~1\AppData\Local\Temp\sd8o.o
+intlevel2 0 0 ENTRY 0 functab C:\Users\ANDYBO~1\AppData\Local\Temp\sd8o.o
+intlevel3 0 0 ENTRY 0 functab C:\Users\ANDYBO~1\AppData\Local\Temp\sd8o.o
+intlevel4 0 0 ENTRY 0 functab C:\Users\ANDYBO~1\AppData\Local\Temp\sd8o.o
+intlevel5 0 0 ENTRY 0 functab C:\Users\ANDYBO~1\AppData\Local\Temp\sd8o.o
 __LbssCOMMON 0 0 ABS 0 bssCOMMON -
 _OSCCONbits 8F 0 ABS 0 - dist/default/production\Lab3_Maestro.X.production.o
 wtemp0 7E 0 ABS 0 - dist/default/production\Lab3_Maestro.X.production.o
@@ -348,8 +348,8 @@ __Lmaintext 0 0 ABS 0 maintext -
 ___awdiv@divisor 20 0 BANK0 1 cstackBANK0 dist/default/production\Lab3_Maestro.X.production.o
 __end_of___awdiv 340 0 CODE 0 text8 dist/default/production\Lab3_Maestro.X.production.o
 __end_of___awmod 3F6 0 CODE 0 text7 dist/default/production\Lab3_Maestro.X.production.o
-___stackhi 0 0 ABS 0 - C:\Users\ANDYBO~1\AppData\Local\Temp\skqc.o
-___stacklo 0 0 ABS 0 - C:\Users\ANDYBO~1\AppData\Local\Temp\skqc.o
+___stackhi 0 0 ABS 0 - C:\Users\ANDYBO~1\AppData\Local\Temp\sd8o.o
+___stacklo 0 0 ABS 0 - C:\Users\ANDYBO~1\AppData\Local\Temp\sd8o.o
 __size_of_mandar_datos 0 0 ABS 0 - dist/default/production\Lab3_Maestro.X.production.o
 _BAUDCTLbits 187 0 ABS 0 - dist/default/production\Lab3_Maestro.X.production.o
 __size_of_setup 0 0 ABS 0 - dist/default/production\Lab3_Maestro.X.production.o
@@ -363,7 +363,7 @@ __pcstackBANK0 20 0 BANK0 1 cstackBANK0 dist/default/production\Lab3_Maestro.X.p
 _SSPBUF 13 0 ABS 0 - dist/default/production\Lab3_Maestro.X.production.o
 _SSPCON 14 0 ABS 0 - dist/default/production\Lab3_Maestro.X.production.o
 _TRISC3 43B 0 ABS 0 - dist/default/production\Lab3_Maestro.X.production.o
-___int_sp 0 0 STACK 2 stack C:\Users\ANDYBO~1\AppData\Local\Temp\skqc.o
+___int_sp 0 0 STACK 2 stack C:\Users\ANDYBO~1\AppData\Local\Temp\sd8o.o
 __Hbank0 0 0 ABS 0 bank0 -
 __Hbank1 0 0 ABS 0 bank1 -
 __Hbank2 0 0 ABS 0 bank2 -
@@ -411,7 +411,7 @@ __end_of_osc_config 5B8 0 CODE 0 text6 dist/default/production\Lab3_Maestro.X.pr
 saved_w 7E 0 ABS 0 - dist/default/production\Lab3_Maestro.X.production.o
 __end_of_isr 600 0 CODE 0 text9 dist/default/production\Lab3_Maestro.X.production.o
 __Lintentry 8 0 CODE 0 intentry -
-reset_vec 0 0 CODE 0 reset_vec C:\Users\ANDYBO~1\AppData\Local\Temp\skqc.o
+reset_vec 0 0 CODE 0 reset_vec C:\Users\ANDYBO~1\AppData\Local\Temp\sd8o.o
 __LbssBANK0 0 0 ABS 0 bssBANK0 -
 ___awmod@counter 2D 0 BANK0 1 cstackBANK0 dist/default/production\Lab3_Maestro.X.production.o
 _RCSTAbits 18 0 ABS 0 - dist/default/production\Lab3_Maestro.X.production.o
