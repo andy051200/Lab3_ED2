@@ -22,11 +22,11 @@ root = Tk()                     #se le da nombre al objeto principal
 -----------------------DEFINICION DE PUERTO SERIAL-------------------------------
 ------------------------------------------------------------------------------'''
 #DEFINICION DE PUERTO SERIAL
-port1=serial.Serial('COM1')        #declarar puerto serial y braudeaje
-port1.baudrate = 9600  # set Baud rate to 9600
-port1.bytesize = 8     # Number of data bits = 8
-port1.parity   ='N'    # No parity
-port1.stopbits = 1     # Number of Stop bits = 1
+port1=serial.Serial('COM1')                                 #declarar puerto serial y braudeaje
+port1.baudrate = 9600                                       #set Baud rate to 9600
+port1.bytesize = 8                                          # Number of data bits = 8
+port1.parity   ='N'                                         # No parity
+port1.stopbits = 1                                          # Number of Stop bits = 1
 
 #variable is stored in the root object
 root.counter = 0                #se declara una variables en el objeto
@@ -56,11 +56,11 @@ titulo=tk.Label(root,text = "GUI para laboratorio 3, Electrónica Digital 2") #t
 titulo.place(x=90, y=20)
 
 #titulo de la ventana
-root.title("GUI Lab3, Electronica Digital 2")   #le pones titulo al objeto
-root.minsize(400,300)                           #le decis el tamaño a la ventana
+root.title("GUI Lab3, Electronica Digital 2")                   #le pones titulo al objeto
+root.minsize(400,300)                                           #le decis el tamaño a la ventana
 
 #texto para indicar que putas hacen los botones
-label = tk.Label(root, text = "Contador para el Portx del PIC")        #texto para el cuadro de texto
+label = tk.Label(root, text = "Contador para el Portx del PIC") #texto para el cuadro de texto
 label.place(x=115,y=50)
 
 #boton de suma
@@ -77,7 +77,7 @@ label_pots.place(x=135, y=150)
 
 #texto indicador
 label1 = tk.Label(root, text = "Valor potenciometro 1")        #texto para el cuadro de texto
-label1.place(x=70,y=110)                                                         #ubicacion del texto para contador
+label1.place(x=70,y=110)                                       #ubicacion del texto para contador
 pot1=tk.LabelFrame(root, text="valor")
 pot1.place(x=70,y=125)
 
