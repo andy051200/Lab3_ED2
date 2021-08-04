@@ -46,6 +46,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 "228 C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h
 [; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 228: extern volatile unsigned char PORTB __attribute__((address(0x006)));
 [v _PORTB `Vuc ~T0 @X0 0 e@6 ]
+"352
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 352: extern volatile unsigned char PORTD __attribute__((address(0x008)));
+[v _PORTD `Vuc ~T0 @X0 0 e@8 ]
 "3387
 [; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 3387: extern volatile unsigned char ANSEL __attribute__((address(0x188)));
 [v _ANSEL `Vuc ~T0 @X0 0 e@392 ]
@@ -69,9 +72,6 @@ Version 4.0 HI-TECH Software Intermediate Code
 "1602
 [; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 1602: extern volatile unsigned char TRISD __attribute__((address(0x088)));
 [v _TRISD `Vuc ~T0 @X0 0 e@136 ]
-"352
-[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 352: extern volatile unsigned char PORTD __attribute__((address(0x008)));
-[v _PORTD `Vuc ~T0 @X0 0 e@8 ]
 "1352
 [; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 1352:     struct {
 [s S50 :3 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
@@ -658,9 +658,12 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e -- _PORTB -> -> 1 `i `Vuc ]
 [e :U 147 ]
 [e :U 146 ]
+"132
+[; ;Main_maestro.c: 132:         PORTB=uart_recibido1;
+[e = _PORTB _uart_recibido1 ]
 "133
-[; ;Main_maestro.c: 133:         PORTB=uart_recibido2;
-[e = _PORTB _uart_recibido2 ]
+[; ;Main_maestro.c: 133:         PORTD=uart_recibido2;
+[e = _PORTD _uart_recibido2 ]
 "134
 [; ;Main_maestro.c: 134:     }
 }
@@ -917,8 +920,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;Main_maestro.c: 248:         case(9):
 [e :U 161 ]
 "249
-[; ;Main_maestro.c: 249:             TXREG=13;
-[e = _TXREG -> -> 13 `i `uc ]
+[; ;Main_maestro.c: 249:             TXREG='\n';
+[e = _TXREG -> -> 10 `ui `uc ]
 "250
 [; ;Main_maestro.c: 250:             break;
 [e $U 150  ]

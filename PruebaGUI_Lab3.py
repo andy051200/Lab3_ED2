@@ -12,6 +12,7 @@ intefaz gráfica para el laboratorio de comunicacion SPI
 import tkinter as tk            #se importa libreria de GUI
 from tkinter import *           #se importa libreria de GUI
 import serial                   #se importa libreria de comunicacion serial
+import io
 '''------------------------------------------------------------------------------
 -----------------------DEFINICION DE OBJETOS------------------------------------
 ------------------------------------------------------------------------------'''
@@ -22,14 +23,15 @@ root = Tk()                     #se le da nombre al objeto principal
 ------------------------------------------------------------------------------'''
 #DEFINICION DE PUERTO SERIAL
 port1=serial.Serial('COM1')                                 #declarar puerto serial y braudeaje
+#port1.port('COM1')
 port1.baudrate = 9600                                       #set Baud rate to 9600
 port1.bytesize = 8                                          # Number of data bits = 8
 port1.parity   ='N'                                         # No parity
 port1.stopbits = 1                                          # Number of Stop bits = 1
-
+#port1.open()                                                #se abre puerto serial
 #variable is stored in the root object
 root.counter = 0                #se declara una variables en el objeto
-
+prueba=0
 '''------------------------------------------------------------------------------
 -----------------------DEFINICION DE FUNCIONES-----------------------------------
 ------------------------------------------------------------------------------'''
@@ -37,15 +39,15 @@ root.counter = 0                #se declara una variables en el objeto
 def plus_clicked():                                          #se define funcion para sumar
     root.counter += 1
     L['text'] = 'Contador: ' + str(root.counter)
-    port1.write(0x31)   #se manda 1 en ascii
-    print(0x31)
+    port1.write(b'1')   #se manda 1 en ascii
+    print('1')
 
 #se define funcion para restar
 def minus_clicked():                                          #se define funcion para sumar
     root.counter -= 1
     L['text'] = 'Contador: ' + str(root.counter)
-    port1.write(0x32)   #se manda 1 en ascii
-    print(0x32)
+    port1.write(b'2')   #se manda 1 en ascii
+    print('2')
 
 '''------------------------------------------------------------------------------
 ----------------------------CUERPO DE INTERFAZ-----------------------------------
@@ -71,21 +73,23 @@ b2 = Button(root, text="Resta", command=minus_clicked)
 b2.place(x=200,y=75)
 
 #POTENCIOMETROS
-label_pots=tk.Label(root, text=port1.read)
+#prueba=port1.read()
+label_pots=tk.Label(root, text=port1.read())
 label_pots.place(x=135, y=150)
+print(port1.read())
 
 #texto indicador
 label1 = tk.Label(root, text = "Valor potenciometro 1")        #texto para el cuadro de texto
 label1.place(x=70,y=110)                                       #ubicacion del texto para contador
-pot1=tk.LabelFrame(root, text="valor")
+pot1=tk.LabelFrame(root, text=port1.read())
 pot1.place(x=70,y=125)
 
 #POTENCIOMETRO2
 #texto indicador
 label2 = tk.Label(root, text = "Valor potenciometro 2")        #texto para el cuadro de texto
 label2.place(x=210,y=110)                                      #ubicacion del texto para contador
-
-
+pot2=tk.LabelFrame(root, text=port1.read())
+pot2.place(x=260, y=110)
 L = Label(root, text="No clicks yet.")                      
 L.pack()
 

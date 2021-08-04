@@ -2774,8 +2774,8 @@ void main(void)
             PORTB--;
 
 
-
-        PORTB=uart_recibido2;
+        PORTB=uart_recibido1;
+        PORTD=uart_recibido2;
     }
 
 }
@@ -2891,7 +2891,7 @@ void mandar_datos(void)
             break;
 
         case(9):
-            TXREG=13;
+            TXREG='\n';
             break;
 
         case(200):

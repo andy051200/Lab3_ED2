@@ -129,8 +129,8 @@ void main(void)
             PORTB--;
         
         
-        //PORTB=uart_recibido1;
-        PORTB=uart_recibido2;
+        PORTB=uart_recibido1;
+        PORTD=uart_recibido2;
     }
 
 }
@@ -246,7 +246,7 @@ void mandar_datos(void)
             break;
             
         case(9):  
-            TXREG=13;               //se da enter a los datos mandados
+            TXREG='\n';               //se da enter a los datos mandados
             break;
             
         case(200):

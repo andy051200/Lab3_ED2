@@ -216,7 +216,7 @@ SPI_ACTIVE_2_IDLE 64
 [v _OPTION_REGbits OPTION_REGbits `VES124  1 e 1 @129 ]
 "1478
 [v _TRISB TRISB `VEuc  1 e 1 @134 ]
-[s S90 . 1 `uc 1 TRISC0 1 0 :1:0 
+[s S91 . 1 `uc 1 TRISC0 1 0 :1:0 
 `uc 1 TRISC1 1 0 :1:1 
 `uc 1 TRISC2 1 0 :1:2 
 `uc 1 TRISC3 1 0 :1:3 
@@ -226,8 +226,8 @@ SPI_ACTIVE_2_IDLE 64
 `uc 1 TRISC7 1 0 :1:7 
 ]
 "1557
-[u S99 . 1 `S90 1 . 1 0 ]
-[v _TRISCbits TRISCbits `VES99  1 e 1 @135 ]
+[u S100 . 1 `S91 1 . 1 0 ]
+[v _TRISCbits TRISCbits `VES100  1 e 1 @135 ]
 "1602
 [v _TRISD TRISD `VEuc  1 e 1 @136 ]
 [s S350 . 1 `uc 1 TMR1IE 1 0 :1:0 
